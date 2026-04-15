@@ -1,6 +1,7 @@
 # Секреты — НИКОГДА не коммитить
 .env
 *.env
+google_credentials.json
 
 # Базы данных
 *.db
