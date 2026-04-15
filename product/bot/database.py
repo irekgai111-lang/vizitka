@@ -53,7 +53,10 @@ def init_db():
             service_key TEXT NOT NULL,
             duration INTEGER NOT NULL,
             status TEXT DEFAULT 'active',
-            reminded INTEGER DEFAULT 0,
+            reminded_6h INTEGER DEFAULT 0,
+            reminded_2h INTEGER DEFAULT 0,
+            reminded_1h INTEGER DEFAULT 0,
+            google_event_id TEXT,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id)
         );
@@ -80,6 +83,13 @@ def save_phone(user_id: int, phone: str):
     conn.execute("UPDATE users SET phone=? WHERE id=?", (phone, user_id))
     conn.commit()
     conn.close()
+
+
+def get_user_phone(user_id: int) -> str | None:
+    conn = get_db()
+    row = conn.execute("SELECT phone FROM users WHERE id=?", (user_id,)).fetchone()
+    conn.close()
+    return row["phone"] if row and row["phone"] else None
 
 
 # === Расписание ===
@@ -158,11 +168,11 @@ def get_available_slots(date_str: str, duration_minutes: int) -> list[str]:
 # === Записи ===
 
 def create_appointment(user_id: int, date_str: str, time_str: str,
-                       service_key: str, duration: int) -> int:
+                       service_key: str, duration: int, google_event_id: str | None = None) -> int:
     conn = get_db()
     cursor = conn.execute(
-        "INSERT INTO appointments (user_id, date, time, service_key, duration) VALUES (?, ?, ?, ?, ?)",
-        (user_id, date_str, time_str, service_key, duration),
+        "INSERT INTO appointments (user_id, date, time, service_key, duration, google_event_id) VALUES (?, ?, ?, ?, ?, ?)",
+        (user_id, date_str, time_str, service_key, duration, google_event_id),
     )
     conn.commit()
     appt_id = cursor.lastrowid
@@ -192,23 +202,26 @@ def cancel_appointment(appt_id: int) -> dict | None:
     return dict(row) if row else None
 
 
-# === Напоминания ===
+# === Напоминания (6ч, 2ч, 1ч) ===
 
-def get_appointments_to_remind() -> list[dict]:
+def get_appointments_to_remind(hours: int) -> list[dict]:
+    """Возвращает записи, для которых нужно отправить напоминание за N часов."""
+    col = f"reminded_{hours}h"
     conn = get_db()
     rows = conn.execute(
-        """SELECT * FROM appointments
-           WHERE status='active' AND reminded=0
+        f"""SELECT * FROM appointments
+           WHERE status='active' AND {col}=0
              AND datetime(date || ' ' || time) > datetime('now')
-             AND datetime(date || ' ' || time) <= datetime('now', '+1 hour')"""
+             AND datetime(date || ' ' || time) <= datetime('now', '+{hours} hour')"""
     ).fetchall()
     conn.close()
     return [dict(r) for r in rows]
 
 
-def mark_reminded(appt_id: int):
+def mark_reminded(appt_id: int, hours: int):
+    col = f"reminded_{hours}h"
     conn = get_db()
-    conn.execute("UPDATE appointments SET reminded=1 WHERE id=?", (appt_id,))
+    conn.execute(f"UPDATE appointments SET {col}=1 WHERE id=?", (appt_id,))
     conn.commit()
     conn.close()
 

@@ -25,11 +25,14 @@ from aiogram.filters import Command
 from aiogram.enums import ParseMode
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
+from aiogram.types import ReplyKeyboardRemove, ContentType
+
 from config import BOT_TOKEN, ADMIN_ID
 from database import (
     init_db,
     save_user,
     save_phone,
+    get_user_phone,
     get_available_dates,
     get_available_slots,
     create_appointment,
@@ -41,6 +44,7 @@ from database import (
     SERVICES,
     DAY_NAMES,
 )
+from calendar_sync import create_event, delete_event
 
 logging.basicConfig(
     level=logging.INFO,
@@ -251,10 +255,10 @@ async def book_step3_time(callback: CallbackQuery):
 
 
 # =============================================
-#  Шаг 4: подтверждение записи
+#  Шаг 4: выбрано время → запрос телефона если нет
 # =============================================
 @router.callback_query(F.data.startswith("time:"))
-async def book_step4_confirm(callback: CallbackQuery):
+async def book_step4_phone(callback: CallbackQuery):
     await callback.answer()
     time_str = callback.data.split(":")[1] + ":" + callback.data.split(":")[2]
 
@@ -278,8 +282,74 @@ async def book_step4_confirm(callback: CallbackQuery):
         )
         return
 
-    # Создаём запись
-    appt_id = create_appointment(uid, date_str, time_str, service_key, service["duration"])
+    state["time"] = time_str
+
+    # Если телефон уже есть — сразу к подтверждению
+    phone = get_user_phone(uid)
+    if phone:
+        await _finalize_booking(uid, callback.from_user, callback.message)
+        return
+
+    # Просим поделиться телефоном
+    phone_kb = ReplyKeyboardMarkup(
+        keyboard=[[KeyboardButton(text="📞 Отправить номер", request_contact=True)]],
+        resize_keyboard=True,
+        one_time_keyboard=True,
+    )
+    await callback.message.edit_text(
+        "Почти готово! Отправь свой номер телефона — чтобы мастер мог связаться с тебой."
+    )
+    await bot.send_message(uid, "Нажми кнопку ниже 👇", reply_markup=phone_kb)
+
+
+# =============================================
+#  Получение телефона → подтверждение записи
+# =============================================
+@router.message(F.contact)
+async def receive_phone(message: Message):
+    uid = message.from_user.id
+    phone = message.contact.phone_number
+    save_phone(uid, phone)
+
+    state = user_state.get(uid)
+    if state and state.get("time"):
+        await _finalize_booking(uid, message.from_user, message)
+    else:
+        await message.answer("Телефон сохранён! ✅", reply_markup=main_menu())
+
+
+# =============================================
+#  Финализация записи + синхронизация с календарём
+# =============================================
+async def _finalize_booking(uid: int, user, message):
+    state = user_state.get(uid, {})
+    service_key = state.get("service")
+    date_str = state.get("date")
+    time_str = state.get("time")
+
+    if not service_key or not date_str or not time_str:
+        await bot.send_message(uid, "Что-то пошло не так. Нажми «💅 Записаться» заново.", reply_markup=main_menu())
+        return
+
+    service = SERVICES[service_key]
+    phone = get_user_phone(uid)
+    username = user.username
+
+    # Синхронизация с Google Календарём
+    event_id = create_event(
+        date_str=date_str,
+        time_str=time_str,
+        duration_min=service["duration"],
+        service_name=service["name"],
+        service_emoji=service["emoji"],
+        price=service["price"],
+        client_name=user.full_name,
+        client_username=username,
+        client_phone=phone,
+    )
+
+    # Создаём запись в БД
+    appt_id = create_appointment(uid, date_str, time_str, service_key, service["duration"], event_id)
 
     # Считаем время окончания
     start_h, start_m = map(int, time_str.split(":"))
@@ -289,56 +359,53 @@ async def book_step4_confirm(callback: CallbackQuery):
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     day_label = f"{DAY_NAMES[date_obj.weekday()]} {date_obj.strftime('%d.%m.%Y')}"
 
-    # Ссылка на Google Календарь для клиента
-    client_cal_url = google_calendar_url(
-        title=f"{service['name']}",
-        date_str=date_str,
-        time_str=time_str,
-        duration_min=service["duration"],
-        description=f"Запись через бот. {service['price']} руб.",
-    )
-    client_cal_btn = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="📅 Добавить в календарь", url=client_cal_url)]
-    ])
-
-    await callback.message.edit_text(
+    await bot.send_message(
+        uid,
         f"✅ <b>Ты записана!</b>\n\n"
         f"{service['emoji']} {service['name']}\n"
         f"📅 {day_label}\n"
         f"🕐 {time_str} — {end_str}\n"
         f"💰 {service['price']} руб.\n\n"
-        f"Напомню за 1 час до визита!\n"
-        f"Ждём тебя! 💅✨",
-        reply_markup=client_cal_btn,
+        f"Напомню заранее! Ждём тебя! 💅✨",
+        reply_markup=main_menu(),
     )
 
-    # Уведомить мастера
+    # Уведомить мастера (со звуком — обычное сообщение всегда со звуком)
     if ADMIN_ID:
-        user = callback.from_user
-        username = f"@{user.username}" if user.username else "—"
+        tg_link = f"@{username}" if username else "—"
+        phone_str = phone or "—"
 
-        # Ссылка на Google Календарь для мастера
+        # Ссылка на Google Календарь — только для мастера
         admin_cal_url = google_calendar_url(
             title=f"{service['name']} — {user.full_name}",
             date_str=date_str,
             time_str=time_str,
             duration_min=service["duration"],
-            description=f"Клиент: {user.full_name}\nTG: {username}\nСумма: {service['price']} руб.",
+            description=f"Клиент: {user.full_name}\nTG: {tg_link}\nТел: {phone_str}\nСумма: {service['price']} руб.",
         )
         admin_cal_btn = InlineKeyboardMarkup(inline_keyboard=[
             [InlineKeyboardButton(text="📅 Добавить в календарь", url=admin_cal_url)]
         ])
 
+        calendar_note = "\n\n📅 <i>Автоматически добавлено в Google Календарь</i>" if event_id else ""
+
         try:
+            # Сначала звуковое уведомление — короткое голосовое
+            await bot.send_message(
+                ADMIN_ID,
+                f"🔔🔔🔔 <b>НОВАЯ ЗАПИСЬ!</b> 🔔🔔🔔",
+            )
             await bot.send_message(
                 ADMIN_ID,
                 f"📌 <b>Новая запись!</b>\n\n"
                 f"Клиент: {user.full_name}\n"
-                f"TG: {username}\n"
+                f"TG: {tg_link}\n"
+                f"📞 Тел: {phone_str}\n"
                 f"Услуга: {service['emoji']} {service['name']}\n"
                 f"Дата: {day_label}\n"
                 f"Время: {time_str} — {end_str}\n"
-                f"Сумма: {service['price']} руб.",
+                f"Сумма: {service['price']} руб."
+                f"{calendar_note}",
                 reply_markup=admin_cal_btn,
             )
         except Exception:
@@ -439,27 +506,36 @@ async def cancel_confirm(callback: CallbackQuery):
 
 
 # =============================================
-#  Напоминания
+#  Напоминания (6ч, 2ч, 1ч) со звуком
 # =============================================
-async def send_reminders():
-    appointments = get_appointments_to_remind()
-    for a in appointments:
-        service = SERVICES.get(a["service_key"], {})
-        date_obj = datetime.strptime(a["date"], "%Y-%m-%d")
-        day_label = f"{DAY_NAMES[date_obj.weekday()]} {date_obj.strftime('%d.%m')}"
+REMINDER_INTERVALS = [
+    (6, "через 6 часов"),
+    (2, "через 2 часа"),
+    (1, "через 1 час"),
+]
 
-        try:
-            await bot.send_message(
-                a["user_id"],
-                f"⏰ <b>Напоминание!</b>\n\n"
-                f"Через час у тебя:\n"
-                f"{service.get('emoji', '')} {service.get('name', '')}\n"
-                f"📅 {day_label} в {a['time']}\n\n"
-                f"Ждём тебя! 💅",
-            )
-            mark_reminded(a["id"])
-        except Exception as e:
-            logger.error(f"Reminder error: {e}")
+
+async def send_reminders():
+    for hours, time_label in REMINDER_INTERVALS:
+        appointments = get_appointments_to_remind(hours)
+        for a in appointments:
+            service = SERVICES.get(a["service_key"], {})
+            date_obj = datetime.strptime(a["date"], "%Y-%m-%d")
+            day_label = f"{DAY_NAMES[date_obj.weekday()]} {date_obj.strftime('%d.%m')}"
+
+            try:
+                # Звуковое уведомление клиенту (обычное сообщение = звук как SMS)
+                await bot.send_message(
+                    a["user_id"],
+                    f"🔔 <b>Напоминание!</b>\n\n"
+                    f"У тебя {time_label}:\n"
+                    f"{service.get('emoji', '')} {service.get('name', '')}\n"
+                    f"📅 {day_label} в {a['time']}\n\n"
+                    f"Ждём тебя! 💅",
+                )
+                mark_reminded(a["id"], hours)
+            except Exception as e:
+                logger.error(f"Reminder ({hours}h) error: {e}")
 
 
 # =============================================

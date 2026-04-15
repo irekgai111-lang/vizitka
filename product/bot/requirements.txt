@@ -1,3 +1,5 @@
 aiogram==3.13.1
 python-dotenv==1.0.1
 apscheduler==3.10.4
+google-api-python-client==2.114.0
+google-auth==2.27.0
