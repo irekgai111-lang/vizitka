@@ -1,0 +1,22 @@
+# Секреты — НИКОГДА не коммитить
+.env
+*.env
+
+# Базы данных
+*.db
+
+# Python
+python_packages/
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
