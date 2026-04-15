@@ -9,6 +9,7 @@ Telegram-бот для записи на маникюр/педикюр.
 import asyncio
 import logging
 from datetime import datetime
+from urllib.parse import quote
 
 from aiogram import Bot, Dispatcher, Router, F
 from aiogram.client.default import DefaultBotProperties
@@ -54,6 +55,23 @@ dp.include_router(router)
 
 # Хранилище выбора пользователя (в памяти, не в БД)
 user_state: dict[int, dict] = {}
+
+
+def google_calendar_url(title: str, date_str: str, time_str: str, duration_min: int, description: str = "") -> str:
+    """Генерирует ссылку для добавления события в Google Календарь."""
+    start_h, start_m = map(int, time_str.split(":"))
+    end_total = start_h * 60 + start_m + duration_min
+    end_h, end_m = end_total // 60, end_total % 60
+    date_clean = date_str.replace("-", "")
+    start_dt = f"{date_clean}T{start_h:02d}{start_m:02d}00"
+    end_dt = f"{date_clean}T{end_h:02d}{end_m:02d}00"
+    return (
+        f"https://calendar.google.com/calendar/render?action=TEMPLATE"
+        f"&text={quote(title)}"
+        f"&dates={start_dt}/{end_dt}"
+        f"&ctz=Europe/Moscow"
+        f"&details={quote(description)}"
+    )
 
 
 # =============================================
@@ -271,6 +289,18 @@ async def book_step4_confirm(callback: CallbackQuery):
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     day_label = f"{DAY_NAMES[date_obj.weekday()]} {date_obj.strftime('%d.%m.%Y')}"
 
+    # Ссылка на Google Календарь для клиента
+    client_cal_url = google_calendar_url(
+        title=f"{service['name']}",
+        date_str=date_str,
+        time_str=time_str,
+        duration_min=service["duration"],
+        description=f"Запись через бот. {service['price']} руб.",
+    )
+    client_cal_btn = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="📅 Добавить в календарь", url=client_cal_url)]
+    ])
+
     await callback.message.edit_text(
         f"✅ <b>Ты записана!</b>\n\n"
         f"{service['emoji']} {service['name']}\n"
@@ -278,13 +308,27 @@ async def book_step4_confirm(callback: CallbackQuery):
         f"🕐 {time_str} — {end_str}\n"
         f"💰 {service['price']} руб.\n\n"
         f"Напомню за 1 час до визита!\n"
-        f"Ждём тебя! 💅✨"
+        f"Ждём тебя! 💅✨",
+        reply_markup=client_cal_btn,
     )
 
     # Уведомить мастера
     if ADMIN_ID:
         user = callback.from_user
         username = f"@{user.username}" if user.username else "—"
+
+        # Ссылка на Google Календарь для мастера
+        admin_cal_url = google_calendar_url(
+            title=f"{service['name']} — {user.full_name}",
+            date_str=date_str,
+            time_str=time_str,
+            duration_min=service["duration"],
+            description=f"Клиент: {user.full_name}\nTG: {username}\nСумма: {service['price']} руб.",
+        )
+        admin_cal_btn = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="📅 Добавить в календарь", url=admin_cal_url)]
+        ])
+
         try:
             await bot.send_message(
                 ADMIN_ID,
@@ -295,6 +339,7 @@ async def book_step4_confirm(callback: CallbackQuery):
                 f"Дата: {day_label}\n"
                 f"Время: {time_str} — {end_str}\n"
                 f"Сумма: {service['price']} руб.",
+                reply_markup=admin_cal_btn,
             )
         except Exception:
             pass
