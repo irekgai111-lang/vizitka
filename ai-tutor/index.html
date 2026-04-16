@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сказочная Академия Волшебных Превращений</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Comfortaa', 'Segoe UI', Arial, sans-serif;
+  background: #f5f0ff;
+  color: #2d1b4e;
+  line-height: 1.7;
+  min-height: 100vh;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* ===== SPLASH SCREEN ===== */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #e0c3fc 0%, #f8d9f0 30%, #c5e8ff 70%, #d4fcf0 100%);
+  transition: opacity 0.8s, visibility 0.8s;
+}
+.splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.splash-fairy {
+  width: 200px;
+  height: 260px;
+  animation: floatFairy 3s ease-in-out infinite;
+}
+@keyframes floatFairy {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.splash h1 {
+  font-size: 1.5em;
+  color: #7c3aed;
+  margin: 16px 0 6px;
+  text-align: center;
+  padding: 0 20px;
+}
+.splash .splash-sub {
+  color: #9333ea;
+  font-size: 0.95em;
+  text-align: center;
+  padding: 0 30px;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+.splash-enter-btn {
+  background: linear-gradient(135deg, #e879f9, #f472b6);
+  color: #fff;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-size: 1.15em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(232,121,249,0.4);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: pulseBtn 2s infinite;
+}
+@keyframes pulseBtn {
+  0%, 100% { box-shadow: 0 6px 24px rgba(232,121,249,0.4); }
+  50% { box-shadow: 0 6px 36px rgba(232,121,249,0.7); }
+}
+.splash-enter-btn:hover {
+  transform: scale(1.06);
+}
+.splash-enter-btn svg { width: 28px; height: 28px; }
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.header-bg {
+  background: linear-gradient(160deg, #c084fc 0%, #e879f9 30%, #fb7185 60%, #fbbf24 100%);
+  padding: 28px 20px 60px;
+  position: relative;
+}
+.header-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23f5f0ff' d='M0,30 C360,60 720,0 1080,30 C1260,45 1380,50 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: cover;
+}
+.header-stars {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.header-stars span {
+  position: absolute;
+  font-size: 1.2em;
+  animation: twinkle 2s ease-in-out infinite;
+  opacity: 0.5;
+}
+.header-stars span:nth-child(1) { top:10%; left:5%; animation-delay:0s; }
+.header-stars span:nth-child(2) { top:20%; left:25%; animation-delay:0.4s; }
+.header-stars span:nth-child(3) { top:8%; left:50%; animation-delay:0.8s; }
+.header-stars span:nth-child(4) { top:25%; left:75%; animation-delay:1.2s; }
+.header-stars span:nth-child(5) { top:12%; left:90%; animation-delay:0.2s; }
+.header-stars span:nth-child(6) { top:30%; left:15%; animation-delay:0.6s; }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.3); }
+}
+.header h1 {
+  font-size: 1.7em;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(124,58,237,0.4);
+  position: relative;
+  z-index: 1;
+}
+.header .subtitle {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.9em;
+  margin-top: 4px;
+  position: relative;
+  z-index: 1;
+}
+.header-fairy-mini {
+  width: 70px;
+  margin: 0 auto 6px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+/* ===== STARS BAR ===== */
+.stars-bar {
+  background: linear-gradient(90deg, #fef9c3, #fde68a, #fef9c3);
+  border-bottom: 3px solid #f59e0b;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.stars-count {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #92400e;
+}
+.progress-wrap {
+  flex: 1;
+  max-width: 260px;
+  min-width: 100px;
+}
+.progress-outer {
+  background: #fff;
+  border-radius: 20px;
+  height: 16px;
+  border: 2px solid #f59e0b;
+  overflow: hidden;
+}
+.progress-inner {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b, #ea580c);
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.8s ease;
+  width: 0%;
+}
+.progress-label {
+  font-size: 0.7em;
+  color: #92400e;
+  text-align: center;
+  margin-top: 2px;
+}
+.voice-toggle {
+  background: #fff;
+  border: 2px solid #c084fc;
+  border-radius: 25px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 0.85em;
+  color: #7c3aed;
+  font-weight: 700;
+  font-family: inherit;
+  transition: all 0.3s;
+}
+.voice-toggle:hover { background: #ede9fe; }
+.voice-toggle.off { opacity: 0.5; border-color: #ccc; color: #999; }
+
+/* ===== NAV ===== */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.nav-btn {
+  background: #fff;
+  border: 2px solid #e0d4f5;
+  color: #7c3aed;
+  padding: 7px 12px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 700;
+  font-family: inherit;
+  transition: all 0.3s;
+  position: relative;
+}
+.nav-btn:hover { background: #ede9fe; transform: translateY(-2px); }
+.nav-btn.active {
+  background: linear-gradient(135deg, #a78bfa, #e879f9);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(167,139,250,0.4);
+}
+.nav-btn.locked { opacity: 0.35; cursor: not-allowed; }
+.nav-btn.locked:hover { transform: none; background: #fff; }
+.nav-btn.completed::after {
+  content: '';
+  position: absolute;
+  top: -5px; right: -3px;
+  width: 16px; height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%23fbbf24' stroke='%23b45309' stroke-width='1.5'/%3E%3Cpath d='M12 3l2 5h5l-4 3.5 1.5 5.5L12 14l-4.5 3 1.5-5.5L5 8h5z' fill='%23fff'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+
+/* ===== PAGES ===== */
+.page {
+  display: none;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 10px 16px 40px;
+}
+.page.active { display: block; }
+
+/* ===== FAIRY BUBBLE ===== */
+.fairy-bubble {
+  background: linear-gradient(135deg, #fff 60%, #fdf2f8);
+  border: 3px solid #e879f9;
+  border-radius: 24px;
+  padding: 16px 16px 16px 74px;
+  margin: 16px 0;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(232,121,249,0.12);
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.2s;
+  min-height: 80px;
+}
+.fairy-bubble:hover { box-shadow: 0 6px 28px rgba(232,121,249,0.25); transform: translateY(-1px); }
+.fairy-bubble .fairy-avatar {
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 52px; height: 52px;
+}
+.fairy-bubble .fairy-text {
+  font-size: 1em;
+  line-height: 1.65;
+}
+.fairy-bubble .fairy-name {
+  color: #c026d3;
+  font-weight: 700;
+  font-size: 0.82em;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+.fairy-bubble .speak-hint {
+  position: absolute;
+  bottom: 5px; right: 12px;
+  font-size: 0.65em;
+  color: #d8b4fe;
+  letter-spacing: 0.3px;
+}
+
+/* ===== STEP CARD ===== */
+.step-card {
+  background: #fff;
+  border-radius: 22px;
+  padding: 18px;
+  margin: 12px 0;
+  border: 2px solid #e9d5ff;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.06);
+}
+.step-card.hidden-step { display: none; }
+.step-card.revealed {
+  display: block;
+  animation: fadeSlideIn 0.5s ease;
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.step-num {
+  background: linear-gradient(135deg, #a78bfa, #e879f9);
+  color: #fff;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 1.1em;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(167,139,250,0.3);
+}
+.step-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #7c3aed;
+}
+.step-card ol, .step-card ul { margin: 8px 0 8px 22px; }
+.step-card li { margin: 4px 0; }
+
+/* ===== ILLUSTRATION CARDS ===== */
+.illust-card {
+  border-radius: 20px;
+  padding: 20px;
+  margin: 14px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.illust-card svg { max-width: 100%; height: auto; }
+.illust-card.castle-bg {
+  background: linear-gradient(180deg, #c5e8ff 0%, #e0c3fc 50%, #fde68a 100%);
+}
+.illust-card.forest-bg {
+  background: linear-gradient(180deg, #a7f3d0 0%, #6ee7b7 40%, #34d399 100%);
+}
+.illust-card.magic-bg {
+  background: linear-gradient(160deg, #ddd6fe 0%, #f0abfc 50%, #fecdd3 100%);
+}
+.illust-card.night-bg {
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+}
+
+/* ===== TOOL BADGE ===== */
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f0e7ff, #fdf2f8);
+  border: 2px solid #d8b4fe;
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin: 8px 4px 8px 0;
+  font-weight: 700;
+  color: #7c3aed;
+  font-size: 0.95em;
+}
+.tool-badge .tool-icon { font-size: 1.3em; }
+
+/* ===== PROMPT BOX ===== */
+.prompt-box {
+  background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+  border: 2px solid #86efac;
+  border-radius: 18px;
+  padding: 14px 14px 14px 14px;
+  margin: 10px 0;
+  position: relative;
+}
+.prompt-label {
+  color: #15803d;
+  font-weight: 700;
+  font-size: 0.82em;
+  margin-bottom: 4px;
+}
+.prompt-text {
+  color: #166534;
+  line-height: 1.5;
+  font-size: 0.95em;
+  padding-right: 60px;
+}
+.copy-btn {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.78em;
+  font-weight: 700;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(34,197,94,0.3);
+}
+.copy-btn:hover { transform: scale(1.05); }
+
+/* ===== EXAMPLE BOX ===== */
+.example-box {
+  background: linear-gradient(135deg, #fef9c3, #fef3c7);
+  border: 2px solid #fbbf24;
+  border-radius: 18px;
+  padding: 14px;
+  margin: 10px 0;
+}
+.example-title {
+  color: #b45309;
+  font-weight: 700;
+  font-size: 0.95em;
+  margin-bottom: 6px;
+}
+
+/* ===== TIP ===== */
+.tip-box {
+  background: linear-gradient(135deg, #fdf4ff, #fce7f3);
+  border: 2px solid #f0abfc;
+  border-radius: 18px;
+  padding: 12px 14px;
+  margin: 10px 0;
+  font-size: 0.93em;
+}
+.tip-box strong { color: #a21caf; }
+
+/* ===== SAFETY ===== */
+.safety-bar {
+  background: linear-gradient(135deg, #fef2f2, #fff1f2);
+  border: 2px solid #fca5a5;
+  border-radius: 18px;
+  padding: 12px 14px;
+  margin: 12px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9em;
+}
+.safety-bar .safety-icon { font-size: 1.8em; flex-shrink: 0; margin-top: 2px; }
+.safety-bar strong { color: #dc2626; }
+
+/* ===== QUIZ ===== */
+.quiz-wrap {
+  background: linear-gradient(160deg, #eff6ff, #dbeafe, #e0e7ff);
+  border: 3px solid #818cf8;
+  border-radius: 22px;
+  padding: 18px;
+  margin: 16px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quiz-wrap::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, rgba(129,140,248,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.quiz-wrap h3 {
+  color: #4338ca;
+  margin-bottom: 8px;
+  font-size: 1.05em;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.quiz-opt {
+  background: #fff;
+  border: 2px solid #a5b4fc;
+  border-radius: 16px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  font-family: inherit;
+  color: #3730a3;
+  transition: all 0.2s;
+  text-align: left;
+}
+.quiz-opt:hover { background: #e0e7ff; transform: translateX(4px); }
+.quiz-opt.correct {
+  background: #dcfce7 !important;
+  border-color: #22c55e !important;
+  color: #15803d !important;
+  pointer-events: none;
+}
+.quiz-opt.wrong {
+  background: #fee2e2 !important;
+  border-color: #f87171 !important;
+  color: #b91c1c !important;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.quiz-result {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 1.05em;
+  min-height: 28px;
+}
+
+/* ===== TASK CHECK ===== */
+.task-check {
+  background: linear-gradient(135deg, #fef9c3, #fff7ed);
+  border: 3px solid #f59e0b;
+  border-radius: 22px;
+  padding: 18px;
+  margin: 16px 0;
+}
+.task-check h3 { color: #b45309; margin-bottom: 10px; }
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #fde68a;
+  cursor: pointer;
+  user-select: none;
+}
+.task-item:last-child { border-bottom: none; }
+.task-checkbox {
+  width: 32px; height: 32px;
+  border: 2px solid #d97706;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2em;
+  flex-shrink: 0;
+  transition: all 0.3s;
+  background: #fff;
+}
+.task-item.done .task-checkbox {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-color: #b45309;
+  box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+}
+.task-label { font-size: 0.93em; }
+.task-item.done .task-label { color: #92400e; text-decoration: line-through; opacity: 0.6; }
+
+/* ===== REWARD POPUP ===== */
+.reward-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.reward-overlay.show { display: flex; }
+.reward-card {
+  background: linear-gradient(160deg, #fef9c3, #fff, #fdf2f8);
+  border-radius: 30px;
+  padding: 30px;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popIn 0.5s ease;
+}
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.reward-stars-anim { font-size: 3em; margin-bottom: 10px; }
+.reward-title { font-size: 1.3em; color: #b45309; font-weight: 700; margin-bottom: 4px; }
+.reward-text { color: #78350f; margin-bottom: 16px; }
+.reward-btn {
+  background: linear-gradient(135deg, #a78bfa, #e879f9);
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 18px;
+  font-size: 1.05em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(167,139,250,0.4);
+}
+.reward-btn:hover { transform: scale(1.05); }
+
+/* ===== ENCOURAGE TOAST ===== */
+.encourage-toast {
+  display: none;
+  position: fixed;
+  bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #fff, #fdf2f8);
+  border: 3px solid #e879f9;
+  border-radius: 22px;
+  padding: 14px 24px;
+  z-index: 900;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  text-align: center;
+  max-width: 90%;
+  font-weight: 600;
+  animation: slideUp 0.4s ease;
+}
+.encourage-toast.show { display: block; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ===== BUTTONS ===== */
+.next-chapter-btn {
+  display: block;
+  margin: 20px auto;
+  background: linear-gradient(135deg, #a78bfa, #e879f9);
+  color: #fff;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 22px;
+  font-size: 1.1em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(167,139,250,0.4);
+  transition: all 0.3s;
+}
+.next-chapter-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(167,139,250,0.5); }
+.next-chapter-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.reveal-btn {
+  display: block;
+  margin: 10px auto;
+  background: linear-gradient(135deg, #e879f9, #f472b6);
+  color: #fff;
+  border: none;
+  padding: 10px 26px;
+  border-radius: 16px;
+  font-size: 0.95em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(232,121,249,0.3);
+  transition: all 0.3s;
+}
+.reveal-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(232,121,249,0.4); }
+
+/* ===== CHEAT TABLE ===== */
+.cheat-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  margin: 10px 0;
+}
+.cheat-table td {
+  padding: 10px 14px;
+  background: #fff;
+  font-size: 0.93em;
+}
+.cheat-table tr td:first-child {
+  border-radius: 14px 0 0 14px;
+  color: #7c3aed;
+  font-weight: 700;
+}
+.cheat-table tr td:last-child { border-radius: 0 14px 14px 0; }
+
+/* ===== INTRO INSTRUCTION ===== */
+.intro-instruction {
+  background: linear-gradient(135deg, #fff, #fdf4ff);
+  border: 3px dashed #d8b4fe;
+  border-radius: 22px;
+  padding: 18px;
+  margin: 16px 0;
+  text-align: center;
+}
+.intro-instruction p { margin: 6px 0; line-height: 1.6; }
+.intro-instruction .btn-example {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #e879f9, #f472b6);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.9em;
+  margin: 4px 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  .header h1 { font-size: 1.3em; }
+  .nav-btn { font-size: 0.75em; padding: 6px 9px; }
+  .page { padding: 8px 10px 30px; }
+  .fairy-bubble { padding: 12px 12px 12px 66px; }
+  .splash-fairy { width: 150px; height: 195px; }
+  .splash h1 { font-size: 1.2em; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== INLINE SVG FAIRY (Cinderella fairy godmother style) ===== -->
+<svg style="display:none">
+  <defs>
+    <!-- FAIRY FULL (for splash) — detailed Cinderella fairy godmother -->
+    <symbol id="fairy-full" viewBox="0 0 200 260">
+      <!-- Magic glow around fairy -->
+      <ellipse cx="100" cy="130" rx="85" ry="120" fill="url(#fairyGlow)" opacity="0.15"/>
+      <!-- Ground shadow -->
+      <ellipse cx="100" cy="248" rx="45" ry="6" fill="#c4b5fd" opacity="0.3"/>
+
+      <!-- WINGS — large, butterfly-style, translucent -->
+      <!-- Left upper wing -->
+      <path d="M68,105 Q15,55 30,15 Q50,5 65,25 Q75,45 72,80 Z" fill="url(#wingGrad1)" opacity="0.55" stroke="#d8b4fe" stroke-width="0.8"/>
+      <!-- Left lower wing -->
+      <path d="M62,115 Q5,100 10,65 Q25,55 45,70 Q58,85 60,105 Z" fill="url(#wingGrad2)" opacity="0.45" stroke="#e0d4f5" stroke-width="0.5"/>
+      <!-- Right upper wing -->
+      <path d="M132,105 Q185,55 170,15 Q150,5 135,25 Q125,45 128,80 Z" fill="url(#wingGrad1)" opacity="0.55" stroke="#d8b4fe" stroke-width="0.8"/>
+      <!-- Right lower wing -->
+      <path d="M138,115 Q195,100 190,65 Q175,55 155,70 Q142,85 140,105 Z" fill="url(#wingGrad2)" opacity="0.45" stroke="#e0d4f5" stroke-width="0.5"/>
+      <!-- Wing vein details -->
+      <path d="M70,100 Q45,60 50,30" stroke="#c4b5fd" stroke-width="0.7" fill="none" opacity="0.4"/>
+      <path d="M130,100 Q155,60 150,30" stroke="#c4b5fd" stroke-width="0.7" fill="none" opacity="0.4"/>
+      <!-- Wing sparkles -->
+      <circle cx="40" cy="35" r="3" fill="#fbbf24"><animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="160" cy="35" r="3" fill="#fbbf24"><animate attributeName="opacity" values="0.2;1;0.2" dur="2s" begin="0.7s" repeatCount="indefinite"/></circle>
+      <circle cx="20" cy="70" r="2.5" fill="#f0abfc"><animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.5s" begin="0.3s" repeatCount="indefinite"/></circle>
+      <circle cx="180" cy="70" r="2.5" fill="#f0abfc"><animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.5s" begin="1s" repeatCount="indefinite"/></circle>
+      <circle cx="50" cy="50" r="2" fill="#c5e8ff"><animate attributeName="opacity" values="0;1;0" dur="1.8s" begin="0.5s" repeatCount="indefinite"/></circle>
+      <circle cx="150" cy="50" r="2" fill="#c5e8ff"><animate attributeName="opacity" values="0;1;0" dur="1.8s" begin="1.2s" repeatCount="indefinite"/></circle>
+
+      <!-- DRESS — flowing ball gown -->
+      <path d="M78,130 Q74,145 58,230 Q80,248 100,250 Q120,248 142,230 Q126,145 122,130 Z" fill="url(#dressGrad)"/>
+      <!-- Dress shimmer layers -->
+      <path d="M78,130 Q90,142 100,140 Q110,142 122,130 L118,155 Q100,162 82,155 Z" fill="url(#dressTop)" opacity="0.6"/>
+      <!-- Dress folds -->
+      <path d="M72,160 Q85,170 100,168 Q115,170 128,160" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" fill="none"/>
+      <path d="M66,190 Q85,202 100,200 Q115,202 134,190" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" fill="none"/>
+      <path d="M60,220 Q82,235 100,233 Q118,235 140,220" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none"/>
+      <!-- Dress sparkles — scattered gems -->
+      <circle cx="88" cy="155" r="2" fill="#fff" opacity="0.8"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.1s" repeatCount="indefinite"/></circle>
+      <circle cx="112" cy="170" r="1.8" fill="#fde68a" opacity="0.7"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="0.6s" repeatCount="indefinite"/></circle>
+      <circle cx="82" cy="190" r="1.5" fill="#c5e8ff" opacity="0.6"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="1.9s" begin="0.9s" repeatCount="indefinite"/></circle>
+      <circle cx="118" cy="200" r="2" fill="#fff" opacity="0.7"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.3s" begin="1.3s" repeatCount="indefinite"/></circle>
+      <circle cx="95" cy="215" r="1.5" fill="#f0abfc" opacity="0.6"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="2s" begin="0.4s" repeatCount="indefinite"/></circle>
+      <circle cx="105" cy="235" r="1.8" fill="#fde68a" opacity="0.5"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.5s" begin="1.6s" repeatCount="indefinite"/></circle>
+      <!-- Waist ribbon/bow -->
+      <ellipse cx="100" cy="132" rx="22" ry="4" fill="#e879f9" opacity="0.6"/>
+      <path d="M82,132 Q78,125 72,128 Q78,132 82,132" fill="#e879f9" opacity="0.5"/>
+      <path d="M118,132 Q122,125 128,128 Q122,132 118,132" fill="#e879f9" opacity="0.5"/>
+
+      <!-- Necklace -->
+      <path d="M86,118 Q92,122 100,123 Q108,122 114,118" stroke="#fbbf24" stroke-width="1.2" fill="none"/>
+      <circle cx="100" cy="124" r="2.5" fill="#fbbf24"/>
+      <circle cx="93" cy="122" r="1.5" fill="#fde68a"/>
+      <circle cx="107" cy="122" r="1.5" fill="#fde68a"/>
+
+      <!-- ARMS — graceful, with sleeves -->
+      <path d="M80,125 Q62,118 50,105 Q46,100 42,96" stroke="#fcd9a8" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+      <path d="M120,125 Q138,115 150,100 Q153,96 158,90" stroke="#fcd9a8" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+      <!-- Puffy sleeves -->
+      <ellipse cx="76" cy="125" rx="8" ry="6" fill="url(#dressGrad)" opacity="0.7"/>
+      <ellipse cx="124" cy="125" rx="8" ry="6" fill="url(#dressGrad)" opacity="0.7"/>
+      <!-- Hands -->
+      <circle cx="40" cy="95" r="4" fill="#fcd9a8"/>
+      <circle cx="160" cy="88" r="4" fill="#fcd9a8"/>
+
+      <!-- WAND — elegant with star tip -->
+      <line x1="160" y1="88" x2="174" y2="48" stroke="url(#wandGrad)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Wand star -->
+      <polygon points="174,32 177,42 188,44 180,50 182,60 174,54 166,60 168,50 160,44 171,42" fill="#fbbf24" stroke="#f59e0b" stroke-width="0.8"/>
+      <!-- Wand glow rings -->
+      <circle cx="174" cy="46" r="12" fill="none" stroke="#fbbf24" stroke-width="1" opacity="0.3"><animate attributeName="r" values="12;18;12" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0.1;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+      <circle cx="174" cy="46" r="8" fill="none" stroke="#fde68a" stroke-width="1.5" opacity="0.4"><animate attributeName="r" values="8;14;8" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0.1;0.4" dur="2s" repeatCount="indefinite"/></circle>
+      <!-- Wand trail sparkles -->
+      <circle cx="174" cy="46" r="3" fill="#fbbf24"><animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/></circle>
+      <circle cx="184" cy="38" r="2" fill="#f0abfc"><animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="0.2s" repeatCount="indefinite"/><animate attributeName="cx" values="184;190;184" dur="3s" repeatCount="indefinite"/></circle>
+      <circle cx="166" cy="34" r="2" fill="#c5e8ff"><animate attributeName="opacity" values="0;1;0" dur="1.8s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="cx" values="166;160;166" dur="3s" repeatCount="indefinite"/></circle>
+      <circle cx="180" cy="30" r="1.5" fill="#fde68a"><animate attributeName="opacity" values="0;0.8;0" dur="2s" begin="1.2s" repeatCount="indefinite"/></circle>
+
+      <!-- HEAD -->
+      <circle cx="100" cy="85" r="30" fill="#fde1c5"/>
+      <!-- Subtle face shape -->
+      <ellipse cx="100" cy="90" rx="25" ry="23" fill="#fcd9a8" opacity="0.3"/>
+
+      <!-- HAIR — flowing golden locks -->
+      <path d="M70,82 Q67,48 82,38 Q92,30 100,33 Q108,30 118,38 Q133,48 130,82 Q128,62 115,58 Q100,55 85,58 Q72,62 70,82 Z" fill="url(#hairGrad)"/>
+      <!-- Hair volume & curls -->
+      <path d="M70,84 Q65,100 68,115 Q70,120 73,118 Q69,105 72,90 Z" fill="#f59e0b" opacity="0.7"/>
+      <path d="M130,84 Q135,100 132,115 Q130,120 127,118 Q131,105 128,90 Z" fill="#f59e0b" opacity="0.7"/>
+      <!-- Curled hair ends -->
+      <path d="M68,115 Q64,122 68,125 Q72,122 70,118" fill="#eab308" opacity="0.6"/>
+      <path d="M132,115 Q136,122 132,125 Q128,122 130,118" fill="#eab308" opacity="0.6"/>
+      <!-- Hair shine -->
+      <path d="M85,45 Q90,42 95,48" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M105,43 Q112,40 118,46" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+      <!-- TIARA / CROWN — jeweled -->
+      <path d="M80,48 Q85,38 90,40 Q95,30 100,28 Q105,30 110,40 Q115,38 120,48" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Crown jewels -->
+      <circle cx="100" cy="28" r="4" fill="#e879f9" stroke="#c026d3" stroke-width="1"/>
+      <circle cx="90" cy="38" r="3" fill="#60a5fa" stroke="#3b82f6" stroke-width="0.8"/>
+      <circle cx="110" cy="38" r="3" fill="#60a5fa" stroke="#3b82f6" stroke-width="0.8"/>
+      <circle cx="82" cy="45" r="2" fill="#fde68a" stroke="#f59e0b" stroke-width="0.8"/>
+      <circle cx="118" cy="45" r="2" fill="#fde68a" stroke="#f59e0b" stroke-width="0.8"/>
+      <!-- Crown sparkle -->
+      <circle cx="100" cy="28" r="2" fill="#fff" opacity="0.6"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/></circle>
+
+      <!-- EYES — large, expressive, Disney-style -->
+      <ellipse cx="88" cy="82" rx="6" ry="7.5" fill="#fff"/>
+      <ellipse cx="112" cy="82" rx="6" ry="7.5" fill="#fff"/>
+      <!-- Iris -->
+      <ellipse cx="89" cy="83" rx="4.5" ry="5.5" fill="#7c3aed"/>
+      <ellipse cx="111" cy="83" rx="4.5" ry="5.5" fill="#7c3aed"/>
+      <!-- Pupil -->
+      <circle cx="90" cy="83" r="2.5" fill="#2e1065"/>
+      <circle cx="110" cy="83" r="2.5" fill="#2e1065"/>
+      <!-- Eye sparkle -->
+      <circle cx="92" cy="80" r="2" fill="#fff"/>
+      <circle cx="112" cy="80" r="2" fill="#fff"/>
+      <circle cx="87" cy="85" r="1" fill="#fff" opacity="0.6"/>
+      <circle cx="108" cy="85" r="1" fill="#fff" opacity="0.6"/>
+      <!-- Upper eyelids -->
+      <path d="M81,77 Q88,73 95,77" stroke="#5b21b6" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M105,77 Q112,73 119,77" stroke="#5b21b6" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- Eyelashes — elegant, curved -->
+      <path d="M81,77 Q79,73 77,71" stroke="#5b21b6" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M84,75 Q83,71 82,69" stroke="#5b21b6" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M119,77 Q121,73 123,71" stroke="#5b21b6" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M116,75 Q117,71 118,69" stroke="#5b21b6" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+      <!-- EYEBROWS — gentle arched -->
+      <path d="M80,72 Q88,67 96,72" stroke="#c88a2a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M104,72 Q112,67 120,72" stroke="#c88a2a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+      <!-- NOSE — subtle, cute -->
+      <path d="M98,90 Q100,93 102,90" stroke="#e8a87c" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+      <!-- BLUSH — rosy cheeks -->
+      <ellipse cx="78" cy="92" rx="7" ry="3.5" fill="#fca5a5" opacity="0.35"/>
+      <ellipse cx="122" cy="92" rx="7" ry="3.5" fill="#fca5a5" opacity="0.35"/>
+
+      <!-- LIPS — warm smile -->
+      <path d="M91,98 Q95,101 100,102 Q105,101 109,98" stroke="#e879a0" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M93,99 Q100,105 107,99" fill="#f9a8c9" opacity="0.4"/>
+
+      <!-- FLOATING MAGIC PARTICLES -->
+      <circle cx="35" cy="125" r="3" fill="#fbbf24" opacity="0.5"><animate attributeName="cy" values="125;108;125" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0.8;0.2" dur="3.5s" repeatCount="indefinite"/></circle>
+      <circle cx="165" cy="135" r="2.5" fill="#c084fc" opacity="0.4"><animate attributeName="cy" values="135;118;135" dur="3s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0.7;0.2" dur="3s" begin="0.4s" repeatCount="indefinite"/></circle>
+      <circle cx="45" cy="170" r="2" fill="#f0abfc" opacity="0.3"><animate attributeName="cy" values="170;155;170" dur="4s" begin="1s" repeatCount="indefinite"/></circle>
+      <circle cx="155" cy="165" r="2" fill="#fde68a" opacity="0.4"><animate attributeName="cy" values="165;148;165" dur="3.2s" begin="0.8s" repeatCount="indefinite"/></circle>
+      <circle cx="30" cy="95" r="1.5" fill="#c5e8ff" opacity="0.3"><animate attributeName="cy" values="95;82;95" dur="2.8s" begin="1.5s" repeatCount="indefinite"/></circle>
+      <circle cx="170" cy="100" r="1.5" fill="#fbbf24" opacity="0.3"><animate attributeName="cy" values="100;85;100" dur="3s" begin="0.6s" repeatCount="indefinite"/></circle>
+    </symbol>
+
+    <!-- FAIRY MINI (for bubbles and header) — matching detailed style -->
+    <symbol id="fairy-mini" viewBox="0 0 56 56">
+      <!-- Wings -->
+      <path d="M14,28 Q3,18 8,8 Q14,6 17,14 Q18,20 16,26 Z" fill="url(#wingGrad1)" opacity="0.5" stroke="#d8b4fe" stroke-width="0.4"/>
+      <path d="M42,28 Q53,18 48,8 Q42,6 39,14 Q38,20 40,26 Z" fill="url(#wingGrad1)" opacity="0.5" stroke="#d8b4fe" stroke-width="0.4"/>
+      <path d="M12,30 Q2,26 5,18 Q10,16 14,22 Z" fill="url(#wingGrad2)" opacity="0.35"/>
+      <path d="M44,30 Q54,26 51,18 Q46,16 42,22 Z" fill="url(#wingGrad2)" opacity="0.35"/>
+      <!-- Wing sparkles -->
+      <circle cx="8" cy="12" r="1.5" fill="#fbbf24"><animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="48" cy="12" r="1.5" fill="#fbbf24"><animate attributeName="opacity" values="0.2;1;0.2" dur="2s" begin="0.7s" repeatCount="indefinite"/></circle>
+      <!-- Dress -->
+      <path d="M21,33 L17,50 Q28,54 39,50 L35,33 Z" fill="url(#dressGradMini)"/>
+      <path d="M19,40 Q28,43 37,40" stroke="rgba(255,255,255,0.3)" stroke-width="0.8" fill="none"/>
+      <!-- Dress sparkle -->
+      <circle cx="26" cy="42" r="1" fill="#fff" opacity="0.7"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+      <circle cx="31" cy="46" r="0.8" fill="#fde68a" opacity="0.6"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.2s" begin="1s" repeatCount="indefinite"/></circle>
+      <!-- Waist bow -->
+      <ellipse cx="28" cy="34" rx="7" ry="1.5" fill="#e879f9" opacity="0.5"/>
+      <!-- Sleeves -->
+      <ellipse cx="21" cy="33" rx="3" ry="2.2" fill="url(#dressGradMini)" opacity="0.7"/>
+      <ellipse cx="35" cy="33" rx="3" ry="2.2" fill="url(#dressGradMini)" opacity="0.7"/>
+      <!-- Head -->
+      <circle cx="28" cy="22" r="10" fill="#fde1c5"/>
+      <!-- Hair -->
+      <path d="M18,20 Q17,12 21,9 Q26,6 28,8 Q30,6 35,9 Q39,12 38,20 Q36,16 32,15 Q28,14 24,15 Q20,16 18,20 Z" fill="url(#hairGrad)"/>
+      <!-- Hair curls -->
+      <path d="M18,21 Q16,28 18,31" stroke="#f59e0b" stroke-width="1" fill="none"/>
+      <path d="M38,21 Q40,28 38,31" stroke="#f59e0b" stroke-width="1" fill="none"/>
+      <!-- Crown/tiara -->
+      <path d="M22,12 Q25,7 28,6 Q31,7 34,12" stroke="#fbbf24" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <circle cx="28" cy="6" r="2.2" fill="#e879f9" stroke="#c026d3" stroke-width="0.5"/>
+      <circle cx="23" cy="10" r="1.3" fill="#60a5fa"/>
+      <circle cx="33" cy="10" r="1.3" fill="#60a5fa"/>
+      <!-- Eyes — expressive -->
+      <ellipse cx="24" cy="21" rx="2.5" ry="3" fill="#fff"/>
+      <ellipse cx="32" cy="21" rx="2.5" ry="3" fill="#fff"/>
+      <ellipse cx="24.5" cy="21.5" rx="1.8" ry="2.2" fill="#7c3aed"/>
+      <ellipse cx="31.5" cy="21.5" rx="1.8" ry="2.2" fill="#7c3aed"/>
+      <circle cx="25" cy="21" r="1" fill="#2e1065"/>
+      <circle cx="31" cy="21" r="1" fill="#2e1065"/>
+      <circle cx="25.5" cy="20" r="0.8" fill="#fff"/>
+      <circle cx="31.5" cy="20" r="0.8" fill="#fff"/>
+      <!-- Eyelashes -->
+      <path d="M21,18.5 Q20,17 19,16.5" stroke="#5b21b6" stroke-width="0.8" fill="none"/>
+      <path d="M35,18.5 Q36,17 37,16.5" stroke="#5b21b6" stroke-width="0.8" fill="none"/>
+      <!-- Blush -->
+      <ellipse cx="20" cy="25" rx="2.5" ry="1.2" fill="#fca5a5" opacity="0.35"/>
+      <ellipse cx="36" cy="25" rx="2.5" ry="1.2" fill="#fca5a5" opacity="0.35"/>
+      <!-- Smile -->
+      <path d="M25,27 Q28,30 31,27" stroke="#e879a0" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <!-- Wand -->
+      <line x1="40" y1="30" x2="48" y2="14" stroke="url(#wandGrad)" stroke-width="1.5" stroke-linecap="round"/>
+      <polygon points="48,8 50,13 46,13" fill="#fbbf24" stroke="#f59e0b" stroke-width="0.3"/>
+      <circle cx="48" cy="8" r="3" fill="#fbbf24" opacity="0.4"><animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0.5;0.2" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="48" cy="8" r="1.5" fill="#fbbf24"><animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/></circle>
+    </symbol>
+
+    <!-- Gradients -->
+    <radialGradient id="fairyGlow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#e0c3fc"/>
+      <stop offset="100%" stop-color="#e0c3fc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="dressGrad" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#d8b4fe"/>
+      <stop offset="30%" stop-color="#c084fc"/>
+      <stop offset="60%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="dressTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e9d5ff"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+    <linearGradient id="dressGradMini" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d8b4fe"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="wingGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0e7ff" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#c4b5fd" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ddd6fe" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="wingGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0e7ff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#c5e8ff" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="40%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="wandGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#d4a574"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+
+    <!-- CASTLE ILLUSTRATION -->
+    <symbol id="illust-castle" viewBox="0 0 400 200">
+      <rect width="400" height="200" fill="none"/>
+      <!-- Sky -->
+      <circle cx="350" cy="40" r="25" fill="#fbbf24" opacity="0.3"/>
+      <!-- Clouds -->
+      <ellipse cx="80" cy="35" rx="40" ry="16" fill="#fff" opacity="0.7"/>
+      <ellipse cx="300" cy="50" rx="35" ry="12" fill="#fff" opacity="0.5"/>
+      <!-- Castle -->
+      <rect x="140" y="80" width="120" height="100" rx="4" fill="#e0c3fc"/>
+      <rect x="155" y="60" width="25" height="30" rx="2" fill="#d8b4fe"/>
+      <rect x="220" y="65" width="25" height="25" rx="2" fill="#d8b4fe"/>
+      <!-- Towers -->
+      <polygon points="167,60 155,45 180,45" fill="#c084fc"/>
+      <polygon points="232,65 220,50 245,50" fill="#c084fc"/>
+      <!-- Flags -->
+      <line x1="167" y1="45" x2="167" y2="30" stroke="#f472b6" stroke-width="2"/>
+      <polygon points="167,30 180,35 167,40" fill="#f472b6"/>
+      <line x1="232" y1="50" x2="232" y2="35" stroke="#fb923c" stroke-width="2"/>
+      <polygon points="232,35 245,40 232,45" fill="#fb923c"/>
+      <!-- Door -->
+      <path d="M185,180 L185,140 Q200,125 215,140 L215,180 Z" fill="#7c3aed"/>
+      <!-- Windows -->
+      <circle cx="170" cy="110" r="8" fill="#c5e8ff" stroke="#a78bfa" stroke-width="2"/>
+      <circle cx="230" cy="110" r="8" fill="#c5e8ff" stroke="#a78bfa" stroke-width="2"/>
+      <!-- Stars -->
+      <circle cx="50" cy="25" r="2" fill="#fbbf24"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="120" cy="15" r="2" fill="#fbbf24"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.7s" repeatCount="indefinite"/></circle>
+      <circle cx="320" cy="20" r="2" fill="#fbbf24"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1.2s" repeatCount="indefinite"/></circle>
+      <!-- Rainbow -->
+      <path d="M30,180 Q60,80 200,70 Q340,80 370,180" stroke="#fca5a5" stroke-width="4" fill="none" opacity="0.3"/>
+      <path d="M35,180 Q65,85 200,75 Q335,85 365,180" stroke="#fde68a" stroke-width="4" fill="none" opacity="0.3"/>
+      <path d="M40,180 Q70,90 200,80 Q330,90 360,180" stroke="#a7f3d0" stroke-width="4" fill="none" opacity="0.3"/>
+      <!-- Ground -->
+      <ellipse cx="200" cy="195" rx="180" ry="12" fill="#a7f3d0" opacity="0.5"/>
+    </symbol>
+
+    <!-- WAND ICON -->
+    <symbol id="wand-icon" viewBox="0 0 24 24">
+      <line x1="4" y1="20" x2="16" y2="8" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="18" cy="6" r="4" fill="#fbbf24" opacity="0.7"/>
+      <circle cx="18" cy="6" r="2" fill="#fff"/>
+      <circle cx="22" cy="3" r="1.5" fill="#f0abfc"><animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/></circle>
+      <circle cx="14" cy="3" r="1" fill="#c4b5fd"><animate attributeName="opacity" values="0;1;0" dur="1s" begin="0.3s" repeatCount="indefinite"/></circle>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div class="splash" id="splash">
+  <svg class="splash-fairy"><use href="#fairy-full"/></svg>
+  <h1>Сказочная Академия Волшебных Превращений</h1>
+  <p class="splash-sub">Привет, юный волшебник! Фея Искорка приглашает тебя в удивительное путешествие по миру чудес!</p>
+  <button class="splash-enter-btn" id="splashBtn" onclick="enterAcademy()">
+    <svg><use href="#fairy-mini"/></svg>
+    Войти в сказку!
+  </button>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app" style="display:none">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-bg">
+    <div class="header-stars">
+      <span>✨</span><span>🌟</span><span>⭐</span><span>✨</span><span>🌟</span><span>⭐</span>
+    </div>
+    <svg class="header-fairy-mini"><use href="#fairy-mini"/></svg>
+    <h1>Сказочная Академия</h1>
+    <div class="subtitle">Путешествие с Феей Искоркой по миру чудес</div>
+  </div>
+</div>
+
+<!-- STARS BAR -->
+<div class="stars-bar">
+  <div class="stars-count">⭐ <span id="starCount">0</span></div>
+  <div class="progress-wrap">
+    <div class="progress-outer"><div class="progress-inner" id="progressBar"></div></div>
+    <div class="progress-label">Глава <span id="chapterLabel">1</span> из 6</div>
+  </div>
+  <button class="voice-toggle" id="voiceBtn" onclick="toggleVoice()">🔊 Голос</button>
+</div>
+
+<!-- NAV -->
+<div class="nav" id="nav"></div>
+
+<!-- ===== CHAPTER 0: INTRO ===== -->
+<div class="page active" id="ch0">
+
+  <!-- Castle illustration -->
+  <div class="illust-card castle-bg">
+    <svg viewBox="0 0 400 200" style="max-height:180px"><use href="#illust-castle"/></svg>
+  </div>
+
+  <!-- Instruction: как начать разговор -->
+  <div class="intro-instruction">
+    <p>Для начала разговора с Феей нажимай на <strong>розовую кнопку</strong> с нарисованной феей:</p>
+    <div class="btn-example">
+      <svg width="20" height="20"><use href="#fairy-mini"/></svg>
+      Розовый пузырь с феей
+    </div>
+    <p style="margin-top:10px">Фея расскажет тебе сказку и научит волшебству!</p>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      Привет, юная волшебница! Я — <strong>Фея Искорка</strong>! Я приглашаю тебя в удивительное путешествие! Сегодня ты научишься настоящей магии: превращать свои фотографии в сказочные картины, менять наряды одним взмахом палочки и даже создавать свои собственные мультики!
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      А для превращений и волшебства есть <strong>Правило Феи</strong>: нам нужны будут волшебные программы. Для регистрации на сайтах <strong>всегда зови маму или папу</strong>! Никогда не вводи свой адрес или номер телефона. Ты — волшебница, а не шпион!
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="safety-bar">
+    <div class="safety-icon">🛡️</div>
+    <div><strong>Правило Феи:</strong> Для регистрации на сайтах всегда зови маму или папу! Никогда не вводи свой адрес или номер телефона. Ты — волшебница, а не шпион!</div>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      Наше путешествие — это <strong>6 волшебных глав</strong>. В каждой главе тебя ждут задания и загадки. За каждое выполненное задание ты получишь <strong>звёздочку</strong>! Собери все звёздочки и стань настоящей <strong>Волшебницей Превращений</strong>!
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Твои первые волшебные инструменты</div>
+    </div>
+    <div class="tool-badge"><span class="tool-icon">🎨</span> Шедеврум — рисует картинки по словам</div>
+    <p>Скачай приложение <strong>Шедеврум</strong> на телефон или открой <strong>shedevrum.ai</strong></p>
+    <br>
+    <div class="tool-badge"><span class="tool-icon">🎥</span> CapCut — склеивает видео и музыку</div>
+    <p>Скачай <strong>CapCut</strong> на компьютер или телефон — <strong>capcut.com</strong></p>
+  </div>
+
+  <div class="quiz-wrap" id="quiz0">
+    <h3>Загадка Феи Искорки</h3>
+    <p>Что такое <strong>нейросеть</strong>?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz('quiz0',this,false)">Паутина в интернете 🕸️</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz0',this,true)">Умная программа, которая создаёт картинки по словам 🧠</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz0',this,false)">Специальный кабель для компьютера 🔌</div>
+    </div>
+    <div class="quiz-result" id="quiz0-result"></div>
+  </div>
+
+  <button class="next-chapter-btn" id="nextBtn0" onclick="goToChapter(1)" disabled>Начать путешествие! 🚀</button>
+</div>
+
+<!-- ===== CHAPTER 1: РИСУЕМ СЛОВАМИ ===== -->
+<div class="page" id="ch1">
+
+  <div class="illust-card magic-bg">
+    <svg viewBox="0 0 400 160" style="max-height:150px">
+      <!-- Paintbrush & canvas scene -->
+      <rect x="120" y="20" width="160" height="120" rx="10" fill="#fff" stroke="#d8b4fe" stroke-width="3"/>
+      <!-- Cat on canvas -->
+      <ellipse cx="200" cy="85" rx="25" ry="22" fill="#fcd34d"/>
+      <ellipse cx="190" cy="72" rx="8" ry="10" fill="#fcd34d"/>
+      <ellipse cx="210" cy="72" rx="8" ry="10" fill="#fcd34d"/>
+      <circle cx="193" cy="80" r="4" fill="#6d28d9"/>
+      <circle cx="207" cy="80" r="4" fill="#6d28d9"/>
+      <circle cx="194" cy="79" r="2" fill="#fff"/>
+      <circle cx="208" cy="79" r="2" fill="#fff"/>
+      <path d="M196,89 Q200,94 204,89" stroke="#d946ef" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M186,68 L183,62" stroke="#fcd34d" stroke-width="2"/>
+      <path d="M214,68 L217,62" stroke="#fcd34d" stroke-width="2"/>
+      <!-- Wizard hat on cat -->
+      <polygon points="200,48 185,72 215,72" fill="#7c3aed"/>
+      <ellipse cx="200" cy="72" rx="18" ry="4" fill="#7c3aed"/>
+      <circle cx="200" cy="52" r="4" fill="#fbbf24"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/></circle>
+      <!-- Stars around -->
+      <circle cx="100" cy="50" r="3" fill="#fbbf24"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="310" cy="40" r="3" fill="#e879f9"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+      <circle cx="90" cy="100" r="2" fill="#c084fc"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1s" repeatCount="indefinite"/></circle>
+      <circle cx="330" cy="90" r="2" fill="#fbbf24"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.3s" repeatCount="indefinite"/></circle>
+      <!-- Wand -->
+      <line x1="60" y1="130" x2="100" y2="70" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="98" cy="65" r="8" fill="#fbbf24" opacity="0.5"><animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/></circle>
+      <!-- Text -->
+      <text x="200" y="155" text-anchor="middle" fill="#7c3aed" font-size="14" font-weight="bold" font-family="Comfortaa,sans-serif">Рисуем словами!</text>
+    </svg>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      Добро пожаловать в <strong>Волшебную мастерскую</strong>! Знаешь, как Рапунцель рисовала на стенах башни? А ты будешь рисовать <em>словами</em>! Напишешь волшебные слова — и картинка появится сама. Это называется <strong>промпт</strong> — волшебное заклинание для нейросети.
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Твоё первое заклинание</div>
+    </div>
+    <p>Открой <strong>Шедеврум</strong> и напиши заклинание:</p>
+    <div class="prompt-box">
+      <div class="prompt-label">Заклинание:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Милый котёнок в шапке волшебника, сидит на стопке книг, вокруг летают звёзды, мультяшный стиль, яркие цвета</div>
+    </div>
+    <p style="margin-top:8px">Нажми <strong>«Сгенерировать»</strong> и подожди!</p>
+    <div class="tip-box">
+      <strong>Подсказка Феи:</strong> Скопировала заклинание? Открой Шедеврум и нажми <strong>Ctrl+V</strong> — заклинание вставится!
+    </div>
+  </div>
+
+  <button class="reveal-btn" onclick="revealStep('ch1-step2')">Получилось? Следующий шаг! ✨</button>
+
+  <div class="step-card hidden-step" id="ch1-step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Секрет идеального заклинания</div>
+    </div>
+    <div class="fairy-bubble" onclick="speakBubble(this)" style="margin-top:0">
+      <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+      <div class="fairy-name">Фея Искорка</div>
+      <div class="fairy-text">
+        Запомни волшебную формулу! Заклинание состоит из 4 частей — как рецепт волшебного зелья:
+      </div>
+      <div class="speak-hint">нажми, чтобы послушать</div>
+    </div>
+    <div class="example-box">
+      <div class="example-title">Формула заклинания:</div>
+      <p><strong>КТО</strong> — котёнок, единорог, девочка...</p>
+      <p><strong>ГДЕ</strong> — в лесу, на луне, в замке...</p>
+      <p><strong>ЧТО ДЕЛАЕТ</strong> — танцует, летит, поёт...</p>
+      <p><strong>СТИЛЬ</strong> — мультяшный, яркий, как в Дисней...</p>
+    </div>
+
+    <p style="margin-top:10px">Попробуй нарисовать себя в мультике!</p>
+
+    <div class="prompt-box">
+      <div class="prompt-label">В обнимку с Машей и Медведем:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Маленькая весёлая девочка обнимается с большим добрым медведем и маленькой девочкой в платочке, на поляне с цветами, мультяшный стиль как в русских мультиках, яркие цвета</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">В обнимку с Тремя Богатырями:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Маленькая храбрая девочка стоит в обнимку с тремя сильными добрыми богатырями в блестящих доспехах, русское поле, голубое небо, мультяшный стиль как в русских мультфильмах</div>
+    </div>
+  </div>
+
+  <div class="quiz-wrap" id="quiz1" style="display:none">
+    <h3>Загадка Главы 1</h3>
+    <p>Из каких 4 частей состоит заклинание (промпт)?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz('quiz1',this,false)">Имя + Фамилия + Адрес + Телефон</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz1',this,true)">Кто + Где + Что делает + Стиль</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz1',this,false)">Красный + Синий + Зелёный + Жёлтый</div>
+    </div>
+    <div class="quiz-result" id="quiz1-result"></div>
+  </div>
+
+  <div class="task-check" id="tasks1" style="display:none">
+    <h3>⭐ Задания Главы 1</h3>
+    <div class="task-item" onclick="toggleTask(this,'ch1')"><div class="task-checkbox"></div><div class="task-label">Создай картинку с котёнком-волшебником</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch1')"><div class="task-checkbox"></div><div class="task-label">Нарисуй себя с Машей и Медведем</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch1')"><div class="task-checkbox"></div><div class="task-label">Придумай своё заклинание и создай картинку</div></div>
+  </div>
+
+  <button class="next-chapter-btn" id="nextBtn1" onclick="goToChapter(2)" disabled>Глава 2: Магия фона →</button>
+</div>
+
+<!-- ===== CHAPTER 2: МАГИЯ ФОНА ===== -->
+<div class="page" id="ch2">
+
+  <div class="illust-card" style="background: linear-gradient(180deg, #bfdbfe, #c5e8ff, #a7f3d0);">
+    <svg viewBox="0 0 400 160" style="max-height:150px">
+      <!-- Beach scene -->
+      <rect y="100" width="400" height="60" fill="#fde68a" rx="0"/>
+      <rect y="0" width="400" height="105" fill="none"/>
+      <circle cx="340" cy="40" r="30" fill="#fbbf24" opacity="0.5"/>
+      <!-- Palm tree -->
+      <rect x="55" y="60" width="8" height="80" rx="3" fill="#a16207"/>
+      <ellipse cx="60" cy="55" rx="35" ry="15" fill="#22c55e" transform="rotate(-20 60 55)"/>
+      <ellipse cx="60" cy="60" rx="30" ry="12" fill="#16a34a" transform="rotate(15 60 60)"/>
+      <!-- Girl silhouette -->
+      <circle cx="200" cy="70" r="14" fill="#fde1c5"/>
+      <rect x="190" y="82" width="20" height="5" rx="3" fill="#fde1c5"/>
+      <path d="M185,87 L178,130 Q200,138 222,130 L215,87 Z" fill="#e879f9"/>
+      <circle cx="195" cy="67" r="2.5" fill="#6d28d9"/>
+      <circle cx="205" cy="67" r="2.5" fill="#6d28d9"/>
+      <path d="M197,74 Q200,78 203,74" stroke="#d946ef" stroke-width="1.5" fill="none"/>
+      <!-- Stars / magic -->
+      <circle cx="160" cy="50" r="3" fill="#fbbf24"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="250" cy="40" r="2" fill="#e879f9"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+      <!-- Arrow showing teleportation -->
+      <text x="200" y="155" text-anchor="middle" fill="#1e40af" font-size="13" font-weight="bold" font-family="Comfortaa,sans-serif">Телепортация!</text>
+    </svg>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      А теперь — настоящая телепортация! Помнишь, как Дороти перенеслась в волшебную страну? Ты тоже сможешь! Возьмёшь свою обычную фотографию — и окажешься на пляже, в космосе или в сказочном замке!
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Заклинание невидимости!</div>
+    </div>
+    <div class="tool-badge"><span class="tool-icon">✂️</span> Remove.bg — волшебные ножницы</div>
+    <p>Вырезает тебя из фона за 5 секунд!</p>
+    <ol>
+      <li>Открой сайт <strong>remove.bg</strong></li>
+      <li>Нажми <strong>«Upload Image»</strong> (загрузить фото)</li>
+      <li>Выбери своё фото — фон исчезнет!</li>
+      <li>Нажми <strong>«Download»</strong> — сохрани картинку</li>
+    </ol>
+    <div class="safety-bar">
+      <div class="safety-icon">🛡️</div>
+      <div><strong>Правило Феи:</strong> Попроси маму или папу помочь открыть сайт!</div>
+    </div>
+  </div>
+
+  <button class="reveal-btn" onclick="revealStep('ch2-step2')">Фон исчез? Следующий шаг! ✨</button>
+
+  <div class="step-card hidden-step" id="ch2-step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Рисуем сказочный фон</div>
+    </div>
+    <p>Нарисуй в <strong>Шедевруме</strong> волшебный фон:</p>
+    <div class="prompt-box">
+      <div class="prompt-label">Фон — Париж Леди Баг:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Крыши ночного Парижа, Эйфелева башня светится огнями, луна, звёзды, мультяшный стиль, без людей, фон для фотографии</div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Фон — лес Холодного сердца:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Волшебный зимний лес из кристаллов льда, северное сияние, снежинки, мультяшный стиль, без людей, фон для фотографии</div>
+    </div>
+    <div class="tip-box">
+      <strong>Секрет Феи:</strong> Добавляй <em>«без людей, фон для фотографии»</em> — нейросеть нарисует именно фон!
+    </div>
+  </div>
+
+  <button class="reveal-btn hidden-step" id="ch2-reveal3" onclick="revealStep('ch2-step3')" style="display:none">Фон готов? Собираем! ✨</button>
+
+  <div class="step-card hidden-step" id="ch2-step3">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Ты + новый фон = магия!</div>
+    </div>
+    <div class="tool-badge"><span class="tool-icon">✏️</span> Canva — волшебный стол</div>
+    <p>Открой <strong>canva.com</strong> (попроси родителей зарегистрироваться).</p>
+    <ol>
+      <li>Нажми <strong>«Создать дизайн»</strong> → размер <strong>1080x1920</strong></li>
+      <li>Загрузи свой нарисованный фон</li>
+      <li>Загрузи своё фото без фона <strong>поверх</strong></li>
+      <li>Ты в сказке!</li>
+    </ol>
+  </div>
+
+  <div class="quiz-wrap" id="quiz2" style="display:none">
+    <h3>Загадка Главы 2</h3>
+    <p>Какой инструмент убирает фон?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz('quiz2',this,false)">Шедеврум</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz2',this,true)">Remove.bg</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz2',this,false)">CapCut</div>
+    </div>
+    <div class="quiz-result" id="quiz2-result"></div>
+  </div>
+
+  <div class="task-check" id="tasks2" style="display:none">
+    <h3>⭐ Задания Главы 2</h3>
+    <div class="task-item" onclick="toggleTask(this,'ch2')"><div class="task-checkbox"></div><div class="task-label">Убери фон со своей фотографии</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch2')"><div class="task-checkbox"></div><div class="task-label">Нарисуй сказочный фон в Шедевруме</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch2')"><div class="task-checkbox"></div><div class="task-label">Собери «ты + фон» в Canva</div></div>
+  </div>
+
+  <button class="next-chapter-btn" id="nextBtn2" onclick="goToChapter(3)" disabled>Глава 3: Волшебный гардероб →</button>
+</div>
+
+<!-- ===== CHAPTER 3: ГАРДЕРОБ ===== -->
+<div class="page" id="ch3">
+
+  <div class="illust-card" style="background: linear-gradient(160deg, #fce7f3, #e9d5ff, #dbeafe);">
+    <svg viewBox="0 0 400 160" style="max-height:150px">
+      <!-- Wardrobe -->
+      <rect x="100" y="20" width="200" height="120" rx="12" fill="#fff" stroke="#d8b4fe" stroke-width="3"/>
+      <line x1="200" y1="20" x2="200" y2="140" stroke="#d8b4fe" stroke-width="2"/>
+      <!-- Hangers with dresses -->
+      <path d="M140,45 L130,55 L150,55 Z" stroke="#a78bfa" stroke-width="2" fill="none"/>
+      <path d="M125,55 L120,95 Q140,102 155,95 L150,55" fill="#f472b6"/>
+      <path d="M250,45 L240,55 L260,55 Z" stroke="#a78bfa" stroke-width="2" fill="none"/>
+      <path d="M235,55 L230,95 Q250,102 265,95 L260,55" fill="#818cf8"/>
+      <!-- Crown on top -->
+      <polygon points="185,10 190,20 195,10 200,20 205,10 210,20 215,10" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5"/>
+      <!-- Sparkles -->
+      <circle cx="80" cy="50" r="3" fill="#fbbf24"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="330" cy="60" r="3" fill="#e879f9"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+      <circle cx="70" cy="100" r="2" fill="#c084fc"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1s" repeatCount="indefinite"/></circle>
+      <text x="200" y="155" text-anchor="middle" fill="#7c3aed" font-size="13" font-weight="bold" font-family="Comfortaa,sans-serif">Волшебный гардероб!</text>
+    </svg>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      Помнишь, как Фея-крёстная превратила старое платье Золушки в сказочный наряд? Сейчас мы сделаем то же самое с твоей фотографией! Загрузишь фото — и примеришь платье принцессы, костюм супергероя или наряд феи!
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Примерка — как у Золушки!</div>
+    </div>
+    <div class="tool-badge"><span class="tool-icon">👗</span> Kling AI — волшебный гардероб</div>
+    <ol>
+      <li>Открой <strong>klingai.com</strong></li>
+      <li>Найди <strong>«Virtual Try-On»</strong> (Примерка)</li>
+      <li>Загрузи своё фото (в полный рост, светлый фон)</li>
+      <li>Загрузи фото одежды</li>
+      <li>Нажми <strong>«Generate»</strong> — через 30 секунд ты в новом наряде!</li>
+    </ol>
+    <div class="safety-bar">
+      <div class="safety-icon">🛡️</div>
+      <div><strong>Правило Феи:</strong> Попроси маму или папу помочь с регистрацией!</div>
+    </div>
+  </div>
+
+  <button class="reveal-btn" onclick="revealStep('ch3-step2')">Получилось? Ещё магии! ✨</button>
+
+  <div class="step-card hidden-step" id="ch3-step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Нарисуй одежду мечты!</div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Платье принцессы:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Красивое голубое платье принцессы с блёстками и звёздами, на белом фоне, вид спереди, детское, фото одежды</div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Костюм супергероя:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Яркий красно-синий костюм супергероя для девочки с плащом и маской, на белом фоне, вид спереди, фото одежды</div>
+    </div>
+    <div class="example-box">
+      <div class="example-title">Проект «Модный показ»:</div>
+      <p>Одно фото → <strong>5 разных нарядов</strong> через Kling AI! Сохрани все — сделаем рилс!</p>
+    </div>
+  </div>
+
+  <div class="quiz-wrap" id="quiz3" style="display:none">
+    <h3>Загадка Главы 3</h3>
+    <p>Какой инструмент меняет одежду на фото?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz('quiz3',this,false)">Remove.bg</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz3',this,false)">Шедеврум</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz3',this,true)">Kling AI</div>
+    </div>
+    <div class="quiz-result" id="quiz3-result"></div>
+  </div>
+
+  <div class="task-check" id="tasks3" style="display:none">
+    <h3>⭐ Задания Главы 3</h3>
+    <div class="task-item" onclick="toggleTask(this,'ch3')"><div class="task-checkbox"></div><div class="task-label">Примерь наряд принцессы в Kling AI</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch3')"><div class="task-checkbox"></div><div class="task-label">Нарисуй одежду мечты в Шедевруме</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch3')"><div class="task-checkbox"></div><div class="task-label">Сохрани 3 разных образа</div></div>
+  </div>
+
+  <button class="next-chapter-btn" id="nextBtn3" onclick="goToChapter(4)" disabled>Глава 4: Оживляем картинки! →</button>
+</div>
+
+<!-- ===== CHAPTER 4: ОЖИВЛЕНИЕ ===== -->
+<div class="page" id="ch4">
+
+  <div class="illust-card" style="background: linear-gradient(160deg, #ddd6fe, #c5e8ff, #a7f3d0);">
+    <svg viewBox="0 0 400 160" style="max-height:150px">
+      <!-- Film strip -->
+      <rect x="30" y="30" width="80" height="60" rx="6" fill="#fff" stroke="#a78bfa" stroke-width="2"/>
+      <rect x="120" y="30" width="80" height="60" rx="6" fill="#fff" stroke="#a78bfa" stroke-width="2"/>
+      <rect x="210" y="30" width="80" height="60" rx="6" fill="#fff" stroke="#a78bfa" stroke-width="2"/>
+      <rect x="300" y="30" width="80" height="60" rx="6" fill="#fff" stroke="#a78bfa" stroke-width="2"/>
+      <!-- Scenes inside frames -->
+      <circle cx="70" cy="55" r="12" fill="#fcd34d"/><!-- sun -->
+      <circle cx="160" cy="60" r="10" fill="#fcd34d"/><!-- cat -->
+      <ellipse cx="160" cy="55" rx="4" ry="5" fill="#fcd34d"/>
+      <rect x="235" y="50" width="30" height="25" rx="3" fill="#22c55e"/><!-- tree -->
+      <rect x="247" y="40" width="6" height="15" fill="#a16207"/>
+      <circle cx="340" cy="55" r="12" fill="#fbbf24"/><!-- treasure -->
+      <rect x="328" y="55" width="24" height="16" rx="3" fill="#b45309"/>
+      <!-- Play buttons -->
+      <polygon points="64,52 78,60 64,68" fill="#7c3aed" opacity="0.7"/>
+      <polygon points="154,52 168,60 154,68" fill="#7c3aed" opacity="0.7"/>
+      <polygon points="244,52 258,60 244,68" fill="#7c3aed" opacity="0.7"/>
+      <polygon points="334,52 348,60 334,68" fill="#7c3aed" opacity="0.7"/>
+      <!-- Arrows -->
+      <path d="M115,60 L120,60" stroke="#e879f9" stroke-width="3" marker-end="url(#arrowhead)"/>
+      <path d="M205,60 L210,60" stroke="#e879f9" stroke-width="3"/>
+      <path d="M295,60 L300,60" stroke="#e879f9" stroke-width="3"/>
+      <!-- Sparkles -->
+      <circle cx="70" cy="110" r="3" fill="#fbbf24"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="200" cy="105" r="2" fill="#e879f9"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+      <circle cx="340" cy="108" r="2" fill="#c084fc"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1s" repeatCount="indefinite"/></circle>
+      <text x="200" y="140" text-anchor="middle" fill="#4338ca" font-size="13" font-weight="bold" font-family="Comfortaa,sans-serif">4 сцены = мини-мультик!</text>
+    </svg>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      Как в «Фиксиках» оживают маленькие человечки — сейчас мы оживим твои картинки! Нарисуешь картинку — а она <strong>начнёт двигаться</strong>! Создадим 4 сцены и сложим мини-мультик!
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Знакомься — PixVerse!</div>
+    </div>
+    <div class="tool-badge"><span class="tool-icon">🎬</span> PixVerse — оживляет картинки</div>
+    <ol>
+      <li>Открой <strong>pixverse.ai</strong></li>
+      <li>Нажми <strong>«Create» → «Image to Video»</strong></li>
+      <li>Загрузи картинку из Шедеврума</li>
+      <li>Опиши, что должно двигаться</li>
+      <li>Нажми <strong>«Generate»</strong> — подожди 1-2 минуты</li>
+    </ol>
+    <div class="tip-box">
+      <strong>Секрет Феи:</strong> PixVerse лучше понимает английские слова. Не переживай — просто копируй заклинания ниже! Рядом написано, что они означают.
+    </div>
+  </div>
+
+  <button class="reveal-btn" onclick="revealStep('ch4-step2')">Попробовала? Создаём мультик! ✨</button>
+
+  <div class="step-card hidden-step" id="ch4-step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">4 сцены мультика «Котёнок и сокровища»</div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">Сцена 1: Котёнок просыпается 🌅</div>
+      <div class="prompt-box" style="border-color:#86efac"><div class="prompt-label">Шедеврум:</div><button class="copy-btn" onclick="copyText(this)">Копировать</button><div class="prompt-text">Милый мультяшный котёнок зевает и потягивается в кроватке, утро, солнечные лучи, детский стиль, яркие цвета</div></div>
+      <div class="prompt-box" style="border-color:#93c5fd"><div class="prompt-label">PixVerse (означает: «котёнок зевает, свет движется»):</div><button class="copy-btn" onclick="copyText(this)">Копировать</button><div class="prompt-text">The kitten yawns and stretches, sunlight moves across the room, cozy morning</div></div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">Сцена 2: Находит карту 🗺️</div>
+      <div class="prompt-box" style="border-color:#86efac"><div class="prompt-label">Шедеврум:</div><button class="copy-btn" onclick="copyText(this)">Копировать</button><div class="prompt-text">Мультяшный котёнок удивлённо смотрит на старую карту сокровищ, большие глаза, восклицательный знак, яркие цвета</div></div>
+      <div class="prompt-box" style="border-color:#93c5fd"><div class="prompt-label">PixVerse (означает: «котёнок удивляется, глаза расширяются»):</div><button class="copy-btn" onclick="copyText(this)">Копировать</button><div class="prompt-text">The kitten looks at the map with surprise, eyes widen, exclamation mark appears</div></div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">Сцена 3: Бежит через лес 🌳</div>
+      <div class="prompt-box" style="border-color:#86efac"><div class="prompt-label">Шедеврум:</div><button class="copy-btn" onclick="copyText(this)">Копировать</button><div class="prompt-text">Мультяшный котёнок бежит по волшебному лесу, бабочки, грибы, цветы, яркие цвета, весёлая атмосфера</div></div>
+      <div class="prompt-box" style="border-color:#93c5fd"><div class="prompt-label">PixVerse (означает: «котёнок бежит, бабочки летают»):</div><button class="copy-btn" onclick="copyText(this)">Копировать</button><div class="prompt-text">The kitten runs through magical forest, butterflies fly around, dynamic motion</div></div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">Сцена 4: Нашёл сокровища! ✨</div>
+      <div class="prompt-box" style="border-color:#86efac"><div class="prompt-label">Шедеврум:</div><button class="copy-btn" onclick="copyText(this)">Копировать</button><div class="prompt-text">Мультяшный счастливый котёнок открывает сундук с сокровищами, золотое сияние, звёзды, блёстки, яркие цвета</div></div>
+      <div class="prompt-box" style="border-color:#93c5fd"><div class="prompt-label">PixVerse (означает: «котёнок открывает сундук, золотой свет»):</div><button class="copy-btn" onclick="copyText(this)">Копировать</button><div class="prompt-text">The kitten opens treasure chest, golden light shines up, sparkles everywhere</div></div>
+    </div>
+  </div>
+
+  <div class="quiz-wrap" id="quiz4" style="display:none">
+    <h3>Загадка Главы 4</h3>
+    <p>Сколько сцен нужно для мультика на 20 секунд?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz('quiz4',this,false)">2 сцены по 10 секунд</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz4',this,true)">4 сцены по 5 секунд</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz4',this,false)">1 длинная сцена</div>
+    </div>
+    <div class="quiz-result" id="quiz4-result"></div>
+  </div>
+
+  <div class="task-check" id="tasks4" style="display:none">
+    <h3>⭐ Задания Главы 4</h3>
+    <div class="task-item" onclick="toggleTask(this,'ch4')"><div class="task-checkbox"></div><div class="task-label">Нарисуй 4 сцены в Шедевруме</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch4')"><div class="task-checkbox"></div><div class="task-label">Оживи каждую сцену в PixVerse</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch4')"><div class="task-checkbox"></div><div class="task-label">Сохрани все 4 видео в одну папку</div></div>
+  </div>
+
+  <button class="next-chapter-btn" id="nextBtn4" onclick="goToChapter(5)" disabled>Глава 5: Собираем мультик! →</button>
+</div>
+
+<!-- ===== CHAPTER 5: МОНТАЖ ===== -->
+<div class="page" id="ch5">
+
+  <div class="illust-card" style="background: linear-gradient(160deg, #fef9c3, #fde68a, #fef3c7);">
+    <svg viewBox="0 0 400 140" style="max-height:130px">
+      <!-- Film reel -->
+      <circle cx="100" cy="70" r="40" fill="none" stroke="#7c3aed" stroke-width="3"/>
+      <circle cx="100" cy="70" r="15" fill="#7c3aed"/>
+      <circle cx="100" cy="70" r="8" fill="#fef9c3"/>
+      <circle cx="100" cy="38" r="5" fill="#fef9c3" stroke="#7c3aed" stroke-width="2"/>
+      <circle cx="100" cy="102" r="5" fill="#fef9c3" stroke="#7c3aed" stroke-width="2"/>
+      <circle cx="68" cy="70" r="5" fill="#fef9c3" stroke="#7c3aed" stroke-width="2"/>
+      <circle cx="132" cy="70" r="5" fill="#fef9c3" stroke="#7c3aed" stroke-width="2"/>
+      <!-- Film strip going to screen -->
+      <path d="M140,70 Q200,30 260,50" stroke="#a78bfa" stroke-width="4" fill="none"/>
+      <!-- Screen -->
+      <rect x="240" y="25" width="130" height="80" rx="8" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+      <!-- Music notes -->
+      <text x="185" y="100" font-size="22" fill="#e879f9">♪</text>
+      <text x="210" y="85" font-size="18" fill="#c084fc">♫</text>
+      <text x="170" y="115" font-size="16" fill="#f472b6">♪</text>
+      <!-- Play on screen -->
+      <polygon points="295,55 315,65 295,75" fill="#7c3aed"/>
+      <text x="200" y="135" text-anchor="middle" fill="#b45309" font-size="13" font-weight="bold" font-family="Comfortaa,sans-serif">Собираем мультик!</text>
+    </svg>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      Ты сделала все 4 сцены — огромная работа! Теперь собираем их в настоящий мультфильм с музыкой и подписями. Ты сейчас — режиссёр! Как будто снимаешь свои «Смешарики»!
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Склеиваем сцены в CapCut</div>
+    </div>
+    <div class="tool-badge"><span class="tool-icon">🎥</span> CapCut — монтажная студия</div>
+    <ol>
+      <li>Открой CapCut → <strong>«Новый проект»</strong></li>
+      <li>Загрузи все <strong>4 видео</strong></li>
+      <li>Расставь по порядку: сцена 1 → 2 → 3 → 4</li>
+      <li>Обрежь каждое до <strong>5 секунд</strong></li>
+      <li>Добавь <strong>переходы</strong> между сценами</li>
+    </ol>
+  </div>
+
+  <button class="reveal-btn" onclick="revealStep('ch5-step2')">Склеила? Музыка! 🎵</button>
+
+  <div class="step-card hidden-step" id="ch5-step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Музыка и титры</div>
+    </div>
+    <p><strong>Музыка:</strong> «Аудио» → «Музыка» → ищи <strong>«Happy»</strong> или <strong>«Cute»</strong></p>
+    <p style="margin-top:10px"><strong>Подписи:</strong> «Текст» → «Добавить текст»</p>
+    <div class="example-box">
+      <div class="example-title">Подписи:</div>
+      <p>Сцена 1: «Доброе утро!» | Сцена 2: «Ого, карта!»</p>
+      <p>Сцена 3: «Вперёд!» | Сцена 4: «Ура, нашёл!»</p>
+    </div>
+  </div>
+
+  <button class="reveal-btn hidden-step" id="ch5-reveal3" onclick="revealStep('ch5-step3')" style="display:none">Сохраняем! 💾</button>
+
+  <div class="step-card hidden-step" id="ch5-step3">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Сохрани шедевр!</div>
+    </div>
+    <p>Нажми <strong>«Экспорт»</strong> → <strong>1080p</strong> → Экспорт!</p>
+    <div class="fairy-bubble" onclick="speakBubble(this)">
+      <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+      <div class="fairy-name">Фея Искорка</div>
+      <div class="fairy-text">Поздравляю! Ты создала свой первый мультфильм! Покажи его маме, папе и друзьям!</div>
+      <div class="speak-hint">нажми, чтобы послушать</div>
+    </div>
+  </div>
+
+  <div class="quiz-wrap" id="quiz5" style="display:none">
+    <h3>Загадка Главы 5</h3>
+    <p>В каком порядке создаём мультик?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz('quiz5',this,false)">Музыка → Видео → Картинки</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz5',this,true)">Картинки → Оживление → Склейка + Музыка</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz5',this,false)">Склейка → Картинки → Музыка</div>
+    </div>
+    <div class="quiz-result" id="quiz5-result"></div>
+  </div>
+
+  <div class="task-check" id="tasks5" style="display:none">
+    <h3>⭐ Задания Главы 5</h3>
+    <div class="task-item" onclick="toggleTask(this,'ch5')"><div class="task-checkbox"></div><div class="task-label">Склей 4 сцены в CapCut</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch5')"><div class="task-checkbox"></div><div class="task-label">Добавь музыку и подписи</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch5')"><div class="task-checkbox"></div><div class="task-label">Экспортируй и покажи родителям!</div></div>
+  </div>
+
+  <button class="next-chapter-btn" id="nextBtn5" onclick="goToChapter(6)" disabled>Финальная глава! ⭐</button>
+</div>
+
+<!-- ===== CHAPTER 6: ФИНАЛ ===== -->
+<div class="page" id="ch6">
+
+  <div class="illust-card" style="background: linear-gradient(160deg, #fbbf24, #f472b6, #a78bfa, #38bdf8);">
+    <svg viewBox="0 0 400 160" style="max-height:150px">
+      <!-- Trophy -->
+      <path d="M170,40 L160,100 Q200,115 240,100 L230,40 Z" fill="#fbbf24" stroke="#b45309" stroke-width="2"/>
+      <rect x="180" y="100" width="40" height="12" rx="3" fill="#b45309"/>
+      <rect x="175" y="110" width="50" height="10" rx="3" fill="#92400e"/>
+      <!-- Trophy handles -->
+      <path d="M170,50 Q140,50 140,70 Q140,90 165,90" stroke="#b45309" stroke-width="3" fill="none"/>
+      <path d="M230,50 Q260,50 260,70 Q260,90 235,90" stroke="#b45309" stroke-width="3" fill="none"/>
+      <!-- Star on trophy -->
+      <polygon points="200,55 207,70 224,72 212,83 215,100 200,92 185,100 188,83 176,72 193,70" fill="#fff" opacity="0.8"/>
+      <!-- Confetti -->
+      <rect x="80" y="30" width="8" height="8" rx="2" fill="#f472b6" transform="rotate(30 84 34)"><animate attributeName="y" values="30;130" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="3s" repeatCount="indefinite"/></rect>
+      <rect x="130" y="20" width="6" height="6" rx="1" fill="#818cf8" transform="rotate(45 133 23)"><animate attributeName="y" values="20;140" dur="3.5s" repeatCount="indefinite"/></rect>
+      <rect x="280" y="25" width="7" height="7" rx="2" fill="#22c55e" transform="rotate(20 284 29)"><animate attributeName="y" values="25;135" dur="2.8s" repeatCount="indefinite"/></rect>
+      <rect x="320" y="35" width="6" height="6" rx="1" fill="#fbbf24" transform="rotate(50 323 38)"><animate attributeName="y" values="35;140" dur="3.2s" repeatCount="indefinite"/></rect>
+      <circle cx="60" cy="50" r="4" fill="#e879f9"><animate attributeName="cy" values="50;140" dur="2.5s" repeatCount="indefinite"/></circle>
+      <circle cx="350" cy="40" r="4" fill="#fbbf24"><animate attributeName="cy" values="40;140" dur="3s" repeatCount="indefinite"/></circle>
+      <text x="200" y="145" text-anchor="middle" fill="#fff" font-size="15" font-weight="bold" font-family="Comfortaa,sans-serif" stroke="#7c3aed" stroke-width="0.5">Ты — Волшебница!</text>
+    </svg>
+  </div>
+
+  <div class="fairy-bubble" onclick="speakBubble(this)">
+    <svg class="fairy-avatar"><use href="#fairy-mini"/></svg>
+    <div class="fairy-name">Фея Искорка</div>
+    <div class="fairy-text">
+      Финальная глава! Ты прошла огромный путь — от первого заклинания до мультфильма. Теперь создай <strong>свой собственный рилс-шедевр</strong>! Выбери одну из волшебных идей:
+    </div>
+    <div class="speak-hint">нажми, чтобы послушать</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">✨</div>
+      <div class="step-title">Выбери финальный проект</div>
+    </div>
+    <div class="example-box">
+      <div class="example-title">Идея А: «Превращение Золушки» (10 сек)</div>
+      <p>Фото в обычной одежде → наряд принцессы (Kling AI) → убрать фон (Remove.bg) → фон замка (Canva) → склеить в CapCut</p>
+    </div>
+    <div class="example-box">
+      <div class="example-title">Идея Б: «Свой мультик» (20 сек)</div>
+      <p>Придумай историю → 4 сцены (Шедеврум) → оживи (PixVerse) → склей (CapCut)</p>
+    </div>
+    <div class="example-box">
+      <div class="example-title">Идея В: «Модный показ» (15 сек)</div>
+      <p>Одно фото → 5 нарядов (Kling AI) → быстрая смена в CapCut под музыку</p>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">📋</div>
+      <div class="step-title">Шпаргалка волшебницы</div>
+    </div>
+    <table class="cheat-table">
+      <tr><td>Нарисовать картинку</td><td>🎨 Шедеврум</td></tr>
+      <tr><td>Убрать фон</td><td>✂️ Remove.bg</td></tr>
+      <tr><td>Поменять одежду</td><td>👗 Kling AI</td></tr>
+      <tr><td>Оживить картинку</td><td>🎬 PixVerse</td></tr>
+      <tr><td>Собрать фото + фон</td><td>✏️ Canva</td></tr>
+      <tr><td>Склеить видео</td><td>🎥 CapCut</td></tr>
+    </table>
+  </div>
+
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">🔮</div>
+      <div class="step-title">Бонусные заклинания</div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Обнимашки с Машей и Медведем:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Счастливая девочка обнимает большого медведя и маленькую девочку в платочке, цветочная поляна, мультяшный стиль, тёплая атмосфера, яркие цвета</div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Фея Винкс:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Три феи с крылышками и блестящими платьями летят над радужным водопадом, магия и искры, мультяшный стиль, яркие неоновые цвета</div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Смешарики:</div>
+      <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+      <div class="prompt-text">Круглый весёлый персонаж с большими глазами на поляне с цветами, мультяшный стиль, простые формы, яркие цвета, детский мультфильм</div>
+    </div>
+  </div>
+
+  <div class="quiz-wrap" id="quiz6">
+    <h3>Финальная загадка!</h3>
+    <p>Что самое важное при создании с нейросетями?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz('quiz6',this,false)">Самый дорогой компьютер</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz6',this,true)">Твоя фантазия и идеи!</div>
+      <div class="quiz-opt" onclick="answerQuiz('quiz6',this,false)">Знание английского</div>
+    </div>
+    <div class="quiz-result" id="quiz6-result"></div>
+  </div>
+
+  <div class="task-check" id="tasks6" style="display:none">
+    <h3>⭐ Финальные задания</h3>
+    <div class="task-item" onclick="toggleTask(this,'ch6')"><div class="task-checkbox"></div><div class="task-label">Выбери идею (А, Б или В)</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch6')"><div class="task-checkbox"></div><div class="task-label">Создай рилс от начала до конца</div></div>
+    <div class="task-item" onclick="toggleTask(this,'ch6')"><div class="task-checkbox"></div><div class="task-label">Покажи шедевр друзьям и семье!</div></div>
+  </div>
+
+  <div id="finalCelebration" style="display:none; text-align:center; padding:30px; margin-top:20px; background: linear-gradient(160deg, #fef9c3, #fce7f3, #ede9fe); border-radius:24px; border:3px solid #fbbf24;">
+    <svg width="80" height="100" style="margin-bottom:10px"><use href="#fairy-full" width="80" height="100"/></svg>
+    <h2 style="color:#b45309">Ты — Волшебница Превращений!</h2>
+    <p style="color:#78350f; margin-top:8px">Ты собрала все звёздочки! Нейросеть — инструмент, а магия — это твоя фантазия!</p>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<!-- REWARD POPUP -->
+<div class="reward-overlay" id="rewardPopup">
+  <div class="reward-card">
+    <div class="reward-stars-anim">⭐⭐⭐</div>
+    <div class="reward-title" id="rewardTitle">Глава пройдена!</div>
+    <div class="reward-text" id="rewardText">Ты получаешь 3 звёздочки!</div>
+    <button class="reward-btn" onclick="closeReward()">Ура! Продолжить! ✨</button>
+  </div>
+</div>
+
+<!-- ENCOURAGE TOAST -->
+<div class="encourage-toast" id="encourageToast">
+  <div id="encourageText"></div>
+</div>
+
+<script>
+// ===== STATE =====
+const TOTAL_CHAPTERS = 6;
+const CHAPTER_NAMES = [
+  '🏠 Старт', '🎨 Заклинания', '✂️ Телепортация',
+  '👗 Гардероб', '🎬 Оживление', '🎥 Мультик', '⭐ Финал'
+];
+
+let state = {
+  stars: 0,
+  currentChapter: 0,
+  unlockedChapter: 0,
+  completedChapters: [],
+  completedTasks: {},
+  quizzesDone: [],
+  voiceOn: true
+};
+
+try {
+  const saved = localStorage.getItem('fairyTutor');
+  if (saved) state = { ...state, ...JSON.parse(saved) };
+} catch(e) {}
+
+function saveState() {
+  try { localStorage.setItem('fairyTutor', JSON.stringify(state)); } catch(e) {}
+}
+
+// ===== SPLASH =====
+function enterAcademy() {
+  document.getElementById('splash').classList.add('hidden');
+  document.getElementById('app').style.display = '';
+  // speak greeting
+  setTimeout(() => {
+    speak('Привет, юная волшебница! Я Фея Искорка! Добро пожаловать в Сказочную Академию Волшебных Превращений! Нажимай на розовые пузырьки с феей, чтобы я рассказала тебе сказку!');
+  }, 400);
+}
+
+// ===== VOICE =====
+let voiceReady = false;
+let russianVoice = null;
+
+function findRussianVoice() {
+  if (!window.speechSynthesis) return;
+  const voices = speechSynthesis.getVoices();
+  if (!voices || voices.length === 0) return;
+  russianVoice = voices.find(v => /irina/i.test(v.name))
+    || voices.find(v => v.lang.startsWith('ru') && /female|milena|svetlana|женский|maria/i.test(v.name))
+    || voices.find(v => v.lang.startsWith('ru'))
+    || voices.find(v => v.lang === 'ru-RU')
+    || null;
+  voiceReady = true;
+}
+
+if (window.speechSynthesis) {
+  findRussianVoice();
+  speechSynthesis.onvoiceschanged = findRussianVoice;
+  setTimeout(findRussianVoice, 100);
+  setTimeout(findRussianVoice, 500);
+  setTimeout(findRussianVoice, 1500);
+}
+
+function toggleVoice() {
+  state.voiceOn = !state.voiceOn;
+  const btn = document.getElementById('voiceBtn');
+  btn.textContent = state.voiceOn ? '🔊 Голос' : '🔇 Выкл';
+  btn.classList.toggle('off', !state.voiceOn);
+  if (!state.voiceOn && window.speechSynthesis) speechSynthesis.cancel();
+  if (state.voiceOn) findRussianVoice();
+  saveState();
+}
+
+function speak(text) {
+  if (!state.voiceOn || !window.speechSynthesis) return;
+  if (!voiceReady) findRussianVoice();
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  if (russianVoice) u.voice = russianVoice;
+  u.lang = 'ru-RU';
+  // Мягкий, тёплый, певучий голос — как у Алсу
+  u.rate = 0.78;   // медленнее — нежнее, певучее
+  u.pitch = 1.08;  // чуть выше нормы — женственный, но не писклявый
+  u.volume = 0.9;  // чуть тише — мягче
+  speechSynthesis.speak(u);
+}
+
+function speakBubble(el) {
+  const textEl = el.querySelector('.fairy-text');
+  if (textEl) speak(textEl.textContent.trim());
+}
+
+// ===== NAV =====
+function buildNav() {
+  const nav = document.getElementById('nav');
+  nav.innerHTML = '';
+  CHAPTER_NAMES.forEach((name, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn';
+    if (i === state.currentChapter) btn.classList.add('active');
+    if (i > state.unlockedChapter) btn.classList.add('locked');
+    if (state.completedChapters.includes(i)) btn.classList.add('completed');
+    btn.textContent = name;
+    if (i > state.unlockedChapter) btn.innerHTML += ' 🔒';
+    btn.onclick = () => { if (i <= state.unlockedChapter) goToChapter(i); };
+    nav.appendChild(btn);
+  });
+}
+
+function goToChapter(n) {
+  state.currentChapter = n;
+  if (n > state.unlockedChapter) state.unlockedChapter = n;
+  saveState();
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('ch' + n).classList.add('active');
+  document.getElementById('chapterLabel').textContent = Math.min(n + 1, TOTAL_CHAPTERS);
+  document.getElementById('progressBar').style.width = (n / TOTAL_CHAPTERS * 100) + '%';
+  buildNav();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => {
+    const page = document.getElementById('ch' + n);
+    const fb = page.querySelector('.fairy-bubble');
+    if (fb) speakBubble(fb);
+  }, 500);
+}
+
+// ===== REVEAL =====
+function revealStep(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('hidden-step');
+  el.classList.add('revealed');
+  const chPrefix = id.split('-')[0];
+  const stepNum = parseInt(id.split('step')[1]);
+  const nextReveal = document.getElementById(chPrefix + '-reveal' + (stepNum + 1));
+  if (nextReveal) nextReveal.style.display = 'block';
+  const nextStep = document.getElementById(chPrefix + '-step' + (stepNum + 1));
+  if (!nextStep) {
+    const chNum = chPrefix.replace('ch', '');
+    const quiz = document.getElementById('quiz' + chNum);
+    const tasks = document.getElementById('tasks' + chNum);
+    if (quiz) quiz.style.display = '';
+    if (tasks) tasks.style.display = '';
+  }
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ===== QUIZ =====
+function answerQuiz(quizId, optEl, isCorrect) {
+  const wrap = document.getElementById(quizId);
+  const opts = wrap.querySelectorAll('.quiz-opt');
+  const result = document.getElementById(quizId + '-result');
+  const chNum = parseInt(quizId.replace('quiz', ''));
+
+  opts.forEach(o => {
+    if (o === optEl) o.classList.add(isCorrect ? 'correct' : 'wrong');
+    else { o.style.pointerEvents = 'none'; o.style.opacity = '0.4'; }
+  });
+
+  if (isCorrect) {
+    result.textContent = '🎉 Правильно! Ты настоящая волшебница!';
+    result.style.color = '#15803d';
+    speak('Правильно! Ты настоящая волшебница!');
+    if (!state.quizzesDone.includes(quizId)) {
+      state.quizzesDone.push(quizId);
+      addStars(1);
+    }
+    const nextBtn = document.getElementById('nextBtn' + chNum);
+    if (nextBtn) nextBtn.disabled = false;
+    const tasks = document.getElementById('tasks' + chNum);
+    if (tasks) tasks.style.display = '';
+  } else {
+    result.textContent = '💜 Попробуй ещё, у тебя обязательно получится!';
+    result.style.color = '#9333ea';
+    speak('Попробуй ещё! У самых терпеливых всегда всё получается!');
+    setTimeout(() => {
+      opts.forEach(o => { o.classList.remove('wrong'); o.style.pointerEvents = ''; o.style.opacity = ''; });
+      result.textContent = '';
+    }, 3000);
+  }
+  saveState();
+}
+
+// ===== TASKS =====
+function toggleTask(item, chId) {
+  item.classList.toggle('done');
+  const cb = item.querySelector('.task-checkbox');
+  cb.textContent = item.classList.contains('done') ? '⭐' : '';
+  if (item.classList.contains('done')) { addStars(1); speak('Отлично! Звёздочка!'); }
+  const chNum = chId.replace('ch', '');
+  const all = document.querySelectorAll('#tasks' + chNum + ' .task-item');
+  const done = document.querySelectorAll('#tasks' + chNum + ' .task-item.done');
+  if (done.length === all.length && all.length > 0) completeChapter(parseInt(chNum));
+  const nb = document.getElementById('nextBtn' + chNum);
+  if (nb) nb.disabled = (done.length < all.length);
+  saveState();
+}
+
+function completeChapter(n) {
+  if (state.completedChapters.includes(n)) return;
+  state.completedChapters.push(n);
+  if (n + 1 <= TOTAL_CHAPTERS) state.unlockedChapter = Math.max(state.unlockedChapter, n + 1);
+  saveState(); buildNav();
+  document.getElementById('rewardTitle').textContent = n < TOTAL_CHAPTERS ? 'Глава ' + n + ' пройдена!' : 'Все главы пройдены!';
+  document.getElementById('rewardText').textContent = 'Ты заработала 3 звёздочки!';
+  document.getElementById('rewardPopup').classList.add('show');
+  speak('Поздравляю! Глава пройдена! Ты заработала три звёздочки!');
+  if (n === TOTAL_CHAPTERS) document.getElementById('finalCelebration').style.display = '';
+}
+
+function closeReward() { document.getElementById('rewardPopup').classList.remove('show'); }
+
+// ===== STARS =====
+function addStars(n) {
+  state.stars += n;
+  document.getElementById('starCount').textContent = state.stars;
+  saveState();
+}
+
+// ===== ENCOURAGE =====
+const ENCOURAGEMENTS = [
+  'Ничего страшного! У самых терпеливых всегда всё получается!',
+  'Каждый волшебник ошибается — это часть обучения!',
+  'Попробуй ещё раз — я верю в тебя!',
+  'Даже Фея Искорка не сразу научилась колдовать!',
+  'Ошибка — это шаг к успеху! Давай ещё разок!',
+  'Ты справишься! Волшебницы не сдаются!',
+];
+
+function showEncouragement() {
+  const toast = document.getElementById('encourageToast');
+  const text = ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)];
+  document.getElementById('encourageText').textContent = '💜 ' + text;
+  toast.classList.add('show');
+  speak(text);
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// ===== COPY =====
+function copyText(btn) {
+  const text = btn.closest('.prompt-box').querySelector('.prompt-text').textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Готово! ✓';
+    speak('Скопировано! Открой программу и нажми контрол вэ, чтобы вставить.');
+    setTimeout(() => btn.textContent = 'Копировать', 2500);
+  });
+}
+
+// ===== INIT =====
+function init() {
+  document.getElementById('starCount').textContent = state.stars;
+  document.getElementById('progressBar').style.width = (state.currentChapter / TOTAL_CHAPTERS * 100) + '%';
+  document.getElementById('chapterLabel').textContent = Math.min(state.currentChapter + 1, TOTAL_CHAPTERS);
+  if (!state.voiceOn) {
+    const btn = document.getElementById('voiceBtn');
+    btn.textContent = '🔇 Выкл';
+    btn.classList.add('off');
+  }
+  buildNav();
+  if (state.currentChapter > 0) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('ch' + state.currentChapter).classList.add('active');
+  }
+}
+init();
+</script>
+
+</body>
+</html>
