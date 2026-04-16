@@ -75,6 +75,7 @@ my-first-project/
 ├── landing/         — лендинг студии вокала
 ├── zapis_bot/       — универсальный бот записи (Telegram)
 ├── product/         — брошюра «Bot Business» + шаблон бота
+├── ai-tutor/        — сказочный AI-репетитор для детей 8 лет
 ├── accountant-bot/  — бот бухгалтер (отдельный проект)
 ├── CLAUDE.md        — этот файл
 └── .gitignore
