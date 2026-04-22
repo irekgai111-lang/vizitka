@@ -65,11 +65,14 @@
 
         .logo-circle {
             width: 140px; height: 140px; border-radius: 50%; position: relative; z-index: 1;
-            background: linear-gradient(145deg, #0d1117, #0a0f18);
+            background: transparent;
             border: 2px solid rgba(0,210,200,0.25);
-            display: flex; align-items: center; justify-content: center; flex-direction: column;
-            box-shadow: 0 0 30px rgba(0,210,200,0.1), inset 0 0 20px rgba(0,210,200,0.03);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 30px rgba(0,210,200,0.1);
         }
+        .logo-svg { width: 140px; height: 140px; display: block; }
+        .logo-svg .arc-text-top { font: 700 13px 'Segoe UI', sans-serif; letter-spacing: 3px; fill: #fff; }
+        .logo-svg .arc-text-bottom { font: 700 13px 'Segoe UI', sans-serif; letter-spacing: 3px; fill: #00d2c8; filter: drop-shadow(0 0 4px rgba(0,210,200,0.5)); }
         .logo-glow {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
             width: 160px; height: 160px; border-radius: 50%;
@@ -78,17 +81,8 @@
         }
         @keyframes logoGlow { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
-        /* Microphone SVG inside logo */
-        .logo-mic { margin-bottom: 2px; }
-
-        .logo-text-top {
-            font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-            color: #fff; line-height: 1;
-        }
-        .logo-text-bottom {
-            font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-            color: #00d2c8; line-height: 1;
-        }
+        /* Microphone glow inside logo */
+        .logo-mic-group { filter: drop-shadow(0 0 6px rgba(0,210,200,0.55)); }
 
         /* Name */
         .name {
@@ -227,8 +221,94 @@
         .social-link svg { width: 22px; height: 22px; fill: rgba(255,255,255,0.5); position: relative; z-index: 1; transition: fill 0.3s ease; }
         .social-link:hover svg { fill: #00d2c8; }
         .social-label { font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 4px; }
+        .social-phone { display: flex; align-items: center; margin-left: 6px; }
+        .phone-link {
+            color: rgba(255,255,255,0.85); text-decoration: none; font-size: 15px; font-weight: 500;
+            letter-spacing: 0.3px; padding: 8px 14px; border-radius: 10px;
+            border: 1px solid rgba(0,210,200,0.25); background: rgba(0,210,200,0.06);
+            transition: all 0.25s ease; white-space: nowrap;
+        }
+        .phone-link:hover { color: #00d2c8; border-color: rgba(0,210,200,0.5); background: rgba(0,210,200,0.12); }
 
-        .footer { font-size: 12px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+        .footer { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+        .cta-sub { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+        .reviews-trigger { display: inline-block; margin: 0 auto 24px; cursor: pointer; }
+        .reviews-trigger .reviews-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: rgba(255,255,255,0.6); font-size: 14px;
+            padding: 10px 20px; border-radius: 12px;
+            border: 1px solid rgba(0,210,200,0.1); background: rgba(0,210,200,0.04);
+            transition: all 0.3s ease;
+        }
+        .reviews-trigger:hover .reviews-link { color: #00d2c8; border-color: rgba(0,210,200,0.3); background: rgba(0,210,200,0.08); }
+        .reviews-trigger .reviews-link svg { width: 18px; height: 18px; fill: none; stroke: #00d2c8; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .reviews-carousel { position: relative; margin-top: 14px; overflow: hidden; border-radius: 14px; }
+        .reviews-track { display: flex; transition: transform 0.5s ease; }
+        .review-slide { min-width: 100%; box-sizing: border-box; padding: 4px; }
+        .review-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+            color: #1c2024; border-radius: 12px; padding: 18px 16px 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(0,0,0,0.04);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            text-align: left;
+        }
+        .review-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .review-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, #00d2c8, #0891a6);
+            color: #fff; font-weight: 600; font-size: 14px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .review-meta { display: flex; flex-direction: column; }
+        .review-name { font-size: 14px; font-weight: 600; color: #1c2024; line-height: 1.2; }
+        .review-date { font-size: 11px; color: #8a8f98; margin-top: 2px; }
+        .review-stars { color: #ffb400; font-size: 13px; letter-spacing: 2px; margin-bottom: 6px; }
+        .review-text { font-size: 13px; line-height: 1.5; color: #2b2f36; }
+        .review-source {
+            display: flex; align-items: center; gap: 6px;
+            margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.06);
+            font-size: 11px; color: #8a8f98;
+        }
+        .review-source-badge {
+            background: #19b92a; color: #fff; font-weight: 700; font-size: 10px;
+            padding: 2px 6px; border-radius: 4px; letter-spacing: 0.3px;
+        }
+        .carousel-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 32px; height: 32px; border-radius: 50%;
+            background: rgba(0,0,0,0.55); border: 1px solid rgba(0,210,200,0.3);
+            color: #00d2c8; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s ease, transform 0.2s ease;
+            z-index: 2;
+        }
+        .carousel-nav:hover { background: rgba(0,210,200,0.2); transform: translateY(-50%) scale(1.08); }
+        .carousel-nav.prev { left: 6px; }
+        .carousel-nav.next { right: 6px; }
+        .carousel-nav svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+        .carousel-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s ease;
+        }
+        .carousel-dot.active { background: #00d2c8; width: 20px; border-radius: 4px; }
+        .reviews-all-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin: 14px auto 0; padding: 10px 18px; border-radius: 10px;
+            color: #00d2c8; text-decoration: none; font-size: 13px; font-weight: 500;
+            background: rgba(0,210,200,0.06); border: 1px solid rgba(0,210,200,0.25);
+            transition: all 0.25s ease;
+        }
+        .reviews-all-link:hover { background: rgba(0,210,200,0.14); border-color: rgba(0,210,200,0.5); transform: translateY(-1px); }
+        .reviews-all-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .reviews-detail .carousel-dots + .reviews-all-link { display: inline-flex; }
+        .reviews-detail { text-align: center; }
+        .lightbox {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92);
+            z-index: 9999; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 95%; max-height: 95vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
 
         @media (max-width: 480px) {
             .card { padding: 32px 20px; border-radius: 20px; }
@@ -238,7 +318,8 @@
             .logo-circle { width: 120px; height: 120px; }
             .logo-ring-outer { width: 136px; height: 136px; top:-8px; left:-8px; }
             .logo-ring-inner { width: 128px; height: 128px; top:-4px; left:-4px; }
-            .logo-text-top, .logo-text-bottom { font-size: 11px; letter-spacing: 2px; }
+            .logo-svg { width: 120px; height: 120px; }
+            .logo-svg .arc-text-top, .logo-svg .arc-text-bottom { font-size: 11px; letter-spacing: 2px; }
             .features { gap: 14px; }
             .cta-button { padding: 14px 32px; font-size: 15px; }
             .nebula { width: 350px; height: 350px; }
@@ -258,110 +339,227 @@
             <div class="logo-ring-outer"></div>
             <div class="logo-ring-inner"></div>
             <div class="logo-circle">
-                <svg class="logo-mic" width="40" height="52" viewBox="0 0 40 52" fill="none">
-                    <!-- Mic head -->
-                    <ellipse cx="20" cy="14" rx="9" ry="11" fill="none" stroke="#00d2c8" stroke-width="2"/>
-                    <!-- Mic body -->
-                    <rect x="15" y="24" width="10" height="14" rx="5" fill="#00d2c8" opacity="0.9"/>
-                    <!-- Mic stand -->
-                    <line x1="20" y1="38" x2="20" y2="45" stroke="#00d2c8" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="13" y1="45" x2="27" y2="45" stroke="#00d2c8" stroke-width="2" stroke-linecap="round"/>
-                    <!-- Cable -->
-                    <path d="M11 14 C6 14, 3 20, 5 26 C7 32, 4 36, 2 38" stroke="#00d2c8" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5">
-                        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
-                    </path>
-                    <!-- Sound waves -->
-                    <path d="M31 8 C34 11, 34 17, 31 20" stroke="#00d2c8" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4">
-                        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="2s" repeatCount="indefinite"/>
-                    </path>
-                    <path d="M35 5 C39 10, 39 18, 35 23" stroke="#00d2c8" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.25">
-                        <animate attributeName="opacity" values="0.1;0.35;0.1" dur="2.5s" repeatCount="indefinite"/>
-                    </path>
+                <svg class="logo-svg" viewBox="0 0 140 140">
+                    <defs>
+                        <path id="arcTop" d="M 28,70 A 42,42 0 0 1 112,70" fill="none"/>
+                        <path id="arcBottom" d="M 28,72 A 42,42 0 0 0 112,72" fill="none"/>
+                    </defs>
+                    <!-- Top text: ТВОЙ полукругом сверху -->
+                    <text class="arc-text-top">
+                        <textPath href="#arcTop" startOffset="50%" text-anchor="middle">ТВОЙ</textPath>
+                    </text>
+                    <!-- Bottom text: ГОЛОС полукругом снизу -->
+                    <text class="arc-text-bottom">
+                        <textPath href="#arcBottom" startOffset="50%" text-anchor="middle">ГОЛОС</textPath>
+                    </text>
+                    <!-- Decorative dots on the sides -->
+                    <circle cx="20" cy="70" r="1.6" fill="#00d2c8" opacity="0.7"/>
+                    <circle cx="120" cy="70" r="1.6" fill="#00d2c8" opacity="0.7"/>
+                    <!-- Studio microphone on a stand -->
+                    <g class="logo-mic-group" transform="translate(70 70)">
+                        <!-- Mic body: vertical rounded rectangle -->
+                        <rect x="-9" y="-22" width="18" height="30" rx="3.5"
+                              fill="rgba(10,15,25,0.5)" stroke="#00d2c8" stroke-width="1.8"/>
+
+                        <!-- Mesh grille on upper half (horizontal lines) -->
+                        <line x1="-7" y1="-18" x2="7" y2="-18" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
+                        <line x1="-7" y1="-15" x2="7" y2="-15" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
+                        <line x1="-7" y1="-12" x2="7" y2="-12" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
+                        <line x1="-7" y1="-9" x2="7" y2="-9" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
+                        <line x1="-7" y1="-6" x2="7" y2="-6" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
+
+                        <!-- Divider between grille and body -->
+                        <line x1="-9" y1="-3" x2="9" y2="-3" stroke="#00d2c8" stroke-width="1" opacity="0.85"/>
+
+                        <!-- Power LED -->
+                        <circle cx="0" cy="2" r="1.3" fill="#00d2c8" opacity="0.95">
+                            <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+
+                        <!-- Joint between mic and stand -->
+                        <rect x="-3.5" y="8" width="7" height="3" rx="1" fill="#00d2c8" opacity="0.9"/>
+
+                        <!-- Stand pole -->
+                        <line x1="0" y1="11" x2="0" y2="22" stroke="#00d2c8" stroke-width="2" stroke-linecap="round"/>
+
+                        <!-- Round base (ellipse for perspective) -->
+                        <ellipse cx="0" cy="23" rx="13" ry="3" fill="#00d2c8" opacity="0.85"/>
+                        <ellipse cx="0" cy="22" rx="13" ry="3" fill="none" stroke="#00d2c8" stroke-width="1" opacity="0.7"/>
+                    </g>
                 </svg>
-                <span class="logo-text-top">ТВОЙ</span>
-                <span class="logo-text-bottom">ГОЛОС</span>
             </div>
         </div>
 
         <!-- Name -->
         <h1 class="name" data-text="Ирек Гайнемухаметов">Ирек Гайнемухаметов</h1>
 
-        <p class="specialization">Преподаватель вокала</p>
-        <p class="tagline">Вокал для начинающих <span>с нуля</span></p>
+        <p class="specialization">Педагог и вокальный тренер · 25+ лет</p>
+        <p class="tagline">Запоёшь красиво <span>уже на первом занятии</span></p>
 
         <div class="divider"></div>
 
         <!-- Features -->
         <div class="features">
-            <div class="feature feature-clickable" onclick="document.querySelector('.metodika-detail').classList.toggle('open')">
+            <div class="feature feature-clickable" data-target="metodika-detail">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                 </div>
-                <div class="feature-text">Методика</div>
+                <div class="feature-text">Как проходит урок</div>
             </div>
-            <div class="feature feature-clickable" onclick="document.querySelector('.result-detail').classList.toggle('open')">
+            <div class="feature feature-clickable" data-target="result-detail">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
                 </div>
-                <div class="feature-text">Результат</div>
+                <div class="feature-text">Этапы голоса</div>
             </div>
-            <div class="feature feature-clickable" onclick="document.querySelector('.about-detail').classList.toggle('open')">
+            <div class="feature feature-clickable" data-target="about-detail">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </div>
-                <div class="feature-text">Обо мне</div>
+                <div class="feature-text">О педагоге</div>
             </div>
         </div>
 
         <!-- About detail -->
         <div class="method-detail about-detail">
-            <h4>Обо мне</h4>
-            <p>Действующий певец с опытом более 30 лет на сцене. Более 20 лет обучаю вокалу — от первого звука до уверенного исполнения.</p>
-            <p>Также — ведущий мероприятий: юбилеи, свадьбы, банкеты, корпоративы. Работаю с профессиональным оборудованием, по индивидуальному сценарию «под ключ».</p>
+            <h4>О педагоге</h4>
+            <p>Действующий певец — 30+ лет эстрадного вокала на сцене. Учу вокалу с 1999 года, веду живые и онлайн занятия.</p>
+            <p>Работаю с теми, кто никогда не пел и думает, что «нет голоса и слуха». Обучаю без музыкальной теории и сложных терминов — простым доступным языком.</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:14px;">Дополнительно — ведущий мероприятий, юбилеев, свадеб, банкетов, выпускных. Эксклюзивный сценарий, оборудование, диджей.</p>
         </div>
 
         <!-- Result detail -->
         <div class="method-detail result-detail">
-            <h4>Программа достижения результата</h4>
-            <p>Каждый ученик проходит свой путь — от первого звука до уверенного исполнения:</p>
+            <h4>Этапы развития голоса</h4>
+            <p>Что разбираем шаг за шагом — от первого звука до свободного пения:</p>
             <ul>
-                <li><strong>Занятия 1–5:</strong> Дыхание, дикция, артикуляция, интонация — и уже первые песни</li>
-                <li><strong>Занятия 6–10:</strong> Ритм, точная интонация, эмоциональная подача, новые песни</li>
-                <li><strong>Занятия 11–15:</strong> Мощность, объём и красота звучания — голос раскрывается по-настоящему</li>
-                <li><strong>Занятия 16–24:</strong> Работа с микрофоном, новые песни, глубокие эмоции в исполнении</li>
-                <li><strong>25+ занятий:</strong> Полная свобода — любимые песни легко, а при желании — своя авторская песня</li>
+                <li><strong>Занятия 1–5:</strong> первый уверенный звук и первая простая песня</li>
+                <li><strong>Занятия 6–10:</strong> чистая интонация, ритм, эмоциональная подача</li>
+                <li><strong>Занятия 11–15:</strong> мощность, объём, красота тембра</li>
+                <li><strong>Занятия 16–24:</strong> формируем репертуар, эмоциональная, «живая» подача песни.</li>
+                <li><strong>25+ занятий:</strong> свободный репертуар — поёте любимые песни в своём стиле</li>
             </ul>
-            <div class="method-note" style="font-size:15px;color:#ffffff;font-weight:normal;">Программа подбирается индивидуально после диагностики и корректируется в зависимости от достижения результата</div>
+            <div class="method-note" style="font-size:14px;color:rgba(255,255,255,0.75);font-weight:normal;font-style:normal;">Темп и порядок подбираем индивидуально — после диагностики на пробном занятии</div>
         </div>
 
         <!-- Method detail -->
         <div class="method-detail metodika-detail">
-            <h4>Авторская методика с 1999 года</h4>
-            <p>Мы не учим ноты — мы учим петь. Свободно, красиво, для себя и близких. Методика создавалась более 25 лет специально для тех, кто впервые в жизни решил запеть. Каждое занятие — индивидуальное, под ваш голос и ваши цели.</p>
+            <h4>Как проходит урок</h4>
+            <p>Не учим ноты и теорию — учим петь. Из чего состоит урок:</p>
             <ul>
-                <li>Йоговокал — правильное свободное дыхание, раскрепощение тела и голоса с первых занятий, снятие зажимов</li>
-                <li>Дикция и артикуляция — чёткая речь и ораторское мастерство в подарок</li>
-                <li>Диафрагма — мощность, уверенность и красота звука — ваш голос зазвучит так, как вы и не представляли, основа сильного голоса</li>
-                <li>Развитие слуха и музыкальной памяти — вы начнёте слышать музыку по-новому</li>
-                <li>Работа с профессиональным микрофоном — навык, который пригодится на любой сцене</li>
-                <li>Полное техническое сопровождение — звук, поиск минусовок, подгон под голос — всё включено</li>
-                <li>Написание вашей личной песни — создадим песню с вашим содержанием, специально для вас</li>
+                <li><strong>Йоговокал</strong> — свободное дыхание, снятие зажимов тела и голоса</li>
+                <li><strong>Дикция и артикуляция</strong> — чёткая речь, ораторское мастерство в подарок</li>
+                <li><strong>Диафрагмальное дыхание</strong> — основа мощного, красивого звука</li>
+                <li><strong>Слух и музыкальная память</strong> — попадаете в ноты и держите мелодию</li>
+                <li><strong>Микрофон</strong> — работа со звуком как на сцене</li>
+                <li><strong>Техническое сопровождение</strong> — минусовки под ваш голос и тональность</li>
+                <li><strong>Авторская песня</strong> — пишем песню специально для вас (по желанию)</li>
             </ul>
+            <div class="method-note" style="font-size:14px;color:rgba(255,255,255,0.75);font-weight:normal;font-style:normal;">Методика отточена за 20+ лет практики — работает даже у тех, кто раньше не пел</div>
         </div>
 
         <!-- Reviews -->
-        <a href="https://vk.com/im/convo/2000000051?entrypoint=convo_invite" class="reviews-link">
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            Отзывы учеников
-        </a>
+        <div class="feature feature-clickable reviews-trigger" data-target="reviews-detail">
+            <span class="reviews-link">
+                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>
+                Живые отзывы учеников
+            </span>
+        </div>
+
+        <!-- Reviews detail -->
+        <div class="method-detail reviews-detail">
+            <h4>Отзывы учеников</h4>
+            <div class="reviews-carousel" id="reviewsCarousel">
+                <div class="reviews-track" id="reviewsTrack">
+                    <div class="review-slide">
+                        <div class="review-card">
+                            <div class="review-head">
+                                <div class="review-avatar">Н</div>
+                                <div class="review-meta">
+                                    <div class="review-name">Наиля Батаева</div>
+                                    <div class="review-date">ученица школы</div>
+                                </div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">На первом же занятии пришло понимание, осознание того, что просто нужно петь от Души!</div>
+                            <div class="review-source"><span class="review-source-badge">2ГИС</span> отзыв с 2gis.ru</div>
+                        </div>
+                    </div>
+                    <div class="review-slide">
+                        <div class="review-card">
+                            <div class="review-head">
+                                <div class="review-avatar">М</div>
+                                <div class="review-meta">
+                                    <div class="review-name">Мария Маркова</div>
+                                    <div class="review-date">ученица школы</div>
+                                </div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">Сбылась моя детская мечта. На вокале я отдыхаю душой.</div>
+                            <div class="review-source"><span class="review-source-badge">2ГИС</span> отзыв с 2gis.ru</div>
+                        </div>
+                    </div>
+                    <div class="review-slide">
+                        <div class="review-card">
+                            <div class="review-head">
+                                <div class="review-avatar">А</div>
+                                <div class="review-meta">
+                                    <div class="review-name">Айсылу Мухамадеева</div>
+                                    <div class="review-date">ученица школы</div>
+                                </div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">После занятия прям ходила воодушевленная! Для новичка это прям нереальные эмоции!</div>
+                            <div class="review-source"><span class="review-source-badge">2ГИС</span> отзыв с 2gis.ru</div>
+                        </div>
+                    </div>
+                    <div class="review-slide">
+                        <div class="review-card">
+                            <div class="review-head">
+                                <div class="review-avatar">Е</div>
+                                <div class="review-meta">
+                                    <div class="review-name">Елена Д.</div>
+                                    <div class="review-date">ученица школы</div>
+                                </div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">Ушла в приятном восторге и эмоционально заряженной! Лёгкая и непринужденная атмосфера.</div>
+                            <div class="review-source"><span class="review-source-badge">2ГИС</span> отзыв с 2gis.ru</div>
+                        </div>
+                    </div>
+                    <div class="review-slide">
+                        <div class="review-card">
+                            <div class="review-head">
+                                <div class="review-avatar">Н</div>
+                                <div class="review-meta">
+                                    <div class="review-name">Нина Заварюгина</div>
+                                    <div class="review-date">ученица школы</div>
+                                </div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">Мне все понравилось, я получила массу эмоций. Очутилась снова в детстве.</div>
+                            <div class="review-source"><span class="review-source-badge">2ГИС</span> отзыв с 2gis.ru</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-nav prev" id="carouselPrev" aria-label="Предыдущий"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                <button class="carousel-nav next" id="carouselNext" aria-label="Следующий"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            </div>
+            <div class="carousel-dots" id="carouselDots"></div>
+            <a href="https://2gis.ru/nizhnekamsk/firm/70000001077042225/tab/reviews" target="_blank" rel="noopener" class="reviews-all-link">
+                Все отзывы на 2ГИС
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7"></path><path d="M21 3l-9 9"></path><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path></svg>
+            </a>
+        </div>
 
         <!-- CTA -->
         <div class="cta-wrapper">
             <div class="cta-pulse"></div>
             <a href="https://t.me/irek_veduschii" class="cta-button" target="_blank">
                 <svg viewBox="0 0 24 24"><path d="M21.2 4.4L2.4 11.5c-.7.3-.7.9 0 1.1l4.8 1.5 1.9 5.9c.2.6.3.7.7.3l2.7-2.2 5.3 3.9c.5.4 1 .2 1.1-.5L22.8 5.6c.2-.8-.3-1.4-1.1-1.1l-.5.2zM9.6 14.1l-.4 3.8 7.5-6.9-7.1 3.1z"/></svg>
-                Написать мне
+                Записаться на пробное
             </a>
+            <div class="cta-sub">60 минут · бесплатно · диагностика голоса</div>
         </div>
 
         <!-- Social -->
@@ -373,33 +571,20 @@
                 <span class="social-label">Telegram</span>
             </div>
             <div class="social-item">
-                <a href="https://vk.com/tvoi_golos_nk" class="social-link" target="_blank" title="ВКонтакте">
+                <a href="https://vk.com/im/convo/2000000051?entrypoint=convo_invite" class="social-link" target="_blank" title="ВКонтакте">
                     <svg viewBox="0 0 24 24"><path d="M12.8 17.2s.3 0 .5-.2c.2-.2.2-.5.2-.5s0-1.6.7-1.8c.7-.2 1.6 1.4 2.5 2 .7.5 1.2.4 1.2.4l2.5-.1s1.3-.1.7-1c0-.1-.4-.9-2-2.5-1.7-1.7-1.4-1.4.6-4.4 1.2-1.8 1.7-2.9 1.5-3.4-.1-.4-1-.3-1-.3l-2.8 0s-.2 0-.4.1c-.2.1-.3.3-.3.3s-.5 1.4-1.2 2.6c-1.5 2.5-2 2.6-2.3 2.5-.5-.3-.4-1.3-.4-2 0-2.1.3-3-.6-3.2-.3-.1-.5-.1-1.3-.1-1 0-1.9 0-2.4.2-.3.2-.6.5-.4.5.2 0 .7.1 1 .4.3.4.3 1.3.3 1.3s.2 2.5-.4 2.8c-.4.2-1-.2-2.2-2.3-.7-1.1-1.2-2.4-1.2-2.4s-.1-.2-.3-.4c-.2-.1-.5-.2-.5-.2L3.4 6s-.4 0-.5.2C2.7 6.4 2.9 6.8 2.9 6.8s2.4 5.6 5.1 8.5c2.5 2.6 5.3 2.4 5.3 2.4l1.5-.5z"/></svg>
                 </a>
                 <span class="social-label">VK</span>
             </div>
-            <div class="social-item">
-                <a href="https://wa.me/79172474353" class="social-link" target="_blank" title="WhatsApp">
-                    <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3 0-.1-.2-.2-.5-.3zM12 21.5c-1.8 0-3.5-.5-5-1.3l-.4-.2-3.6 1 1-3.5-.2-.4A9.4 9.4 0 0 1 2.5 12c0-5.2 4.3-9.5 9.5-9.5S21.5 6.8 21.5 12s-4.3 9.5-9.5 9.5zM12 1C5.9 1 1 5.9 1 12c0 1.9.5 3.8 1.4 5.4L1 23l5.7-1.5C8.3 22.3 10.1 23 12 23c6.1 0 11-4.9 11-11S18.1 1 12 1z"/></svg>
-                </a>
-                <span class="social-label">WhatsApp</span>
-            </div>
-            <div class="social-item">
-                <a href="https://m.max.ru/79172474353" class="social-link" target="_blank" title="Max">
-                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="8.5" y="14.5" font-size="8" font-weight="700" fill="rgba(255,255,255,.5)" font-family="sans-serif">M</text></svg>
-                </a>
-                <span class="social-label">Max</span>
-            </div>
-            <div class="social-item">
-                <a href="tel:+79172474353" class="social-link" title="Позвонить">
-                    <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2.1h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.4 2.1L8 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.7a2 2 0 0 1 1.7 2z" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-                <span class="social-label">Позвонить</span>
+            <div class="social-item social-phone">
+                <a href="tel:+79172474353" class="phone-link" title="Позвонить">+7 917 247-43-53</a>
             </div>
         </div>
 
-        <div class="footer">ШКОЛА ВОКАЛА «ТВОЙ ГОЛОС»</div>
+        <div class="footer">Нижнекамск · онлайн по всей России</div>
     </div>
+
+    <div class="lightbox" id="lightbox"><img src="" alt=""></div>
 
     <script>
         (function(){
@@ -411,6 +596,69 @@
                 if(Math.random()>0.85){s.style.background='rgba(0,210,200,0.8)';s.style.boxShadow='0 0 4px rgba(0,210,200,0.4)';}
                 c.appendChild(s);
             }
+        })();
+
+        // Аккордеон: открыта только одна панель, повторный клик закрывает
+        document.querySelectorAll('.feature-clickable').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                var target = btn.getAttribute('data-target');
+                if(!target) return;
+                var panel = document.querySelector('.' + target);
+                document.querySelectorAll('.method-detail').forEach(function(p){
+                    if(p !== panel) p.classList.remove('open');
+                });
+                if(panel) panel.classList.toggle('open');
+                if(panel && panel.classList.contains('open')){
+                    setTimeout(function(){ panel.scrollIntoView({behavior:'smooth', block:'center'}); }, 100);
+                }
+            });
+        });
+
+        // Карусель отзывов
+        (function(){
+            var track = document.getElementById('reviewsTrack');
+            if(!track) return;
+            var slides = track.querySelectorAll('.review-slide');
+            var dotsWrap = document.getElementById('carouselDots');
+            var idx = 0;
+            slides.forEach(function(_, i){
+                var d = document.createElement('div');
+                d.className = 'carousel-dot' + (i===0?' active':'');
+                d.addEventListener('click', function(){ go(i); });
+                dotsWrap.appendChild(d);
+            });
+            function go(i){
+                idx = (i + slides.length) % slides.length;
+                track.style.transform = 'translateX(-' + (idx*100) + '%)';
+                dotsWrap.querySelectorAll('.carousel-dot').forEach(function(d,j){
+                    d.classList.toggle('active', j===idx);
+                });
+            }
+            document.getElementById('carouselPrev').addEventListener('click', function(){ go(idx-1); });
+            document.getElementById('carouselNext').addEventListener('click', function(){ go(idx+1); });
+
+            // Автопрокрутка при открытии блока
+            var panel = document.querySelector('.reviews-detail');
+            var timer = null;
+            function startAuto(){ stopAuto(); timer = setInterval(function(){ go(idx+1); }, 4500); }
+            function stopAuto(){ if(timer){ clearInterval(timer); timer = null; } }
+            if(panel){
+                var obs = new MutationObserver(function(){
+                    if(panel.classList.contains('open')){ go(0); startAuto(); } else { stopAuto(); }
+                });
+                obs.observe(panel, {attributes:true, attributeFilter:['class']});
+            }
+
+            // Свайп на мобильных
+            var startX = null;
+            track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; stopAuto(); }, {passive:true});
+            track.addEventListener('touchend', function(e){
+                if(startX===null) return;
+                var dx = e.changedTouches[0].clientX - startX;
+                if(Math.abs(dx) > 40){ go(idx + (dx<0?1:-1)); }
+                startX = null;
+                if(panel && panel.classList.contains('open')) startAuto();
+            });
         })();
     </script>
 </body>
