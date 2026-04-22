@@ -598,17 +598,20 @@
             }
         })();
 
-        // Аккордеон: открыта только одна панель, повторный клик закрывает
+        // Аккордеон: открыта только одна панель; повторный клик по кнопке закрывает её.
+        // Клик по другой кнопке — закрывает текущую и открывает новую.
         document.querySelectorAll('.feature-clickable').forEach(function(btn){
             btn.addEventListener('click', function(){
                 var target = btn.getAttribute('data-target');
                 if(!target) return;
                 var panel = document.querySelector('.' + target);
+                if(!panel) return;
+                var wasOpen = panel.classList.contains('open');
                 document.querySelectorAll('.method-detail').forEach(function(p){
-                    if(p !== panel) p.classList.remove('open');
+                    p.classList.remove('open');
                 });
-                if(panel) panel.classList.toggle('open');
-                if(panel && panel.classList.contains('open')){
+                if(!wasOpen){
+                    panel.classList.add('open');
                     setTimeout(function(){ panel.scrollIntoView({behavior:'smooth', block:'center'}); }, 100);
                 }
             });
