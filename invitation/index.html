@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Приглашение — 55 лет семье Гайнемхаметовых</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700;900&family=Cinzel:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { font-family: 'Cormorant Garamond', 'Times New Roman', serif; background: #2a2a2a; color: #333; }
+
+  /* ---------- Панель управления ---------- */
+  .control-panel {
+    position: sticky; top: 0; z-index: 100;
+    background: #111; color: #fff; padding: 14px 20px;
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    border-bottom: 2px solid #D4AF37;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .control-panel h2 { font-size: 16px; font-weight: 600; color: #D4AF37; margin-right: 16px; }
+  .control-panel button, .control-panel select {
+    background: #D4AF37; color: #111; border: none; padding: 8px 14px;
+    border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .control-panel button:hover { background: #e5c158; }
+  .control-panel .hint { font-size: 12px; opacity: 0.7; margin-left: auto; }
+  .guest-name-input {
+    padding: 8px 12px; border: 1px solid #555; background: #222; color: #fff;
+    border-radius: 4px; font-size: 13px; min-width: 280px;
+  }
+
+  .instructions {
+    background: #1a1a1a; color: #ccc; padding: 20px 30px; font-family: 'Segoe UI', sans-serif;
+    font-size: 14px; line-height: 1.6; border-bottom: 1px solid #333;
+  }
+  .instructions strong { color: #D4AF37; }
+  .instructions ul { margin: 10px 0 0 20px; }
+
+  .variants-container { padding: 40px 20px; display: flex; flex-direction: column; gap: 60px; align-items: center; }
+  .variant-label {
+    color: #D4AF37; font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 600;
+    margin-bottom: -20px; letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  /* ---------- Лист A5 ---------- */
+  .sheet {
+    width: 148mm; height: 210mm;
+    background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .pair { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+
+  [contenteditable="true"] { outline: none; }
+  [contenteditable="true"]:hover { background: rgba(255, 215, 0, 0.08); }
+  [contenteditable="true"]:focus { background: rgba(255, 215, 0, 0.15); box-shadow: 0 0 0 1px rgba(212,175,55,0.5); }
+
+  /* ============================================================
+     ВАРИАНТ 1 — ИЗУМРУДНО-ЗОЛОТОЙ КЛАССИЧЕСКИЙ
+     ============================================================ */
+  .v1-front {
+    background: linear-gradient(135deg, #0a3a2a 0%, #0F4C3A 50%, #0a3a2a 100%);
+    color: #f5ecd4;
+    padding: 18mm 14mm;
+    display: flex; flex-direction: column;
+  }
+  .v1-front::before {
+    content: ''; position: absolute; inset: 8mm;
+    border: 1px solid rgba(212,175,55,0.6); pointer-events: none;
+  }
+  .v1-front::after {
+    content: ''; position: absolute; inset: 9mm;
+    border: 1px solid rgba(212,175,55,0.3); pointer-events: none;
+  }
+  .v1-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: auto; }
+  .v1-title {
+    font-family: 'Cinzel', serif; font-size: 22pt; letter-spacing: 3px;
+    color: #D4AF37; line-height: 1.1;
+  }
+  .v1-title small {
+    display: block; font-size: 11pt; letter-spacing: 4px; color: #c9b88a;
+    margin-top: 4px;
+  }
+  .v1-emblem { width: 32mm; text-align: center; }
+  .v1-emblem .emblem-60 {
+    font-family: 'Playfair Display', serif; font-size: 10pt; font-weight: 700;
+    color: #D4AF37; letter-spacing: 2px; margin-top: 3mm;
+  }
+  .v1-center { text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .v1-number {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: 140pt; line-height: 0.9;
+    background: linear-gradient(180deg, #f4d880 0%, #D4AF37 50%, #a8832a 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; color: transparent;
+    text-shadow: 0 0 0 transparent;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  }
+  .v1-years {
+    font-family: 'Cinzel', serif; font-size: 14pt; letter-spacing: 6px;
+    color: #D4AF37; margin-top: -4mm;
+  }
+  .v1-couple {
+    text-align: center; margin-top: 10mm;
+    font-family: 'Cormorant Garamond', serif; font-size: 20pt; font-weight: 500;
+    color: #f5ecd4; line-height: 1.3;
+  }
+  .v1-couple .tat { font-size: 16pt; color: #c9b88a; margin-bottom: 3mm; font-style: italic; }
+  .v1-sub {
+    text-align: center; font-size: 11pt; color: #c9b88a;
+    letter-spacing: 1px; margin-top: 5mm; font-style: italic;
+  }
+  .v1-guest {
+    text-align: center; margin-top: auto; padding-top: 6mm;
+    font-family: 'Cormorant Garamond', serif; font-size: 13pt;
+    color: #f5ecd4; font-style: italic;
+  }
+  .v1-guest .guest-name { font-size: 15pt; color: #D4AF37; display: block; margin-top: 2mm; font-style: normal; font-weight: 500; }
+
+  .v1-back {
+    background: linear-gradient(135deg, #0a3a2a 0%, #0F4C3A 50%, #0a3a2a 100%);
+    color: #f5ecd4;
+    padding: 14mm 12mm;
+  }
+  .v1-back::before {
+    content: ''; position: absolute; inset: 8mm;
+    border: 1px solid rgba(212,175,55,0.6); pointer-events: none;
+  }
+  .v1-back-header {
+    text-align: center; font-family: 'Cinzel', serif;
+    font-size: 12pt; letter-spacing: 4px; color: #D4AF37;
+    padding-bottom: 4mm; border-bottom: 1px solid rgba(212,175,55,0.4);
+    margin-bottom: 6mm;
+  }
+  .v1-cols { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 6mm; height: calc(100% - 20mm); }
+  .v1-cols .divider { background: linear-gradient(180deg, transparent, rgba(212,175,55,0.5), transparent); }
+  .v1-col { font-size: 10.5pt; line-height: 1.5; color: #f5ecd4; }
+  .v1-col h3 {
+    font-family: 'Cinzel', serif; font-size: 11pt; letter-spacing: 2px;
+    color: #D4AF37; margin-bottom: 4mm; text-align: center;
+  }
+  .v1-col p { margin-bottom: 3mm; }
+  .v1-col .highlight { color: #D4AF37; font-weight: 600; font-size: 11.5pt; }
+  .v1-col .date-block { text-align: center; margin: 4mm 0; padding: 3mm 0; border-top: 1px solid rgba(212,175,55,0.3); border-bottom: 1px solid rgba(212,175,55,0.3); }
+  .v1-col .date-block .date { font-family: 'Cinzel', serif; font-size: 12pt; color: #D4AF37; letter-spacing: 2px; }
+  .v1-col .date-block .place { font-size: 10pt; margin-top: 1.5mm; font-style: italic; }
+  .v1-col .sign { text-align: center; margin-top: 4mm; font-style: italic; font-size: 10pt; color: #c9b88a; }
+
+  /* ============================================================
+     ВАРИАНТ 2 — КРЕМОВЫЙ ЭЛЕГАНТНЫЙ (светлый)
+     ============================================================ */
+  .v2-front {
+    background: #f5ecd9;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(15,76,58,0.08), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(212,175,55,0.12), transparent 60%);
+    color: #1a3a2a;
+    padding: 16mm 14mm;
+    display: flex; flex-direction: column;
+  }
+  .v2-front::before {
+    content: ''; position: absolute; inset: 10mm;
+    border: 2px double #0F4C3A; pointer-events: none;
+  }
+  .v2-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .v2-title {
+    font-family: 'Cinzel', serif; font-size: 20pt; letter-spacing: 4px;
+    color: #0F4C3A; line-height: 1.2;
+  }
+  .v2-title small {
+    display: block; font-size: 10pt; color: #5a7a6a; letter-spacing: 3px;
+    margin-top: 3mm; font-weight: 400;
+  }
+  .v2-emblem { width: 30mm; text-align: center; }
+  .v2-emblem .emblem-60 {
+    font-family: 'Playfair Display', serif; font-size: 9pt; font-weight: 600;
+    color: #0F4C3A; letter-spacing: 2px; margin-top: 2mm;
+  }
+
+  .v2-ornament { text-align: center; margin: 6mm 0 4mm; color: #D4AF37; font-size: 14pt; letter-spacing: 4px; }
+
+  .v2-center { text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .v2-years-top { font-family: 'Cinzel', serif; font-size: 10pt; letter-spacing: 6px; color: #0F4C3A; margin-bottom: 2mm; }
+  .v2-number {
+    font-family: 'Playfair Display', serif; font-weight: 400; font-style: italic;
+    font-size: 130pt; line-height: 0.85;
+    color: #0F4C3A;
+    position: relative;
+  }
+  .v2-number::before, .v2-number::after {
+    content: '❦'; color: #D4AF37; font-size: 24pt; vertical-align: middle;
+    margin: 0 8mm; font-style: normal;
+  }
+  .v2-years { font-family: 'Cinzel', serif; font-size: 12pt; letter-spacing: 8px; color: #0F4C3A; margin-top: 2mm; }
+
+  .v2-couple {
+    text-align: center; margin-top: 8mm;
+    font-family: 'Cormorant Garamond', serif; font-size: 22pt; font-weight: 500;
+    color: #0F4C3A; line-height: 1.3;
+  }
+  .v2-couple .tat { font-size: 17pt; color: #5a7a6a; margin-bottom: 3mm; font-style: italic; }
+  .v2-sub {
+    text-align: center; font-size: 11pt; color: #5a7a6a;
+    letter-spacing: 1px; margin-top: 4mm; font-style: italic;
+  }
+  .v2-guest {
+    text-align: center; margin-top: auto; padding-top: 6mm;
+    font-family: 'Cormorant Garamond', serif; font-size: 13pt;
+    color: #0F4C3A; font-style: italic;
+  }
+  .v2-guest .guest-name { font-size: 15pt; color: #D4AF37; display: block; margin-top: 2mm; font-style: normal; font-weight: 600; }
+
+  .v2-back {
+    background: #f5ecd9;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(15,76,58,0.08), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(212,175,55,0.12), transparent 60%);
+    color: #1a3a2a;
+    padding: 14mm 12mm;
+  }
+  .v2-back::before {
+    content: ''; position: absolute; inset: 10mm;
+    border: 2px double #0F4C3A; pointer-events: none;
+  }
+  .v2-back-header {
+    text-align: center; font-family: 'Cinzel', serif;
+    font-size: 11pt; letter-spacing: 4px; color: #0F4C3A;
+    padding-bottom: 3mm; margin-bottom: 5mm;
+  }
+  .v2-cols { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 6mm; height: calc(100% - 22mm); }
+  .v2-cols .divider { background: linear-gradient(180deg, transparent, #D4AF37, transparent); }
+  .v2-col { font-size: 10.5pt; line-height: 1.55; color: #1a3a2a; }
+  .v2-col h3 {
+    font-family: 'Cinzel', serif; font-size: 11pt; letter-spacing: 2px;
+    color: #0F4C3A; margin-bottom: 4mm; text-align: center;
+  }
+  .v2-col p { margin-bottom: 3mm; }
+  .v2-col .highlight { color: #0F4C3A; font-weight: 700; font-size: 11.5pt; }
+  .v2-col .date-block { text-align: center; margin: 4mm 0; padding: 3mm 0; border-top: 1px solid #D4AF37; border-bottom: 1px solid #D4AF37; }
+  .v2-col .date-block .date { font-family: 'Cinzel', serif; font-size: 12pt; color: #0F4C3A; letter-spacing: 2px; }
+  .v2-col .date-block .place { font-size: 10pt; margin-top: 1.5mm; font-style: italic; color: #5a7a6a; }
+  .v2-col .sign { text-align: center; margin-top: 4mm; font-style: italic; font-size: 10pt; color: #5a7a6a; }
+
+  /* ============================================================
+     ВАРИАНТ 3 — АР-ДЕКО ТОРЖЕСТВЕННЫЙ (чёрно-золотой)
+     ============================================================ */
+  .v3-front {
+    background: radial-gradient(ellipse at center, #1e1e1e 0%, #0a0a0a 100%);
+    color: #f5ecd4;
+    padding: 16mm 14mm;
+    display: flex; flex-direction: column;
+  }
+  .v3-front::before {
+    content: ''; position: absolute; inset: 7mm;
+    border: 2px solid #D4AF37; pointer-events: none;
+  }
+  .v3-front::after {
+    content: ''; position: absolute; inset: 10mm;
+    border: 1px solid rgba(212,175,55,0.5); pointer-events: none;
+  }
+  .v3-corner { position: absolute; width: 18mm; height: 18mm; }
+  .v3-corner-tl { top: 5mm; left: 5mm; border-top: 3px solid #D4AF37; border-left: 3px solid #D4AF37; }
+  .v3-corner-tr { top: 5mm; right: 5mm; border-top: 3px solid #D4AF37; border-right: 3px solid #D4AF37; }
+  .v3-corner-bl { bottom: 5mm; left: 5mm; border-bottom: 3px solid #D4AF37; border-left: 3px solid #D4AF37; }
+  .v3-corner-br { bottom: 5mm; right: 5mm; border-bottom: 3px solid #D4AF37; border-right: 3px solid #D4AF37; }
+
+  .v3-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 2; }
+  .v3-title {
+    font-family: 'Cinzel', serif; font-size: 18pt; letter-spacing: 5px;
+    color: #D4AF37; line-height: 1.2; font-weight: 500;
+  }
+  .v3-title small {
+    display: block; font-size: 9pt; color: #a89560; letter-spacing: 4px; margin-top: 3mm;
+  }
+  .v3-emblem { width: 30mm; text-align: center; }
+  .v3-emblem .emblem-60 {
+    font-family: 'Cinzel', serif; font-size: 9pt; font-weight: 600;
+    color: #D4AF37; letter-spacing: 2px; margin-top: 2mm;
+  }
+
+  .v3-deco { text-align: center; margin: 5mm 0 3mm; color: #D4AF37; font-size: 16pt; letter-spacing: 6px; }
+
+  .v3-center {
+    text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2;
+  }
+  .v3-number-wrap {
+    display: inline-block; position: relative; padding: 4mm 12mm;
+  }
+  .v3-number-wrap::before, .v3-number-wrap::after {
+    content: ''; position: absolute; top: 50%; width: 20mm; height: 1px; background: #D4AF37;
+  }
+  .v3-number-wrap::before { left: -8mm; }
+  .v3-number-wrap::after { right: -8mm; }
+  .v3-number {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: 120pt; line-height: 0.9;
+    color: #D4AF37;
+    text-shadow: 0 0 20px rgba(212,175,55,0.3);
+  }
+  .v3-years { font-family: 'Cinzel', serif; font-size: 11pt; letter-spacing: 8px; color: #D4AF37; margin-top: 2mm; }
+
+  .v3-couple {
+    text-align: center; margin-top: 8mm;
+    font-family: 'Playfair Display', serif; font-size: 20pt; font-weight: 500;
+    color: #f5ecd4; line-height: 1.3; position: relative; z-index: 2;
+  }
+  .v3-couple .tat { font-size: 16pt; color: #a89560; margin-bottom: 3mm; font-style: italic; }
+  .v3-sub {
+    text-align: center; font-size: 10pt; color: #a89560;
+    letter-spacing: 2px; margin-top: 5mm; font-style: italic;
+    text-transform: uppercase;
+  }
+  .v3-guest {
+    text-align: center; margin-top: auto; padding-top: 5mm;
+    font-family: 'Cormorant Garamond', serif; font-size: 13pt;
+    color: #f5ecd4; font-style: italic; position: relative; z-index: 2;
+  }
+  .v3-guest .guest-name { font-size: 15pt; color: #D4AF37; display: block; margin-top: 2mm; font-style: normal; font-weight: 500; letter-spacing: 1px; }
+
+  .v3-back {
+    background: radial-gradient(ellipse at center, #1e1e1e 0%, #0a0a0a 100%);
+    color: #f5ecd4; padding: 14mm 12mm;
+  }
+  .v3-back::before {
+    content: ''; position: absolute; inset: 7mm;
+    border: 2px solid #D4AF37; pointer-events: none;
+  }
+  .v3-back-header {
+    text-align: center; font-family: 'Cinzel', serif;
+    font-size: 11pt; letter-spacing: 5px; color: #D4AF37;
+    padding: 0 0 4mm; margin-bottom: 5mm;
+    border-bottom: 1px solid rgba(212,175,55,0.4);
+  }
+  .v3-cols { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 6mm; height: calc(100% - 22mm); }
+  .v3-cols .divider { background: linear-gradient(180deg, transparent, #D4AF37, transparent); }
+  .v3-col { font-size: 10.5pt; line-height: 1.55; color: #f5ecd4; }
+  .v3-col h3 {
+    font-family: 'Cinzel', serif; font-size: 11pt; letter-spacing: 3px;
+    color: #D4AF37; margin-bottom: 4mm; text-align: center;
+  }
+  .v3-col p { margin-bottom: 3mm; }
+  .v3-col .highlight { color: #D4AF37; font-weight: 600; font-size: 11.5pt; }
+  .v3-col .date-block { text-align: center; margin: 4mm 0; padding: 3mm 0; border-top: 1px solid rgba(212,175,55,0.4); border-bottom: 1px solid rgba(212,175,55,0.4); }
+  .v3-col .date-block .date { font-family: 'Cinzel', serif; font-size: 12pt; color: #D4AF37; letter-spacing: 2px; }
+  .v3-col .date-block .place { font-size: 10pt; margin-top: 1.5mm; font-style: italic; }
+  .v3-col .sign { text-align: center; margin-top: 4mm; font-style: italic; font-size: 10pt; color: #a89560; }
+
+  /* ---------- ГЕРБ НИЖНЕКАМСКА + 60 (упрощённый SVG) ---------- */
+  .nk-emblem { display: block; margin: 0 auto; }
+
+  /* ---------- ПЕЧАТЬ ---------- */
+  @page { size: A5; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .control-panel, .instructions, .variant-label { display: none !important; }
+    .variants-container { padding: 0; gap: 0; }
+    .pair { gap: 0; page-break-inside: avoid; }
+    .sheet { box-shadow: none; page-break-after: always; }
+    body.print-v1 .variant-block:not(#v1),
+    body.print-v2 .variant-block:not(#v2),
+    body.print-v3 .variant-block:not(#v3) { display: none !important; }
+    [contenteditable="true"]:hover, [contenteditable="true"]:focus { background: transparent; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="control-panel">
+  <h2>📜 Приглашение — 55 лет</h2>
+  <label style="font-size:13px;">Имя гостя:
+    <input type="text" class="guest-name-input" id="guestName" placeholder="Уважаемый Радмир Ильдарович Беляев!" value="Уважаемый Радмир Ильдарович Беляев!">
+  </label>
+  <button onclick="applyGuestName()">Применить имя</button>
+  <button onclick="printVariant(1)">🖨 Печать варианта 1</button>
+  <button onclick="printVariant(2)">🖨 Печать варианта 2</button>
+  <button onclick="printVariant(3)">🖨 Печать варианта 3</button>
+  <button onclick="saveHTML()">💾 Скачать HTML</button>
+  <span class="hint">Кликни по любому тексту, чтобы отредактировать прямо в браузере</span>
+</div>
+
+<div class="instructions">
+  <strong>Как пользоваться:</strong>
+  <ul>
+    <li><strong>Редактирование</strong> — кликни по любой надписи на приглашении и правь прямо в браузере (подсвечивается жёлтым).</li>
+    <li><strong>Смена имени гостя</strong> — впиши ФИО в поле сверху и нажми «Применить». Имя обновится во всех 3 вариантах.</li>
+    <li><strong>Печать</strong> — жми «Печать варианта N». Откроется диалог печати: выбери «Сохранить как PDF» → отправь файл в типографию. Или печатай сразу на цветном принтере.</li>
+    <li><strong>Настройки печати:</strong> размер A5, поля «Нет», фон/графика ВКЛ (в Chrome: «Доп. настройки» → «Параметры» → поставь галку «Графика фона»).</li>
+    <li><strong>Скачать HTML</strong> — сохранит текущую версию с правками, можешь открыть в любом браузере.</li>
+    <li><strong>Герб НК + 60</strong> — сейчас стоит стилизованный плейсхолдер. Перед печатью скачай официальный герб с сайта администрации Нижнекамска (PNG без фона) и замени SVG внутри элемента <code>.nk-emblem</code> или просто приклей картинку.</li>
+  </ul>
+</div>
+
+<div class="variants-container">
+
+  <!-- ============================================================
+       ВАРИАНТ 1 — ИЗУМРУДНО-ЗОЛОТОЙ КЛАССИЧЕСКИЙ
+       ============================================================ -->
+  <div class="variant-block" id="v1">
+    <div class="variant-label">Вариант 1 — Изумруд и золото (классика)</div>
+    <div class="pair" style="margin-top:20px;">
+      <div class="sheet v1-front">
+        <div class="v1-top">
+          <div class="v1-title" contenteditable="true">ЧАКЫРУ<small>ПРИГЛАШЕНИЕ</small></div>
+          <div class="v1-emblem">
+            <svg class="nk-emblem" width="90" height="100" viewBox="0 0 90 100">
+              <clipPath id="shieldClip1">
+                <path d="M10 8 L80 8 L80 55 Q80 82 45 96 Q10 82 10 55 Z"/>
+              </clipPath>
+              <g clip-path="url(#shieldClip1)">
+                <rect x="10" y="8" width="24" height="90" fill="#4fb3e3"/>
+                <rect x="34" y="8" width="22" height="90" fill="#f4d83a"/>
+                <rect x="56" y="8" width="24" height="90" fill="#3fb34f"/>
+                <path d="M12 76 Q17 72 22 76 T32 76" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <path d="M12 82 Q17 78 22 82 T32 82" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <path d="M12 88 Q17 84 22 88 T32 88" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <rect x="44" y="32" width="2" height="58" fill="#3fb34f"/>
+                <path d="M45 18 L40 28 L43 28 L38 38 L42 38 L36 48 L44 48 L44 60 L46 60 L46 48 L54 48 L48 38 L52 38 L47 28 L50 28 Z" fill="#3fb34f"/>
+                <circle cx="45" cy="54" r="4" fill="#3fb34f" stroke="#3fb34f" stroke-width="0.5"/>
+                <g stroke="#3fb34f" stroke-width="0.8">
+                  <line x1="45" y1="46" x2="45" y2="49"/><line x1="45" y1="59" x2="45" y2="62"/>
+                  <line x1="37" y1="54" x2="40" y2="54"/><line x1="50" y1="54" x2="53" y2="54"/>
+                  <line x1="39" y1="48" x2="41" y2="50"/><line x1="49" y1="58" x2="51" y2="60"/>
+                  <line x1="51" y1="48" x2="49" y2="50"/><line x1="41" y1="58" x2="39" y2="60"/>
+                </g>
+                <path d="M60 18 Q62 16 64 18 Q66 16 68 18" stroke="#fff" stroke-width="1" fill="none"/>
+                <path d="M66 22 Q68 20 70 22 Q72 20 74 22" stroke="#fff" stroke-width="1" fill="none"/>
+                <path d="M62 26 Q64 24 66 26 Q68 24 70 26" stroke="#fff" stroke-width="1" fill="none"/>
+              </g>
+              <path d="M10 8 L80 8 L80 55 Q80 82 45 96 Q10 82 10 55 Z" fill="none" stroke="#D4AF37" stroke-width="2"/>
+            </svg>
+            <div class="emblem-60" contenteditable="true">60 ЛЕТ<br>НИЖНЕКАМСКУ</div>
+          </div>
+        </div>
+
+        <div class="v1-center">
+          <div class="v1-number">55</div>
+          <div class="v1-years" contenteditable="true">ЛЕТ ВМЕСТЕ</div>
+        </div>
+
+        <div class="v1-couple" contenteditable="true">
+          <div class="tat">Флёр һәм Разинә Гайнемхаметовлар</div>
+          Флёр и Разина Гайнемхаметовы
+        </div>
+        <div class="v1-sub" contenteditable="true">Первостроители города Нижнекамска</div>
+
+        <div class="v1-guest">
+          <span contenteditable="true">Приглашаем</span>
+          <span class="guest-name" contenteditable="true">Уважаемый Радмир Ильдарович Беляев!</span>
+        </div>
+      </div>
+
+      <div class="sheet v1-back">
+        <div class="v1-back-header" contenteditable="true">◆ ИЗУМРУДНАЯ СВАДЬБА ◆</div>
+        <div class="v1-cols">
+          <div class="v1-col" contenteditable="true">
+            <h3>ЧАКЫРУ</h3>
+            <p>Хөрмәтле дустыбыз!</p>
+            <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә безнең гаиләбез корылган иде. Бүген без бергә яшәвебезнең <span class="highlight">55 еллыгын</span> билгелибез.</p>
+            <p>Сезне Флёр һәм Разинә Гайнемхаметовларның зөмрәт туен бергә бәйрәм итәргә чакырабыз.</p>
+            <div class="date-block">
+              <div class="date">30 АПРЕЛЬ 2026</div>
+              <div class="place">14:00 • Түбән Кама ЗАГС бүлеге</div>
+            </div>
+            <p style="font-size:9.5pt; font-style:italic; color:#c9b88a;">Чара Түбән Кама шәһәренең 60 еллыгы уңаеннан үткәрелә.</p>
+            <div class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</div>
+          </div>
+          <div class="divider"></div>
+          <div class="v1-col" contenteditable="true">
+            <h3>ПРИГЛАШЕНИЕ</h3>
+            <p>Дорогой друг!</p>
+            <p>30 апреля 1971 года в Нижнекамске была создана наша семья. Сегодня мы празднуем <span class="highlight">55 лет</span> совместной жизни.</p>
+            <p>Приглашаем Вас разделить с нами этот торжественный день — изумрудную свадьбу Флёра и Разины Гайнемхаметовых.</p>
+            <div class="date-block">
+              <div class="date">30 АПРЕЛЯ 2026</div>
+              <div class="place">14:00 • Отделение ЗАГС г. Нижнекамска</div>
+            </div>
+            <p style="font-size:9.5pt; font-style:italic; color:#c9b88a;">Мероприятие проходит под эгидой 60-летия города Нижнекамска.</p>
+            <div class="sign">С уважением,<br>семья Гайнемхаметовых</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ВАРИАНТ 2 — КРЕМОВЫЙ ЭЛЕГАНТНЫЙ
+       ============================================================ -->
+  <div class="variant-block" id="v2">
+    <div class="variant-label">Вариант 2 — Кремовый и изумруд (светлый элегантный)</div>
+    <div class="pair" style="margin-top:20px;">
+      <div class="sheet v2-front">
+        <div class="v2-top">
+          <div class="v2-title" contenteditable="true">ЧАКЫРУ<small>ПРИГЛАШЕНИЕ</small></div>
+          <div class="v2-emblem">
+            <svg class="nk-emblem" width="85" height="95" viewBox="0 0 90 100">
+              <clipPath id="shieldClip2">
+                <path d="M10 8 L80 8 L80 55 Q80 82 45 96 Q10 82 10 55 Z"/>
+              </clipPath>
+              <g clip-path="url(#shieldClip2)">
+                <rect x="10" y="8" width="24" height="90" fill="#4fb3e3"/>
+                <rect x="34" y="8" width="22" height="90" fill="#f4d83a"/>
+                <rect x="56" y="8" width="24" height="90" fill="#3fb34f"/>
+                <path d="M12 76 Q17 72 22 76 T32 76" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <path d="M12 82 Q17 78 22 82 T32 82" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <path d="M12 88 Q17 84 22 88 T32 88" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <rect x="44" y="32" width="2" height="58" fill="#3fb34f"/>
+                <path d="M45 18 L40 28 L43 28 L38 38 L42 38 L36 48 L44 48 L44 60 L46 60 L46 48 L54 48 L48 38 L52 38 L47 28 L50 28 Z" fill="#3fb34f"/>
+                <circle cx="45" cy="54" r="4" fill="#3fb34f"/>
+                <g stroke="#3fb34f" stroke-width="0.8">
+                  <line x1="45" y1="46" x2="45" y2="49"/><line x1="45" y1="59" x2="45" y2="62"/>
+                  <line x1="37" y1="54" x2="40" y2="54"/><line x1="50" y1="54" x2="53" y2="54"/>
+                  <line x1="39" y1="48" x2="41" y2="50"/><line x1="49" y1="58" x2="51" y2="60"/>
+                  <line x1="51" y1="48" x2="49" y2="50"/><line x1="41" y1="58" x2="39" y2="60"/>
+                </g>
+                <path d="M60 18 Q62 16 64 18 Q66 16 68 18" stroke="#fff" stroke-width="1" fill="none"/>
+                <path d="M66 22 Q68 20 70 22 Q72 20 74 22" stroke="#fff" stroke-width="1" fill="none"/>
+                <path d="M62 26 Q64 24 66 26 Q68 24 70 26" stroke="#fff" stroke-width="1" fill="none"/>
+              </g>
+              <path d="M10 8 L80 8 L80 55 Q80 82 45 96 Q10 82 10 55 Z" fill="none" stroke="#0F4C3A" stroke-width="2"/>
+            </svg>
+            <div class="emblem-60" contenteditable="true">60 ЛЕТ НИЖНЕКАМСКУ</div>
+          </div>
+        </div>
+
+        <div class="v2-ornament">❦ ❦ ❦</div>
+
+        <div class="v2-center">
+          <div class="v2-years-top" contenteditable="true">С ГОРДОСТЬЮ ОТМЕЧАЕМ</div>
+          <div class="v2-number">55</div>
+          <div class="v2-years" contenteditable="true">ЛЕТ ВМЕСТЕ</div>
+        </div>
+
+        <div class="v2-couple" contenteditable="true">
+          <div class="tat">Флёр һәм Разинә Гайнемхаметовлар</div>
+          Флёр и Разина Гайнемхаметовы
+        </div>
+        <div class="v2-sub" contenteditable="true">Первостроители города Нижнекамска</div>
+
+        <div class="v2-guest">
+          <span contenteditable="true">Приглашаем</span>
+          <span class="guest-name" contenteditable="true">Уважаемый Радмир Ильдарович Беляев!</span>
+        </div>
+      </div>
+
+      <div class="sheet v2-back">
+        <div class="v2-back-header" contenteditable="true">❦ ИЗУМРУДНАЯ СВАДЬБА ❦</div>
+        <div class="v2-cols">
+          <div class="v2-col" contenteditable="true">
+            <h3>ЧАКЫРУ</h3>
+            <p>Хөрмәтле дустыбыз!</p>
+            <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә безнең гаиләбез корылган иде. Бүген без бергә яшәвебезнең <span class="highlight">55 еллыгын</span> билгелибез.</p>
+            <p>Сезне Флёр һәм Разинә Гайнемхаметовларның зөмрәт туен бергә бәйрәм итәргә чакырабыз.</p>
+            <div class="date-block">
+              <div class="date">30 АПРЕЛЬ 2026</div>
+              <div class="place">14:00 • Түбән Кама ЗАГС бүлеге</div>
+            </div>
+            <p style="font-size:9.5pt; font-style:italic; color:#5a7a6a;">Чара Түбән Кама шәһәренең 60 еллыгы уңаеннан үткәрелә.</p>
+            <div class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</div>
+          </div>
+          <div class="divider"></div>
+          <div class="v2-col" contenteditable="true">
+            <h3>ПРИГЛАШЕНИЕ</h3>
+            <p>Дорогой друг!</p>
+            <p>30 апреля 1971 года в Нижнекамске была создана наша семья. Сегодня мы празднуем <span class="highlight">55 лет</span> совместной жизни.</p>
+            <p>Приглашаем Вас разделить с нами этот торжественный день — изумрудную свадьбу Флёра и Разины Гайнемхаметовых.</p>
+            <div class="date-block">
+              <div class="date">30 АПРЕЛЯ 2026</div>
+              <div class="place">14:00 • Отделение ЗАГС г. Нижнекамска</div>
+            </div>
+            <p style="font-size:9.5pt; font-style:italic; color:#5a7a6a;">Мероприятие проходит под эгидой 60-летия города Нижнекамска.</p>
+            <div class="sign">С уважением,<br>семья Гайнемхаметовых</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ВАРИАНТ 3 — АР-ДЕКО ТОРЖЕСТВЕННЫЙ
+       ============================================================ -->
+  <div class="variant-block" id="v3">
+    <div class="variant-label">Вариант 3 — Чёрное золото (ар-деко торжественный)</div>
+    <div class="pair" style="margin-top:20px;">
+      <div class="sheet v3-front">
+        <div class="v3-corner v3-corner-tl"></div>
+        <div class="v3-corner v3-corner-tr"></div>
+        <div class="v3-corner v3-corner-bl"></div>
+        <div class="v3-corner v3-corner-br"></div>
+
+        <div class="v3-top">
+          <div class="v3-title" contenteditable="true">ЧАКЫРУ<small>ПРИГЛАШЕНИЕ</small></div>
+          <div class="v3-emblem">
+            <svg class="nk-emblem" width="85" height="95" viewBox="0 0 90 100">
+              <clipPath id="shieldClip3">
+                <path d="M10 8 L80 8 L80 55 Q80 82 45 96 Q10 82 10 55 Z"/>
+              </clipPath>
+              <g clip-path="url(#shieldClip3)">
+                <rect x="10" y="8" width="24" height="90" fill="#4fb3e3"/>
+                <rect x="34" y="8" width="22" height="90" fill="#f4d83a"/>
+                <rect x="56" y="8" width="24" height="90" fill="#3fb34f"/>
+                <path d="M12 76 Q17 72 22 76 T32 76" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <path d="M12 82 Q17 78 22 82 T32 82" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <path d="M12 88 Q17 84 22 88 T32 88" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <rect x="44" y="32" width="2" height="58" fill="#3fb34f"/>
+                <path d="M45 18 L40 28 L43 28 L38 38 L42 38 L36 48 L44 48 L44 60 L46 60 L46 48 L54 48 L48 38 L52 38 L47 28 L50 28 Z" fill="#3fb34f"/>
+                <circle cx="45" cy="54" r="4" fill="#3fb34f"/>
+                <g stroke="#3fb34f" stroke-width="0.8">
+                  <line x1="45" y1="46" x2="45" y2="49"/><line x1="45" y1="59" x2="45" y2="62"/>
+                  <line x1="37" y1="54" x2="40" y2="54"/><line x1="50" y1="54" x2="53" y2="54"/>
+                  <line x1="39" y1="48" x2="41" y2="50"/><line x1="49" y1="58" x2="51" y2="60"/>
+                  <line x1="51" y1="48" x2="49" y2="50"/><line x1="41" y1="58" x2="39" y2="60"/>
+                </g>
+                <path d="M60 18 Q62 16 64 18 Q66 16 68 18" stroke="#fff" stroke-width="1" fill="none"/>
+                <path d="M66 22 Q68 20 70 22 Q72 20 74 22" stroke="#fff" stroke-width="1" fill="none"/>
+                <path d="M62 26 Q64 24 66 26 Q68 24 70 26" stroke="#fff" stroke-width="1" fill="none"/>
+              </g>
+              <path d="M10 8 L80 8 L80 55 Q80 82 45 96 Q10 82 10 55 Z" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+            </svg>
+            <div class="emblem-60" contenteditable="true">60 ЛЕТ НИЖНЕКАМСКУ</div>
+          </div>
+        </div>
+
+        <div class="v3-deco">◆ ◆ ◆</div>
+
+        <div class="v3-center">
+          <div class="v3-number-wrap">
+            <div class="v3-number">55</div>
+          </div>
+          <div class="v3-years" contenteditable="true">ЛЕТ ВМЕСТЕ</div>
+        </div>
+
+        <div class="v3-couple" contenteditable="true">
+          <div class="tat">Флёр һәм Разинә Гайнемхаметовлар</div>
+          Флёр и Разина Гайнемхаметовы
+        </div>
+        <div class="v3-sub" contenteditable="true">Первостроители Нижнекамска</div>
+
+        <div class="v3-guest">
+          <span contenteditable="true">Приглашаем</span>
+          <span class="guest-name" contenteditable="true">Уважаемый Радмир Ильдарович Беляев!</span>
+        </div>
+      </div>
+
+      <div class="sheet v3-back">
+        <div class="v3-back-header" contenteditable="true">◆ ИЗУМРУДНАЯ СВАДЬБА ◆</div>
+        <div class="v3-cols">
+          <div class="v3-col" contenteditable="true">
+            <h3>ЧАКЫРУ</h3>
+            <p>Хөрмәтле дустыбыз!</p>
+            <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә безнең гаиләбез корылган иде. Бүген без бергә яшәвебезнең <span class="highlight">55 еллыгын</span> билгелибез.</p>
+            <p>Сезне Флёр һәм Разинә Гайнемхаметовларның зөмрәт туен бергә бәйрәм итәргә чакырабыз.</p>
+            <div class="date-block">
+              <div class="date">30 АПРЕЛЬ 2026</div>
+              <div class="place">14:00 • Түбән Кама ЗАГС бүлеге</div>
+            </div>
+            <p style="font-size:9.5pt; font-style:italic; color:#a89560;">Чара Түбән Кама шәһәренең 60 еллыгы уңаеннан үткәрелә.</p>
+            <div class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</div>
+          </div>
+          <div class="divider"></div>
+          <div class="v3-col" contenteditable="true">
+            <h3>ПРИГЛАШЕНИЕ</h3>
+            <p>Дорогой друг!</p>
+            <p>30 апреля 1971 года в Нижнекамске была создана наша семья. Сегодня мы празднуем <span class="highlight">55 лет</span> совместной жизни.</p>
+            <p>Приглашаем Вас разделить с нами этот торжественный день — изумрудную свадьбу Флёра и Разины Гайнемхаметовых.</p>
+            <div class="date-block">
+              <div class="date">30 АПРЕЛЯ 2026</div>
+              <div class="place">14:00 • Отделение ЗАГС г. Нижнекамска</div>
+            </div>
+            <p style="font-size:9.5pt; font-style:italic; color:#a89560;">Мероприятие проходит под эгидой 60-летия города Нижнекамска.</p>
+            <div class="sign">С уважением,<br>семья Гайнемхаметовых</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function applyGuestName() {
+    const name = document.getElementById('guestName').value.trim();
+    document.querySelectorAll('.guest-name').forEach(el => el.textContent = name);
+  }
+
+  function printVariant(n) {
+    document.body.classList.remove('print-v1', 'print-v2', 'print-v3');
+    document.body.classList.add('print-v' + n);
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => document.body.classList.remove('print-v' + n), 1000);
+    }, 100);
+  }
+
+  function saveHTML() {
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'invitation-edited.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+
+</body>
+</html>

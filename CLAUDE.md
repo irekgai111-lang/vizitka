@@ -77,9 +77,27 @@ my-first-project/
 ├── product/         — брошюра «Bot Business» + шаблон бота
 ├── ai-tutor/        — сказочный AI-репетитор для детей 8 лет
 ├── accountant-bot/  — бот бухгалтер (отдельный проект)
+├── vocal-bot/       — ★ Онлайн вокал студия «Твой Голос» (главный живой проект)
+│   ├── PROJEKT.md
+│   ├── CLAUDE.md
+│   ├── PLAN.md
+│   └── content/     — контент-паки, скрипты, методика, анализ конкурентов
 ├── CLAUDE.md        — этот файл
 └── .gitignore
 ```
+
+## Главный живой проект — «Твой Голос»
+
+**vocal-bot/** — центральный проект, в который постепенно интегрируется всё остальное:
+- Офлайн-школа Нижнекамск + онлайн-продукты для РФ
+- Главное узкое место: конверсия пробное → оплата (13% → цель 30%)
+- Единая методика из 5 школ РФ (Стройцева, Серопян, Антипова, Лаврищева, Staccato)
+- Сет из 20+ упражнений: [content/exercises_pool.md](vocal-bot/content/exercises_pool.md) + [content/exercises_seropyan.md](vocal-bot/content/exercises_seropyan.md)
+- Анализ 5 конкурентов: [content/competitors_analysis.md](vocal-bot/content/competitors_analysis.md)
+- Сводная методика: [content/methodology_unified.md](vocal-bot/content/methodology_unified.md)
+- Скрипт пробного 60 мин: [content/probno_script.md](vocal-bot/content/probno_script.md)
+
+**Будущее:** лендинг (`landing/`), визитка (`vizitka/`), бот записи (`zapis_bot/`) — всё должно вести в воронку «Твой Голос» и использовать единую методику и позиционирование из `vocal-bot/PROJEKT.md`.
 
 Каждый проект содержит:
 - `PROJEKT.md` — описание проекта

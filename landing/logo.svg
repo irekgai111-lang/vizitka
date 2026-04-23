@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 810 290">
+  <path d="M 463 245 C 430 290 260 290 160 248 C 80 220 95 175 175 172"
+        fill="none" stroke="#00d2c8" stroke-width="5" stroke-linecap="round"/>
+  <text x="355" y="180" text-anchor="end"
+        font-family="'Segoe UI','Arial Black',Arial,sans-serif"
+        font-weight="800" font-size="120" fill="#0a0a0a" letter-spacing="3">ТВОЙ</text>
+  <text x="368" y="180" text-anchor="start"
+        font-family="'Segoe UI','Arial Black',Arial,sans-serif"
+        font-weight="800" font-size="120" fill="#0a0a0a">Г</text>
+  <circle cx="485" cy="132" r="36" fill="#00d2c8"/>
+  <path d="M 467 170 L 503 170 L 488 242 Q 485 248 478 248 L 470 248 Q 464 248 463 242 Z" fill="#00d2c8"/>
+  <text x="530" y="180" text-anchor="start"
+        font-family="'Segoe UI','Arial Black',Arial,sans-serif"
+        font-weight="800" font-size="120" fill="#0a0a0a">ЛОС</text>
+</svg>
