@@ -84,31 +84,44 @@
         /* Microphone glow inside logo */
         .logo-mic-group { filter: drop-shadow(0 0 6px rgba(0,210,200,0.55)); }
 
-        /* Name */
+        /* Hero proof (stars + rating) */
+        .hero-proof {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-bottom: 14px; padding: 6px 14px;
+            background: rgba(255,180,0,0.08); border: 1px solid rgba(255,180,0,0.25);
+            border-radius: 999px; font-size: 12px; color: rgba(255,255,255,0.85);
+        }
+        .hero-stars { color: #ffb400; letter-spacing: 1px; font-size: 13px; }
+        .hero-proof a { color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); }
+
+        /* Hero promise — главный оффер */
+        .hero-promise {
+            font-size: 24px; font-weight: 700; line-height: 1.25;
+            margin-bottom: 10px; letter-spacing: 0.2px;
+            background: linear-gradient(135deg, #ffffff 0%, #cfeff0 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-promise em { font-style: normal; color: #00d2c8; -webkit-text-fill-color: #00d2c8; }
+        .hero-sub {
+            font-size: 15px; color: rgba(255,255,255,0.75);
+            line-height: 1.5; margin-bottom: 18px; font-weight: 400;
+        }
+
+        /* Name (теперь подпись, не заголовок) */
         .name {
-            font-size: 28px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 10px;
+            font-size: 17px; font-weight: 600; letter-spacing: 0.3px; margin-bottom: 4px;
             background: linear-gradient(135deg, #00d2c8, #00e5ff, #00d2c8, #48f0e0);
             background-size: 300% 300%;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            animation: gradientShift 6s ease infinite; position: relative;
-        }
-        .name::after {
-            content: attr(data-text); position: absolute; top: 0; left: 0; right: 0;
-            background: linear-gradient(135deg, #00d2c8, #00e5ff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            filter: blur(20px); opacity: 0.5; z-index: -1;
+            animation: gradientShift 6s ease infinite;
         }
         @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
         .specialization {
-            font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 6px;
-            letter-spacing: 2.5px; text-transform: uppercase; font-weight: 300;
+            font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 22px;
+            letter-spacing: 2px; text-transform: uppercase; font-weight: 300;
         }
-        .tagline {
-            font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 28px;
-            line-height: 1.5; font-weight: 400;
-        }
-        .tagline span { color: #00d2c8; font-weight: 500; }
+        .tagline { display: none; }
 
         .divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,210,200,0.5), transparent); margin: 0 auto 24px; }
 
@@ -312,8 +325,9 @@
 
         @media (max-width: 480px) {
             .card { padding: 32px 20px; border-radius: 20px; }
-            .name { font-size: 22px; }
-            .tagline { font-size: 16px; }
+            .name { font-size: 15px; }
+            .hero-promise { font-size: 21px; line-height: 1.3; }
+            .hero-sub { font-size: 14px; }
             .logo-container { width: 120px; height: 120px; }
             .logo-circle { width: 120px; height: 120px; }
             .logo-ring-outer { width: 136px; height: 136px; top:-8px; left:-8px; }
@@ -390,53 +404,60 @@
             </div>
         </div>
 
-        <!-- Name -->
-        <h1 class="name" data-text="Ирек Гайнемухаметов">Ирек Гайнемухаметов</h1>
+        <!-- Social proof (первый экран) -->
+        <div class="hero-proof">
+            <span class="hero-stars">★★★★★</span>
+            <a href="https://2gis.ru/nizhnekamsk/firm/70000001077042225/tab/reviews" target="_blank" rel="noopener">4.9 на 2ГИС · 39+ отзывов</a>
+        </div>
 
-        <p class="specialization">Педагог и вокальный тренер · 25+ лет</p>
-        <p class="tagline">Запоёшь красиво <span>уже на первом занятии</span></p>
+        <!-- Главный оффер -->
+        <h1 class="hero-promise">Запоёте <em>любимую песню</em> —<br>даже если кажется, что «нет голоса и слуха»</h1>
+        <p class="hero-sub">Услышите свой настоящий голос уже за 60 минут — без стеснения и зажимов</p>
+
+        <!-- Имя и специализация (подпись) -->
+        <div class="name">Ирек Гайнемухаметов</div>
+        <p class="specialization">Индивидуальные занятия · с 1999 года</p>
 
         <div class="divider"></div>
 
         <!-- Features -->
         <div class="features">
+            <div class="feature feature-clickable" data-target="about-detail">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div class="feature-text">Кто я и почему мне доверяют</div>
+            </div>
             <div class="feature feature-clickable" data-target="metodika-detail">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                 </div>
-                <div class="feature-text">Как проходит урок</div>
+                <div class="feature-text">Что будет на уроке</div>
             </div>
             <div class="feature feature-clickable" data-target="result-detail">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
                 </div>
-                <div class="feature-text">Этапы голоса</div>
-            </div>
-            <div class="feature feature-clickable" data-target="about-detail">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </div>
-                <div class="feature-text">О педагоге</div>
+                <div class="feature-text">Что умеешь через 5 / 10 / 25 уроков</div>
             </div>
         </div>
 
         <!-- About detail -->
         <div class="method-detail about-detail">
-            <h4>О педагоге</h4>
-            <p>Действующий певец — 30+ лет эстрадного вокала на сцене. Учу вокалу с 1999 года, веду живые и онлайн занятия.</p>
-            <p>Работаю с теми, кто никогда не пел и думает, что «нет голоса и слуха». Обучаю без музыкальной теории и сложных терминов — простым доступным языком.</p>
-            <p style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:14px;">Дополнительно — ведущий мероприятий, юбилеев, свадеб, банкетов, выпускных. Эксклюзивный сценарий, оборудование, диджей.</p>
+            <h4>Кто я и почему мне доверяют</h4>
+            <p>Действующий певец — 30+ лет эстрадного вокала на сцене. Учу вокалу с 1999 года, провожу <strong>индивидуальные занятия</strong> — живые в Нижнекамске и онлайн по всей России.</p>
+            <p>Беру тех, кто никогда не пел и уверен, что «нет голоса и слуха». Без нот, без теории, без сложных терминов — простым языком, под ваш голос и темп.</p>
         </div>
 
         <!-- Result detail -->
         <div class="method-detail result-detail">
-            <h4>Этапы развития голоса</h4>
-            <p>Что разбираем шаг за шагом — от первого звука до свободного пения:</p>
+            <h4>Что умеешь через 5 / 10 / 25 уроков</h4>
+            <p>Путь от первого звука до свободного пения. На индивидуальных занятиях — под ваш темп:</p>
             <ul>
                 <li><strong>Занятия 1–5:</strong> первый уверенный звук и первая простая песня</li>
                 <li><strong>Занятия 6–10:</strong> чистая интонация, ритм, эмоциональная подача</li>
                 <li><strong>Занятия 11–15:</strong> мощность, объём, красота тембра</li>
-                <li><strong>Занятия 16–24:</strong> формируем репертуар, эмоциональная, «живая» подача песни.</li>
+                <li><strong>Занятия 16–24:</strong> формируем репертуар. Эмоциональная, «живая» подача каждой песни</li>
                 <li><strong>25+ занятий:</strong> свободный репертуар — поёте любимые песни в своём стиле</li>
             </ul>
             <div class="method-note" style="font-size:14px;color:rgba(255,255,255,0.75);font-weight:normal;font-style:normal;">Темп и порядок подбираем индивидуально — после диагностики на пробном занятии</div>
@@ -444,8 +465,8 @@
 
         <!-- Method detail -->
         <div class="method-detail metodika-detail">
-            <h4>Как проходит урок</h4>
-            <p>Не учим ноты и теорию — учим петь. Из чего состоит урок:</p>
+            <h4>Что будет на уроке</h4>
+            <p>Индивидуальное занятие — 60 минут, всё внимание вашему голосу. Не учим ноты и теорию — учим петь. Из чего состоит урок:</p>
             <ul>
                 <li><strong>Йоговокал</strong> — свободное дыхание, снятие зажимов тела и голоса</li>
                 <li><strong>Дикция и артикуляция</strong> — чёткая речь, ораторское мастерство в подарок</li>
@@ -557,9 +578,10 @@
             <div class="cta-pulse"></div>
             <a href="https://t.me/irek_veduschii" class="cta-button" target="_blank">
                 <svg viewBox="0 0 24 24"><path d="M21.2 4.4L2.4 11.5c-.7.3-.7.9 0 1.1l4.8 1.5 1.9 5.9c.2.6.3.7.7.3l2.7-2.2 5.3 3.9c.5.4 1 .2 1.1-.5L22.8 5.6c.2-.8-.3-1.4-1.1-1.1l-.5.2zM9.6 14.1l-.4 3.8 7.5-6.9-7.1 3.1z"/></svg>
-                Записаться на пробное
+                Хочу пробный бесплатный урок
             </a>
-            <div class="cta-sub">60 минут · бесплатно · диагностика голоса</div>
+            <div class="cta-sub">60 минут · диагностика голоса · индивидуально</div>
+            <div class="cta-sub" style="margin-top:4px;color:rgba(255,255,255,0.4);">Пробный — бесплатно. Абонемент — от 1500 ₽ за урок</div>
         </div>
 
         <!-- Social -->
