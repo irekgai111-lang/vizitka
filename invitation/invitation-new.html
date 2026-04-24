@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Приглашение — 55 лет</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600;700&family=Cinzel:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { font-family: 'Cormorant Garamond', serif; background: #1a1a1a; color: #333; }
@@ -108,13 +105,13 @@
     display: flex; flex-direction: column; justify-content: center; align-items: center;
   }
   .v1-title-word {
-    font-family: 'EB Garamond', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 36pt; font-weight: 600; letter-spacing: 3px;
     color: #0F7A6A; line-height: 1; margin: 0;
     white-space: nowrap;
   }
   .v1-title-sub {
-    font-family: 'EB Garamond', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 24pt; letter-spacing: 5px;
     color: #0F7A6A; margin-top: 6mm; font-weight: 500;
   }
@@ -139,7 +136,7 @@
     display: flex; flex-direction: column; height: 100%;
   }
   .v1-back-content h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, serif;
     font-size: 18pt; color: #0F7A6A; text-align: center;
     margin-bottom: 4mm; font-weight: 400; letter-spacing: 2px;
   }
@@ -151,7 +148,7 @@
     font-size: 10pt; line-height: 1.6; color: #2a2a2a;
   }
   .v1-col h3 {
-    font-family: 'Cinzel', serif; font-size: 11pt; color: #0F7A6A;
+    font-family: Georgia, serif; font-size: 11pt; color: #0F7A6A;
     letter-spacing: 2px; margin-bottom: 3mm; text-align: center; font-weight: 500;
   }
   .v1-col p { margin-bottom: 2mm; }
@@ -160,7 +157,7 @@
     text-align: center; margin: 3mm 0; padding: 3mm 0;
     border-top: 1px solid rgba(15, 122, 106, 0.3);
     border-bottom: 1px solid rgba(15, 122, 106, 0.3);
-    font-family: 'Cinzel', serif; font-size: 10.5pt; color: #0F7A6A;
+    font-family: Georgia, serif; font-size: 10.5pt; color: #0F7A6A;
   }
   .v1-col .date-info .time { font-size: 11pt; margin-bottom: 1mm; }
   .v1-col .place { font-size: 9.5pt; color: #5a5a5a; font-style: italic; }
@@ -216,13 +213,13 @@
     display: flex; flex-direction: column; justify-content: center; align-items: center;
   }
   .v2-title-word {
-    font-family: 'Lora', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 38pt; font-weight: 600; letter-spacing: 3px;
     color: #0F7A6A; line-height: 1; margin: 0;
     white-space: nowrap;
   }
   .v2-title-sub {
-    font-family: 'Lora', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 24pt; letter-spacing: 5px;
     color: #0F7A6A; margin-top: 6mm; font-weight: 500;
   }
@@ -267,7 +264,7 @@
     text-align: center; margin: 3mm 0; padding: 3mm 0;
     border-top: 1px solid #9DA9A0;
     border-bottom: 1px solid #9DA9A0;
-    font-family: 'Cinzel', serif; font-size: 10pt; color: #0F7A6A;
+    font-family: Georgia, serif; font-size: 10pt; color: #0F7A6A;
   }
   .v2-col .place { font-size: 9pt; color: #666; font-style: italic; }
   .v2-col .sign {
@@ -322,13 +319,13 @@
     display: flex; flex-direction: column; justify-content: center; align-items: center;
   }
   .v3-title-word {
-    font-family: 'EB Garamond', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 36pt; font-weight: 600; letter-spacing: 3px;
     color: #0F7A6A; line-height: 1; margin: 0;
     white-space: nowrap;
   }
   .v3-title-sub {
-    font-family: 'EB Garamond', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 24pt; letter-spacing: 5px;
     color: #8B3A3A; margin-top: 6mm; font-weight: 600;
   }
@@ -378,7 +375,7 @@
     text-align: center; margin: 3mm 0; padding: 3mm 0;
     border-top: 1px solid #8B3A3A;
     border-bottom: 1px solid #8B3A3A;
-    font-family: 'Cinzel', serif; font-size: 10pt; color: #0F7A6A;
+    font-family: Georgia, serif; font-size: 10pt; color: #0F7A6A;
   }
   .v3-col .place { font-size: 9pt; color: #666; font-style: italic; }
   .v3-col .sign {
@@ -407,16 +404,15 @@
 
 <div class="control-panel">
   <h2>📜 Приглашение 55 лет — Горизонтальный формат</h2>
-  <label style="font-size:12px; color:#fff;">
-    Имя VIP-гостя:
-    <input type="text" class="guest-input" id="guestName" placeholder="Уважаемый Радмир Ильдарович Беляев!" value="Уважаемый Радмир Ильдарович Беляев!">
-  </label>
+  <select id="guestList" class="guest-input" onchange="applyGuestFromList()" style="min-width: 320px;">
+    <option value="">-- Выбери VIP гостя --</option>
+  </select>
   <button onclick="applyGuest()">✓ Применить</button>
   <button onclick="printV(1)">🖨 Печать V1</button>
   <button onclick="printV(2)">🖨 Печать V2</button>
   <button onclick="printV(3)">🖨 Печать V3</button>
   <button onclick="downloadHTML()">💾 Скачать</button>
-  <span class="hint">Клик по тексту = редактирование</span>
+  <span class="hint">Или вводи имя прямо в поле</span>
 </div>
 
 <div class="instructions">
@@ -647,9 +643,51 @@
 </div>
 
 <script>
+const VIP_GUESTS = [
+  'Уважаемый Радмир Ильдарович Беляев!',
+  'Уважаемая Марина Валерьевна Камелина!',
+  'Уважаемая Эльвира Юлдашевна Каримуллина!',
+  'Уважаемый Нафиков Ришат Фаргатович!',
+  'Уважаемая Александра Михайловна Офицерова!',
+  'Уважаемый Григорий Леонидович Китанов!'
+];
+
+function initPage() {
+  const select = document.getElementById('guestList');
+  VIP_GUESTS.forEach((name, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = name;
+    select.appendChild(opt);
+  });
+
+  const saved = localStorage.getItem('lastGuest');
+  if (saved !== null) {
+    select.value = saved;
+    applyGuestFromList();
+  } else {
+    select.value = 0;
+    applyGuestFromList();
+  }
+}
+
 function applyGuest() {
-  const name = document.getElementById('guestName').value.trim();
-  document.querySelectorAll('[data-guest]').forEach(el => el.textContent = name);
+  const select = document.getElementById('guestList');
+  const name = select.options[select.selectedIndex]?.text || VIP_GUESTS[0];
+  updateGuestText(name);
+  localStorage.setItem('lastGuest', select.value);
+}
+
+function applyGuestFromList() {
+  applyGuest();
+}
+
+function updateGuestText(name) {
+  document.querySelectorAll('.highlight').forEach(el => {
+    if (el.textContent.includes('Уважаемый') || el.textContent.includes('Уважаемая')) {
+      el.textContent = name;
+    }
+  });
 }
 
 function printV(n) {
@@ -667,6 +705,8 @@ function downloadHTML() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+window.addEventListener('DOMContentLoaded', initPage);
 </script>
 
 </body>
