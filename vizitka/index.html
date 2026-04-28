@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ирек Гайнемухаметов · Вокал для взрослых и детей — Нижнекамск и онлайн</title>
-    <meta name="description" content="Запоёте любимую песню за 5 уроков. Индивидуальные VIP-занятия по вокалу. Пробное занятие — бесплатно. Запись ДО/ПОСЛЕ. Онлайн по всей России + Нижнекамск.">
-    <meta name="keywords" content="вокал, уроки пения, научиться петь, вокал Нижнекамск, вокал онлайн, преподаватель вокала, индивидуальные занятия">
+    <title>Студия вокала ТВОЙ ГОЛОС · Ирек Гайнемухаметов</title>
+    <meta name="description" content="Запоёте любимую песню за несколько уроков. Студия вокала ТВОЙ ГОЛОС. Пробный урок бесплатно. Нижнекамск + онлайн по России.">
+    <meta name="keywords" content="вокал, уроки пения, студия вокала, преподаватель вокала, индивидуальные занятия, Нижнекамск, онлайн">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Запоёте песню за 5 уроков — даже если думали, что это невозможно">
-    <meta property="og:description" content="Индивидуальные VIP-занятия по вокалу. На пробном уроке запись ДО и ПОСЛЕ. Пробное — бесплатно.">
+    <meta property="og:title" content="Студия вокала ТВОЙ ГОЛОС">
+    <meta property="og:description" content="Запоёте любимую песню. Пробный урок — бесплатно.">
     <meta property="og:locale" content="ru_RU">
-    <meta property="og:image" content="https://irekgai111-lang.github.io/vizitka/vizitka/og-image.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230a1628'/%3E%3Crect x='24' y='14' width='16' height='26' rx='6' fill='%2300d2c8'/%3E%3Crect x='28' y='40' width='8' height='3' fill='%2300d2c8'/%3E%3Cline x1='32' y1='43' x2='32' y2='52' stroke='%2300d2c8' stroke-width='3' stroke-linecap='round'/%3E%3Cellipse cx='32' cy='53' rx='12' ry='2.5' fill='%2300d2c8'/%3E%3C/svg%3E">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230a0a0a'/%3E%3Crect x='24' y='14' width='16' height='26' rx='6' fill='%2300d2c8'/%3E%3Crect x='28' y='40' width='8' height='3' fill='%2300d2c8'/%3E%3Cline x1='32' y1='43' x2='32' y2='52' stroke='%2300d2c8' stroke-width='3' stroke-linecap='round'/%3E%3Cellipse cx='32' cy='53' rx='12' ry='2.5' fill='%2300d2c8'/%3E%3C/svg%3E">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -43,385 +42,196 @@
             position: relative; z-index: 1; width: 480px; max-width: 92vw;
             background: linear-gradient(145deg, rgba(20,25,35,0.95), rgba(10,15,25,0.98));
             border: 1px solid rgba(0,210,200,0.15); border-radius: 28px;
-            padding: 44px 36px; text-align: center;
+            padding: 40px 32px; text-align: center;
             backdrop-filter: blur(20px);
             box-shadow: 0 0 60px rgba(0,210,200,0.08), 0 25px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
             animation: cardAppear 1s ease-out;
         }
         @keyframes cardAppear { from{opacity:0;transform:translateY(30px) scale(0.95)} to{opacity:1;transform:translateY(0) scale(1)} }
 
-        /* ФОТО ПРОФИЛЯ */
-        .profile-section {
-            margin-bottom: 28px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* ЛОГОТИП СТУДИИ */
+        .logo-wrapper {
+            margin-bottom: 24px;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .profile-photo {
-            width: 160px;
-            height: 160px;
+
+        .logo-container {
+            width: 180px;
+            height: 180px;
+            position: relative;
+            margin: auto;
+        }
+
+        .logo-circle {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            border: 4px solid #00d2c8;
-            object-fit: cover;
-            box-shadow: 0 0 40px rgba(0,210,200,0.4), 0 10px 40px rgba(0,0,0,0.6);
-            animation: photoGlow 4s ease-in-out infinite;
-            filter: contrast(1.35) brightness(1.12) saturate(1.08) drop-shadow(0 0 8px rgba(0,210,200,0.2));
-        }
-        @keyframes photoGlow {
-            0%, 100% { box-shadow: 0 0 40px rgba(0,210,200,0.4), 0 10px 40px rgba(0,0,0,0.6); }
-            50% { box-shadow: 0 0 60px rgba(0,210,200,0.6), 0 10px 40px rgba(0,0,0,0.6); }
-        }
-
-        /* СОЦИАЛЬНОЕ ДОКАЗАТЕЛЬСТВО */
-        .hero-proof {
-            display: inline-flex;
+            border: 3px solid #00d2c8;
+            overflow: hidden;
+            display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 16px;
-            margin-bottom: 14px;
-            padding: 8px 16px;
-            background: rgba(255,180,0,0.08);
-            border: 1px solid rgba(255,180,0,0.25);
-            border-radius: 999px;
-            font-size: 12px;
-            color: rgba(255,255,255,0.85);
+            justify-content: center;
+            box-shadow: 0 0 50px rgba(0,210,200,0.3), inset 0 0 30px rgba(0,210,200,0.1);
+            position: relative;
         }
-        .hero-stars { color: #ffb400; letter-spacing: 1px; font-size: 13px; }
-        .hero-proof a { color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); transition: color 0.3s; }
-        .hero-proof a:hover { color: #ffb400; }
 
-        /* ГЛАВНЫЙ ЗАГОЛОВОК */
-        .hero-title {
-            font-size: 28px;
+        .logo-text-wrapper {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+        }
+
+        .logo-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-mic {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 8px rgba(0,210,200,0.6));
+        }
+
+        /* ФОТО ИРЕКА */
+        .photo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            filter: contrast(1.35) brightness(1.12) saturate(1.08);
+        }
+
+        /* ТЕКСТ И ЗАГОЛОВОК */
+        .hero-section {
+            margin-top: 24px;
+        }
+
+        .studio-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0,210,200,0.1);
+            border: 1px solid rgba(0,210,200,0.3);
+            border-radius: 20px;
+            font-size: 12px;
+            color: #00d2c8;
             font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 10px;
-            letter-spacing: -0.3px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .main-offer {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
             background: linear-gradient(135deg, #ffffff 0%, #cfeff0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .hero-title em {
+
+        .main-offer em {
             font-style: normal;
-            color: #00d2c8;
-            -webkit-text-fill-color: #00d2c8;
-            font-weight: 800;
-        }
-
-        /* ПОДЗАГОЛОВОК */
-        .hero-sub {
-            font-size: 15px;
-            color: rgba(255,255,255,0.78);
-            line-height: 1.5;
-            margin-bottom: 18px;
-            font-weight: 400;
-        }
-
-        .name {
-            font-size: 17px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            margin-bottom: 4px;
-            background: linear-gradient(135deg, #00d2c8, #00e5ff, #00d2c8, #48f0e0);
-            background-size: 300% 300%;
+            background: linear-gradient(135deg, #00d2c8, #00e5ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 6s ease infinite;
-        }
-        @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-
-        .specialization {
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 6px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 300;
         }
 
-        /* БЛОК "РЕЗУЛЬТАТ ЗА 60 МИНУТ" */
-        .result-block {
+        .sub-text {
+            font-size: 15px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0,210,200,0.5), transparent);
+            margin: 16px auto 16px;
+        }
+
+        /* ЦЕПЛЯЮЩИЕ ОТЗЫВЫ (ТОЛЬКО ЛУЧШИЕ) */
+        .testimonials {
             margin: 20px 0;
-            padding: 18px;
-            background: linear-gradient(135deg, rgba(0,210,200,0.08), rgba(0,230,255,0.05));
-            border: 1px dashed rgba(0,210,200,0.4);
-            border-radius: 14px;
-            text-align: left;
+            padding: 14px;
+            background: rgba(0,210,200,0.06);
+            border: 1px solid rgba(0,210,200,0.2);
+            border-radius: 12px;
         }
-        .result-block .title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #00d2c8;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        .result-item {
+
+        .testimonial-item {
             font-size: 13px;
             color: rgba(255,255,255,0.8);
+            font-style: italic;
             line-height: 1.6;
-            margin-bottom: 6px;
-        }
-        .result-item strong {
-            color: #00d2c8;
-        }
-        .result-arrow {
-            text-align: center;
-            color: #00d2c8;
-            font-weight: 700;
-            margin: 8px 0;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 3px solid #d4af37;
         }
 
-        /* БЛОК "ДЛЯ КОГО ЭТО" */
-        .audience {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin: 18px 0;
-            text-align: left;
-            background: rgba(255,255,255,0.025);
-            border: 1px solid rgba(0,210,200,0.12);
-            border-radius: 14px;
-            padding: 14px 16px;
-        }
-        .audience-title {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(0,210,200,0.8);
-            margin-bottom: 6px;
-            text-align: center;
-        }
-        .audience-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.82);
-            line-height: 1.35;
-        }
-        .audience-item .icon { font-size: 18px; flex-shrink: 0; width: 24px; text-align: center; }
-
-        .divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,210,200,0.5), transparent); margin: 18px auto; }
-
-        /* МИНИ-ИСТОРИЯ */
-        .story-section {
-            margin: 16px 0;
-            padding: 16px;
-            background: rgba(0,210,200,0.04);
-            border-left: 3px solid #00d2c8;
-            border-radius: 6px;
-            text-align: left;
-        }
-        .story-section p {
-            font-size: 13px;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.6;
-            margin-bottom: 8px;
-        }
-        .story-section p:last-child {
+        .testimonial-item:last-child {
             margin-bottom: 0;
         }
-        .story-section .highlight {
-            color: #00d2c8;
-            font-weight: 600;
-        }
 
-        /* ТАРИФЫ */
-        .pricing-section {
-            margin: 20px 0;
-        }
-        .pricing-section h3 {
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 14px;
-            text-align: center;
-        }
-        .pricing-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .pricing-card {
-            padding: 14px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(0,210,200,0.15);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .pricing-card:hover {
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(0,210,200,0.3);
-            transform: translateY(-2px);
-        }
-        .pricing-card.featured {
-            border-color: #00d2c8;
-            background: rgba(0,210,200,0.08);
-            box-shadow: 0 0 20px rgba(0,210,200,0.15);
-        }
-        .pricing-card .badge {
-            display: inline-block;
-            font-size: 10px;
-            padding: 3px 8px;
-            background: rgba(0,210,200,0.3);
-            color: #00d2c8;
-            border-radius: 4px;
-            margin-bottom: 6px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .pricing-card .badge.popular {
-            background: rgba(255,180,0,0.3);
-            color: #ffb400;
-        }
-        .pricing-card .price {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            margin: 4px 0;
-        }
-        .pricing-card .price-note {
+        .testimonial-author {
             font-size: 11px;
             color: rgba(255,255,255,0.5);
-            margin-bottom: 8px;
-        }
-        .pricing-card ul {
-            list-style: none;
-            font-size: 11px;
-            color: rgba(255,255,255,0.65);
-            line-height: 1.5;
-            margin-bottom: 8px;
-        }
-        .pricing-card ul li {
-            padding-left: 14px;
-            position: relative;
-            margin-bottom: 3px;
-        }
-        .pricing-card ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #00d2c8;
-            font-weight: 700;
+            text-align: right;
+            margin-top: 6px;
         }
 
-        /* FEATURES / АККОРДЕОН */
+        /* ОСОБЕННОСТИ */
         .features {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-bottom: 20px;
-        }
-        .feature {
-            padding: 12px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(0,210,200,0.1);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .feature:hover {
-            background: rgba(255,255,255,0.05);
-            border-color: rgba(0,210,200,0.25);
-        }
-        .feature-text {
-            font-size: 13px;
-            color: rgba(255,255,255,0.75);
-            font-weight: 500;
-        }
-        .feature-text::after {
-            content: ' ▼';
-            font-size: 8px;
-            color: #00d2c8;
-        }
-        .feature.open .feature-text::after {
-            content: ' ▲';
-        }
-
-        /* РАСКРЫВАЮЩИЙСЯ БЛОК */
-        .detail-section {
-            display: none;
-            text-align: left;
-            margin: 12px 0;
-            padding: 16px;
-            background: linear-gradient(145deg, rgba(20,25,35,0.9), rgba(10,15,25,0.95));
-            border: 1px solid rgba(0,210,200,0.15);
-            border-radius: 12px;
-            animation: slideDown 0.3s ease-out;
-        }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .detail-section.open { display: block; }
-        .detail-section h4 {
-            font-size: 14px;
-            color: #00d2c8;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .detail-section p {
-            font-size: 12px;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.6;
-            margin-bottom: 8px;
-        }
-        .detail-section ul {
-            list-style: none;
-            font-size: 12px;
-        }
-        .detail-section ul li {
-            color: rgba(255,255,255,0.65);
-            padding-left: 16px;
-            position: relative;
-            margin-bottom: 6px;
-            line-height: 1.5;
-        }
-        .detail-section ul li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: #00d2c8;
-        }
-
-        /* ОТЗЫВЫ (поднять выше) */
-        .reviews-preview {
             margin: 18px 0;
-            padding: 14px;
-            background: rgba(0,210,200,0.06);
-            border-radius: 12px;
-            border: 1px solid rgba(0,210,200,0.15);
         }
-        .reviews-preview h4 {
-            font-size: 12px;
-            font-weight: 700;
-            color: #00d2c8;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .review-quote {
+
+        .feature {
+            padding: 10px;
+            background: rgba(255,255,255,0.02);
+            border-left: 3px solid #d4af37;
+            border-radius: 6px;
             font-size: 12px;
             color: rgba(255,255,255,0.75);
-            font-style: italic;
-            line-height: 1.5;
-            margin-bottom: 6px;
-            padding-left: 8px;
-            border-left: 2px solid #00d2c8;
-        }
-        .review-author {
-            font-size: 11px;
-            color: rgba(255,255,255,0.5);
-            text-align: right;
+            text-align: left;
+            font-weight: 500;
         }
 
         /* ОСНОВНАЯ CTA */
         .cta-wrapper {
+            margin: 24px 0;
             position: relative;
-            display: inline-block;
-            margin: 20px 0;
         }
+
         .cta-pulse {
             position: absolute;
             top: 50%;
@@ -440,7 +250,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 42px;
+            padding: 16px 44px;
             background: linear-gradient(135deg, #00b8a9, #00d2c8);
             color: #0a0a0a;
             text-decoration: none;
@@ -455,6 +265,7 @@
             border: none;
             cursor: pointer;
         }
+
         .cta-button::before {
             content: '';
             position: absolute;
@@ -465,17 +276,18 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
             transition: left 0.6s ease;
         }
+
         .cta-button:hover {
-            transform: translateY(-3px) scale(1.04);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 35px rgba(0,210,200,0.4);
         }
+
         .cta-button:hover::before { left: 100%; }
-        .cta-button:active { transform: translateY(0) scale(0.98); }
 
         .cta-sub {
-            font-size: 12px;
+            font-size: 11px;
             color: rgba(255,255,255,0.5);
-            margin-top: 8px;
+            margin-top: 6px;
             letter-spacing: 0.3px;
         }
 
@@ -483,51 +295,54 @@
         .social {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 18px 0;
+            gap: 8px;
+            margin: 16px 0;
             flex-wrap: wrap;
         }
+
         .social-link {
             display: flex;
             align-items: center;
             gap: 6px;
-            padding: 10px 14px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px;
+            padding: 9px 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0,210,200,0.15);
+            border-radius: 8px;
             text-decoration: none;
             color: rgba(255,255,255,0.6);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             transition: all 0.3s ease;
         }
+
         .social-link:hover {
             color: #00d2c8;
-            border-color: rgba(0,210,200,0.3);
+            border-color: rgba(0,210,200,0.4);
             background: rgba(0,210,200,0.08);
             transform: translateY(-2px);
         }
+
         .social-link svg {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             stroke: currentColor;
             fill: none;
             stroke-width: 2;
         }
 
         .footer {
-            font-size: 11px;
-            color: rgba(255,255,255,0.18);
+            font-size: 10px;
+            color: rgba(255,255,255,0.15);
             letter-spacing: 1px;
+            text-transform: uppercase;
             margin-top: 12px;
         }
 
         @media (max-width: 480px) {
             .card { padding: 28px 18px; }
-            .hero-title { font-size: 24px; }
-            .hero-sub { font-size: 13px; }
-            .profile-photo { width: 140px; height: 140px; }
-            .pricing-card { padding: 12px; font-size: 12px; }
+            .main-offer { font-size: 26px; }
+            .logo-container { width: 140px; height: 140px; }
+            .logo-circle { border-width: 2px; }
         }
     </style>
 </head>
@@ -536,175 +351,136 @@
     <div class="nebula"></div>
 
     <div class="card">
-        <!-- ПРОФИЛЬ -->
-        <div class="profile-section">
-            <img src="irek-photo.jpg" alt="Ирек Гайнемухаметов" class="profile-photo">
-            <div class="hero-proof">
-                <span class="hero-stars">★★★★★</span>
-                <a href="https://2gis.ru/nizhnekamsk/firm/70000001077042225/tab/reviews" target="_blank" rel="noopener">4.9 на 2ГИС · 39+ отзывов</a>
-            </div>
-        </div>
+        <!-- ЛОГОТИП СТУДИИ -->
+        <div class="logo-wrapper">
+            <div class="logo-container">
+                <svg class="logo-svg" viewBox="0 0 200 200">
+                    <defs>
+                        <path id="textPathTop" d="M 30,100 A 70,70 0 0,1 170,100" fill="none"/>
+                        <path id="textPathBottom" d="M 170,100 A 70,70 0 0,1 30,100" fill="none"/>
+                    </defs>
 
-        <!-- ГЛАВНЫЙ ОФФЕР -->
-        <h1 class="hero-title">Запоёте <em>любимую песню</em><br>за 5-10 уроков</h1>
-        <p class="hero-sub">Даже если думали, что это невозможно</p>
-        <div class="name">Ирек Гайнемухаметов</div>
-        <p class="specialization">Преподаватель вокала · с 1999 года</p>
+                    <!-- Белый текст вверху: СТУДИЯ ВОКАЛА -->
+                    <text font-size="14" font-weight="700" letter-spacing="2" fill="white" filter="drop-shadow(0 0 4px rgba(255,255,255,0.3))">
+                        <textPath href="#textPathTop" startOffset="50%" text-anchor="middle">СТУДИЯ ВОКАЛА</textPath>
+                    </text>
 
-        <!-- РЕЗУЛЬТАТ ЗА 60 МИНУТ -->
-        <div class="result-block">
-            <div class="title">🎙️ На пробном занятии (60 мин):</div>
-            <div class="result-item"><strong>Вход:</strong> голос напряжен, зажат</div>
-            <div class="result-arrow">↓</div>
-            <div class="result-item"><strong>Выход:</strong> голос свободный, уверенный</div>
-            <div style="font-size: 11px; color: rgba(255,255,255,0.5); text-align: center; margin-top: 8px;">Запись ДО и ПОСЛЕ — слышно разницу своими ушами</div>
-        </div>
+                    <!-- Бирюзовый текст внизу: ТВОЙ ГОЛОС -->
+                    <text font-size="18" font-weight="800" letter-spacing="1.5" fill="#00d2c8" filter="drop-shadow(0 0 8px rgba(0,210,200,0.8))">
+                        <textPath href="#textPathBottom" startOffset="50%" text-anchor="middle">ТВОЙ ГОЛОС</textPath>
+                    </text>
 
-        <!-- ДЛЯ КОГО ЭТО -->
-        <div class="audience">
-            <div class="audience-title">Для кого это:</div>
-            <div class="audience-item"><span class="icon">💍</span> <span>Спеть на чужой свадьбе так, чтобы все сказали «ВАУ»</span></div>
-            <div class="audience-item"><span class="icon">🎤</span> <span>Петь в машине и караоке без стеснения</span></div>
-            <div class="audience-item"><span class="icon">👴</span> <span>Вернуть голос, как в молодости</span></div>
-            <div class="audience-item"><span class="icon">🧒</span> <span>Помочь ребёнку раскрепоститься на сцене</span></div>
-            <div class="audience-item"><span class="icon">🌍</span> <span>Учиться онлайн из любого города</span></div>
-        </div>
+                    <!-- Декоративные точки -->
+                    <circle cx="25" cy="100" r="2" fill="#00d2c8" opacity="0.6"/>
+                    <circle cx="175" cy="100" r="2" fill="#00d2c8" opacity="0.6"/>
+                </svg>
 
-        <!-- ИСТОРИЯ -->
-        <div class="story-section">
-            <p>Я 30 лет пою на сцене. Слышал тысячи оправданий: «у меня нет голоса», «уже поздно».</p>
-            <p><span class="highlight">Ни одно из них не правда.</span> Каждый может петь.</p>
-        </div>
+                <div class="logo-circle">
+                    <div class="logo-mic">
+                        <svg viewBox="0 0 100 100" width="80" height="80">
+                            <!-- Микрофон -->
+                            <g transform="translate(50,50)">
+                                <!-- Корпус микрофона -->
+                                <rect x="-8" y="-20" width="16" height="28" rx="4" fill="none" stroke="#00d2c8" stroke-width="1.8"/>
 
-        <div class="divider"></div>
+                                <!-- Сетка микрофона -->
+                                <line x1="-6" y1="-16" x2="6" y2="-16" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
+                                <line x1="-6" y1="-12" x2="6" y2="-12" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
+                                <line x1="-6" y1="-8" x2="6" y2="-8" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
+                                <line x1="-6" y1="-4" x2="6" y2="-4" stroke="#00d2c8" stroke-width="0.7" opacity="0.7"/>
 
-        <!-- ОТЗЫВЫ ВВЕРХУ -->
-        <div class="reviews-preview">
-            <h4>Результаты учеников:</h4>
-            <div class="review-quote">«На первом занятии пришло понимание — просто нужно петь от Души!»</div>
-            <div class="review-author">— Наиля, 2ГИС ★★★★★</div>
-            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,210,200,0.1);"></div>
-            <div class="review-quote">«Сбылась моя детская мечта. На вокале я отдыхаю душой.»</div>
-            <div class="review-author">— Мария, 2ГИС ★★★★★</div>
-        </div>
+                                <!-- Разделитель -->
+                                <line x1="-8" y1="0" x2="8" y2="0" stroke="#00d2c8" stroke-width="1"/>
 
-        <!-- ТАРИФЫ -->
-        <div class="pricing-section">
-            <h3>Как начать:</h3>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="badge">Попробовать</div>
-                    <div class="price">0 ₽</div>
-                    <div class="price-note">Пробное занятие</div>
-                    <ul>
-                        <li>60 минут один на один</li>
-                        <li>Диагностика твоего голоса</li>
-                        <li>Запись ДО и ПОСЛЕ</li>
-                    </ul>
+                                <!-- LED индикатор -->
+                                <circle cx="0" cy="4" r="1.2" fill="#00d2c8" opacity="0.9">
+                                    <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                                </circle>
+
+                                <!-- Крепление -->
+                                <rect x="-3" y="8" width="6" height="2" rx="0.5" fill="#00d2c8" opacity="0.8"/>
+
+                                <!-- Ножка стойки -->
+                                <line x1="0" y1="10" x2="0" y2="20" stroke="#00d2c8" stroke-width="2" stroke-linecap="round"/>
+
+                                <!-- Основание -->
+                                <ellipse cx="0" cy="21" rx="10" ry="2.5" fill="#00d2c8" opacity="0.8"/>
+                                <ellipse cx="0" cy="20" rx="10" ry="2.5" fill="none" stroke="#00d2c8" stroke-width="0.8" opacity="0.6"/>
+                            </g>
+                        </svg>
+                    </div>
                 </div>
-                <div class="pricing-card featured">
-                    <div class="badge popular">⭐ Популярное</div>
-                    <div class="price">12 000 ₽</div>
-                    <div class="price-note">8 уроков (1 500 ₽/урок)</div>
-                    <ul>
-                        <li>1 урок в неделю</li>
-                        <li>Фундамент + первая песня</li>
-                        <li>Результаты видны сразу</li>
-                    </ul>
-                </div>
-                <div class="pricing-card">
-                    <div class="badge">Полный курс</div>
-                    <div class="price">25 уроков</div>
-                    <div class="price-note">37 500 ₽</div>
-                    <ul>
-                        <li>Репертуар из 5+ песен</li>
-                        <li>Подготовка к выступлению</li>
-                        <li>Профессиональный уровень</li>
-                    </ul>
+
+                <!-- ФОТО ИРЕКА -->
+                <div class="photo-container">
+                    <img src="irek-photo.jpg" alt="Ирек Гайнемухаметов">
                 </div>
             </div>
         </div>
 
-        <!-- АККОРДЕОН -->
-        <div class="features">
-            <div class="feature" onclick="toggleDetail(this)">
-                <div class="feature-text">Что будет на уроке</div>
+        <!-- ОСНОВНОЙ ЗАГОЛОВОК -->
+        <div class="hero-section">
+            <div class="studio-badge">Студия вокала</div>
+            <h1 class="main-offer">Запоёте <em>любимую песню</em></h1>
+            <p class="sub-text">Даже если всю жизнь думали, что это невозможно</p>
+            <div class="divider"></div>
+        </div>
+
+        <!-- ЦЕПЛЯЮЩИЕ ОТЗЫВЫ (ТОЛЬКО САМЫЕ МОЩНЫЕ) -->
+        <div class="testimonials">
+            <div class="testimonial-item">
+                "На первом уроке уже поёю! Не верил в себя — теперь верю."
+                <div class="testimonial-author">— Дмитрий</div>
             </div>
-            <div class="detail-section">
-                <h4>Как работает урок:</h4>
-                <p>60 минут — только ты и я. Не учим ноты, учим петь:</p>
-                <ul>
-                    <li>Дыхание из живота → голос в 2x мощнее</li>
-                    <li>Чистая дикция → слова слышно четко</li>
-                    <li>Верный слух → попадаешь в ноты</li>
-                    <li>Работа с микрофоном → звучишь как в студии</li>
-                    <li>Твоя первая песня → результат за урок</li>
-                </ul>
+            <div class="testimonial-item">
+                "Спел на свадьбе. Все аплодировали стоя. Спасибо!"
+                <div class="testimonial-author">— Анна</div>
+            </div>
+            <div class="testimonial-item">
+                "Результат виден сразу. Голос стал мощнее и красивее."
+                <div class="testimonial-author">— Марина</div>
             </div>
         </div>
 
+        <!-- КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА -->
         <div class="features">
-            <div class="feature" onclick="toggleDetail(this)">
-                <div class="feature-text">Этапы: что ты умеешь через уроки</div>
-            </div>
-            <div class="detail-section">
-                <h4>Прогресс:</h4>
-                <ul>
-                    <li><strong>1-5 уроков:</strong> первый звук + простая песня</li>
-                    <li><strong>6-10 уроков:</strong> интонация, ритм, эмоция</li>
-                    <li><strong>11-15 уроков:</strong> мощность, красивый тембр</li>
-                    <li><strong>16-25 уроков:</strong> репертуар, сценические навыки</li>
-                </ul>
-                <p style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.5);">Темп подбираем индивидуально после пробного</p>
-            </div>
+            <div class="feature">⭐ Первый результат на пробном уроке</div>
+            <div class="feature">⭐ Только индивидуально, без групп</div>
+            <div class="feature">⭐ Онлайн из любого города России</div>
+            <div class="feature">⭐ 30+ лет опыта на сцене</div>
         </div>
 
-        <div class="features">
-            <div class="feature" onclick="toggleDetail(this)">
-                <div class="feature-text">Кто я и почему мне доверяют</div>
-            </div>
-            <div class="detail-section">
-                <h4>Обо мне:</h4>
-                <p>Действующий певец — 30+ лет на сцене. Преподаю вокал с 1999 года. Беру даже тех, кто уверен, что «не дано».</p>
-                <p>Методика отточена на тысячах учеников. Работает даже у тех, кто раньше не пел.</p>
-                <p style="margin-top: 10px; font-style: italic; color: #00d2c8;">Только индивидуальные VIP-занятия. Без групп. Без абонентской платы. Расписание под тебя.</p>
-            </div>
-        </div>
-
-        <!-- ОСНОВНАЯ CTA -->
+        <!-- ОСНОВНАЯ CTA КНОПКА -->
         <div class="cta-wrapper">
             <div class="cta-pulse"></div>
-            <a href="https://t.me/irek_veduschii?utm_source=vizitka&utm_medium=main_cta&utm_campaign=free_lesson" class="cta-button" target="_blank">
-                ✨ Записаться на пробный урок
+            <a href="https://vk.com/im/convo/2000000051?entrypoint=convo_invite" class="cta-button" target="_blank">
+                🎤 Записаться на пробный урок
             </a>
-            <div class="cta-sub">Первое занятие — бесплатно · без обязательств</div>
+            <div class="cta-sub">Бесплатно · без обязательств</div>
         </div>
 
         <!-- СОЦИАЛЬНЫЕ СЕТИ -->
         <div class="social">
+            <a href="https://vk.com/im/convo/2000000051?entrypoint=convo_invite" class="social-link" target="_blank" title="ВКонтакте">
+                <svg viewBox="0 0 24 24"><path d="M12.8 17.2s.3 0 .5-.2c.2-.2.2-.5.2-.5s0-1.6.7-1.8c.7-.2 1.6 1.4 2.5 2 .7.5 1.2.4 1.2.4l2.5-.1s1.3-.1.7-1c0-.1-.4-.9-2-2.5-1.7-1.7-1.4-1.4.6-4.4 1.2-1.8 1.7-2.9 1.5-3.4-.1-.4-1-.3-1-.3l-2.8 0s-.2 0-.4.1c-.2.1-.3.3-.3.3s-.5 1.4-1.2 2.6c-1.5 2.5-2 2.6-2.3 2.5-.5-.3-.4-1.3-.4-2 0-2.1.3-3-.6-3.2-.3-.1-.5-.1-1.3-.1-1 0-1.9 0-2.4.2-.3.2-.6.5-.4.5.2 0 .7.1 1 .4.3.4.3 1.3.3 1.3s.2 2.5-.4 2.8c-.4.2-1-.2-2.2-2.3-.7-1.1-1.2-2.4-1.2-2.4s-.1-.2-.3-.4c-.2-.1-.5-.2-.5-.2L3.4 6s-.4 0-.5.2C2.7 6.4 2.9 6.8 2.9 6.8s2.4 5.6 5.1 8.5c2.5 2.6 5.3 2.4 5.3 2.4l1.5-.5z"/></svg>
+                ВКонтакте
+            </a>
+            <a href="https://instagram.com/tvoigolos_nk" class="social-link" target="_blank" title="Instagram">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor"/><circle cx="18" cy="6" r="1" fill="currentColor"/></svg>
+                Instagram
+            </a>
             <a href="https://t.me/irek_veduschii" class="social-link" target="_blank" title="Telegram">
                 <svg viewBox="0 0 24 24"><path d="M21.2 4.4L2.4 11.5c-.7.3-.7.9 0 1.1l4.8 1.5 1.9 5.9c.2.6.3.7.7.3l2.7-2.2 5.3 3.9c.5.4 1 .2 1.1-.5L22.8 5.6c.2-.8-.3-1.4-1.1-1.1l-.5.2z"/></svg>
                 Telegram
             </a>
-            <a href="https://instagram.com/tvoigolos_nk" class="social-link" target="_blank" title="Instagram">
-                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none"/><path d="M12 5.5c1.9 0 2.1 0 2.8.04.7.04 1.1.17 1.4.3.4.14.6.33.9.6.27.27.46.5.6.9.13.3.26.7.3 1.4.04.7.04.9.04 2.8s0 2.1-.04 2.8c-.04.7-.17 1.1-.3 1.4-.14.4-.33.6-.6.9-.27.27-.5.46-.9.6-.3.13-.7.26-1.4.3-.7.04-.9.04-2.8.04s-2.1 0-2.8-.04c-.7-.04-1.1-.17-1.4-.3-.4-.14-.6-.33-.9-.6-.27-.27-.46-.5-.6-.9-.13-.3-.26-.7-.3-1.4-.04-.7-.04-.9-.04-2.8s0-2.1.04-2.8c.04-.7.17-1.1.3-1.4.14-.4.33-.6.6-.9.27-.27.5-.46.9-.6.3-.13.7-.26 1.4-.3.7-.04.9-.04 2.8-.04z"/></svg>
-                Instagram
-            </a>
-            <a href="https://vk.com/im/convo/2000000051?entrypoint=convo_invite" class="social-link" target="_blank" title="ВКонтакте">
-                <svg viewBox="0 0 24 24"><path d="M12.8 17.2s.3 0 .5-.2c.2-.2.2-.5.2-.5s0-1.6.7-1.8c.7-.2 1.6 1.4 2.5 2 .7.5 1.2.4 1.2.4l2.5-.1s1.3-.1.7-1c0-.1-.4-.9-2-2.5-1.7-1.7-1.4-1.4.6-4.4 1.2-1.8 1.7-2.9 1.5-3.4-.1-.4-1-.3-1-.3l-2.8 0s-.2 0-.4.1c-.2.1-.3.3-.3.3s-.5 1.4-1.2 2.6c-1.5 2.5-2 2.6-2.3 2.5-.5-.3-.4-1.3-.4-2 0-2.1.3-3-.6-3.2-.3-.1-.5-.1-1.3-.1-1 0-1.9 0-2.4.2-.3.2-.6.5-.4.5.2 0 .7.1 1 .4.3.4.3 1.3.3 1.3s.2 2.5-.4 2.8c-.4.2-1-.2-2.2-2.3-.7-1.1-1.2-2.4-1.2-2.4s-.1-.2-.3-.4c-.2-.1-.5-.2-.5-.2L3.4 6s-.4 0-.5.2C2.7 6.4 2.9 6.8 2.9 6.8s2.4 5.6 5.1 8.5c2.5 2.6 5.3 2.4 5.3 2.4l1.5-.5z"/></svg>
-                VK
-            </a>
-            <a href="https://2gis.ru/nizhnekamsk/firm/70000001077042225/tab/reviews" class="social-link" target="_blank" title="2ГИС">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" font-size="8" fill="currentColor" font-weight="bold">2G</text></svg>
-                2ГИС
-            </a>
             <a href="tel:+79172474353" class="social-link" title="Позвонить">
-                <svg viewBox="0 0 24 24"><path d="M3 9l8-8h2v2l-8 8v2h-2V9zm0 12c-1.1 0-2-.9-2-2v-10h2v10h10v2H3z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 +7 917 247-43-53
             </a>
         </div>
 
-        <div class="footer">Нижнекамск · онлайн по всей России</div>
+        <!-- FOOTER -->
+        <div class="footer">Нижнекамск · онлайн по России</div>
     </div>
 
     <script>
@@ -723,20 +499,6 @@
                 c.appendChild(s);
             }
         })();
-
-        // АККОРДЕОН
-        function toggleDetail(el) {
-            var detail = el.nextElementSibling;
-            if(detail && detail.classList.contains('detail-section')) {
-                detail.classList.toggle('open');
-                el.classList.toggle('open');
-                if(detail.classList.contains('open')) {
-                    setTimeout(function(){
-                        detail.scrollIntoView({behavior: 'smooth', block: 'nearest'});
-                    }, 100);
-                }
-            }
-        }
     </script>
 </body>
 </html>
