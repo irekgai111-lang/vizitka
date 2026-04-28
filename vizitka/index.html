@@ -79,15 +79,15 @@
             box-shadow: 0 0 30px rgba(0,210,200,0.1);
         }
         .logo-svg { width: 140px; height: 140px; display: block; }
-        .logo-svg .arc-text-top { font: 700 11px 'Segoe UI', sans-serif; letter-spacing: 2px; fill: #fff; }
-        .logo-svg .arc-text-bottom { font: 700 11px 'Segoe UI', sans-serif; letter-spacing: 2px; fill: #00d2c8; filter: drop-shadow(0 0 4px rgba(0,210,200,0.5)); }
+        .logo-svg .arc-text-top { font: 700 22px 'Segoe UI', sans-serif; letter-spacing: 3px; fill: #fff; filter: drop-shadow(0 0 6px rgba(255,255,255,0.6)); }
+        .logo-svg .arc-text-bottom { font: 700 22px 'Segoe UI', sans-serif; letter-spacing: 3px; fill: #00d2c8; filter: drop-shadow(0 0 10px rgba(0,210,200,0.9)); }
         .logo-glow {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
             width: 160px; height: 160px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,210,200,0.1), transparent 70%);
+            background: radial-gradient(circle, rgba(0,210,200,0.25), transparent 70%);
             filter: blur(10px); animation: logoGlow 4s ease-in-out infinite; z-index: 0;
         }
-        @keyframes logoGlow { 0%,100%{opacity:0.4} 50%{opacity:1} }
+        @keyframes logoGlow { 0%,100%{opacity:0.7} 50%{opacity:1.3} }
 
         /* Microphone glow inside logo */
         .logo-mic-group { filter: drop-shadow(0 0 6px rgba(0,210,200,0.55)); }
@@ -390,7 +390,7 @@
             .logo-ring-outer { width: 136px; height: 136px; top:-8px; left:-8px; }
             .logo-ring-inner { width: 128px; height: 128px; top:-4px; left:-4px; }
             .logo-svg { width: 120px; height: 120px; }
-            .logo-svg .arc-text-top, .logo-svg .arc-text-bottom { font-size: 10px; letter-spacing: 1.5px; }
+            .logo-svg .arc-text-top, .logo-svg .arc-text-bottom { font-size: 18px; letter-spacing: 2px; }
             .features { gap: 14px; }
             .cta-button { padding: 14px 32px; font-size: 15px; }
             .nebula { width: 350px; height: 350px; }
