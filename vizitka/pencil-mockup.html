@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визитка Ирека - Pencil Mockup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 375px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #8B5A8F 0%, #7a4a7f 100%);
+            padding: 32px 24px;
+            text-align: center;
+            color: white;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            background: #D4A574;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+        }
+
+        .name {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .spec {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .stars {
+            font-size: 16px;
+            color: #E8A76F;
+        }
+
+        /* Offer */
+        .offer {
+            background: #E8A76F;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .offer h2 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #1A1A1A;
+        }
+
+        .offer p {
+            font-size: 13px;
+            color: #1A1A1A;
+            opacity: 0.8;
+        }
+
+        /* For Who */
+        .for-who {
+            padding: 24px;
+        }
+
+        .for-who h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #1A1A1A;
+        }
+
+        .segment {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #8B5A8F;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .segment-text {
+            font-size: 13px;
+            color: #1A1A1A;
+            line-height: 1.5;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 24px;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 16px;
+            background: #8B5A8F;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #7a4a7f;
+        }
+
+        .cta-note {
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Price */
+        .price {
+            background: #F5F1ED;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #8B5A8F;
+        }
+
+        /* Socials */
+        .socials {
+            background: #2D2D2D;
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            border: none;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .tg {
+            background: #E8A76F;
+            color: #1A1A1A;
+        }
+
+        .vk {
+            background: #D4A574;
+            color: #1A1A1A;
+        }
+
+        .phone {
+            background: #8B5A8F;
+            color: white;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="avatar"></div>
+            <div class="name">Ирек</div>
+            <div class="spec">Учитель вокала</div>
+            <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span>4.9 · 5 отзывов</span>
+            </div>
+        </div>
+
+        <!-- Offer -->
+        <div class="offer">
+            <h2>Пробный урок бесплатно</h2>
+            <p>До и после — слышишь разницу</p>
+        </div>
+
+        <!-- For Who -->
+        <div class="for-who">
+            <h3>Для кого это</h3>
+            <div class="segment">
+                <div class="dot"></div>
+                <div class="segment-text">Для взрослых, кто давно хочет петь</div>
+            </div>
+            <div class="segment">
+                <div class="dot"></div>
+                <div class="segment-text">Для певцов на свадьбы и юбилеи</div>
+            </div>
+            <div class="segment">
+                <div class="dot"></div>
+                <div class="segment-text">Онлайн из любого города</div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <button class="cta-button">Хочу пробный бесплатный урок</button>
+            <div class="cta-note">Ограниченное число мест</div>
+        </div>
+
+        <!-- Price -->
+        <div class="price">
+            <div class="price-label">От 1 500 ₽ за урок</div>
+        </div>
+
+        <!-- Socials -->
+        <div class="socials">
+            <button class="social-btn tg">TG</button>
+            <button class="social-btn vk">VK</button>
+            <button class="social-btn phone">☎</button>
+        </div>
+    </div>
+</body>
+</html>
