@@ -93,15 +93,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 1;
-        }
-
-        .arc-text-top {
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .arc-text-bottom {
-            font-family: 'Segoe UI', sans-serif;
+            z-index: 20;
         }
 
         /* ФОТО ИРЕКА */
@@ -130,19 +122,6 @@
             margin-top: 24px;
         }
 
-        .studio-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            background: rgba(0,210,200,0.1);
-            border: 1px solid rgba(0,210,200,0.3);
-            border-radius: 20px;
-            font-size: 12px;
-            color: #00d2c8;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
 
         .main-offer {
             font-size: 32px;
@@ -355,43 +334,48 @@
         <!-- ЛОГОТИП СТУДИИ -->
         <div class="logo-wrapper">
             <div class="logo-container">
-                <svg class="logo-svg" viewBox="0 0 200 200">
-                    <defs>
-                        <!-- Путь для белого текста сверху -->
-                        <path id="arcTextTop" d="M 35,100 A 65,65 0 0,1 165,100" fill="none"/>
-                        <!-- Путь для бирюзового текста снизу -->
-                        <path id="arcTextBottom" d="M 165,100 A 65,65 0 0,1 35,100" fill="none"/>
-                    </defs>
-
-                    <!-- БЕЛЫЙ ТЕКСТ СВЕРХУ: СТУДИЯ ВОКАЛА -->
-                    <text class="arc-text-top" font-size="15" font-weight="700" letter-spacing="2" fill="white"
-                          filter="drop-shadow(0 0 6px rgba(255,255,255,0.7)) drop-shadow(0 0 12px rgba(255,255,255,0.4))">
-                        <textPath href="#arcTextTop" startOffset="50%" text-anchor="middle">СТУДИЯ ВОКАЛА</textPath>
-                    </text>
-
-                    <!-- БИРЮЗОВЫЙ ТЕКСТ СНИЗУ: ТВОЙ ГОЛОС -->
-                    <text class="arc-text-bottom" font-size="19" font-weight="800" letter-spacing="1.8" fill="#00d2c8"
-                          filter="drop-shadow(0 0 8px rgba(0,210,200,0.9)) drop-shadow(0 0 16px rgba(0,210,200,0.5))">
-                        <textPath href="#arcTextBottom" startOffset="50%" text-anchor="middle">ТВОЙ ГОЛОС</textPath>
-                    </text>
-
-                    <!-- Декоративные точки -->
-                    <circle cx="25" cy="100" r="2" fill="#00d2c8" opacity="0.7"/>
-                    <circle cx="175" cy="100" r="2" fill="#00d2c8" opacity="0.7"/>
-                </svg>
-
+                <!-- КРУГ С ФОТО -->
                 <div class="logo-circle">
                     <!-- ФОТО ИРЕКА В ЦЕНТРЕ -->
                     <div class="photo-container">
                         <img src="irek-photo.jpg" alt="Ирек Гайнемухаметов">
                     </div>
                 </div>
+
+                <!-- SVG С ТЕКСТОМ ВОКРУГ ФОТО (ПОВЕРХ) -->
+                <svg class="logo-svg" viewBox="0 0 200 200" style="z-index: 20;">
+                    <defs>
+                        <!-- Путь для белого текста сверху (полукруг вверху) -->
+                        <path id="arcTop" d="M 30,100 A 70,70 0 0,1 170,100" fill="none"/>
+                        <!-- Путь для бирюзового текста снизу (полукруг внизу) -->
+                        <path id="arcBottom" d="M 170,100 A 70,70 0 0,1 30,100" fill="none"/>
+                    </defs>
+
+                    <!-- БЕЛЫЙ ТЕКСТ СВЕРХУ ПО ПЕРИМЕТРУ -->
+                    <text font-size="18" font-weight="700" letter-spacing="3" fill="white"
+                          filter="drop-shadow(0 0 8px rgba(255,255,255,0.8)) drop-shadow(0 0 16px rgba(0,0,0,0.6))">
+                        <textPath href="#arcTop" startOffset="50%" text-anchor="middle" dominant-baseline="middle">
+                            СТУДИЯ ВОКАЛА
+                        </textPath>
+                    </text>
+
+                    <!-- БИРЮЗОВЫЙ ТЕКСТ СНИЗУ ПО ПЕРИМЕТРУ -->
+                    <text font-size="20" font-weight="800" letter-spacing="2" fill="#00d2c8"
+                          filter="drop-shadow(0 0 10px rgba(0,210,200,1)) drop-shadow(0 0 20px rgba(0,210,200,0.7)) drop-shadow(0 0 4px rgba(0,0,0,0.8))">
+                        <textPath href="#arcBottom" startOffset="50%" text-anchor="middle" dominant-baseline="middle">
+                            ТВОЙ ГОЛОС
+                        </textPath>
+                    </text>
+
+                    <!-- Декоративные звёздочки -->
+                    <circle cx="15" cy="100" r="2.5" fill="#d4af37" opacity="0.8"/>
+                    <circle cx="185" cy="100" r="2.5" fill="#d4af37" opacity="0.8"/>
+                </svg>
             </div>
         </div>
 
         <!-- ОСНОВНОЙ ЗАГОЛОВОК -->
         <div class="hero-section">
-            <div class="studio-badge">Студия вокала</div>
             <h1 class="main-offer">Запоёте <em>любимую песню</em></h1>
             <p class="sub-text">Даже если всю жизнь думали, что это невозможно</p>
             <div class="divider"></div>
