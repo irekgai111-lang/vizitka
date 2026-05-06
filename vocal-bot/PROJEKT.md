@@ -67,6 +67,16 @@
 - Не писать: «№1», «100% гарантия», «лучшая школа города».
 - Не ссылаться на Instagram в РФ-сетях (Meta — экстремист).
 
+## Квиз
+
+- **Репозиторий:** [irekgai111-lang/tvoy-golos-quiz](https://github.com/irekgai111-lang/tvoy-golos-quiz)
+- **GitHub Pages:** [Пройти квиз](https://irekgai111-lang.github.io/tvoy-golos-quiz/quiz_tvoy_golos_FINAL%20(1).html)
+- **Локальная копия:** `../tvoy-golos-quiz/quiz_tvoy_golos_FINAL (1).html`
+- Название: «Узнай, почему не получается петь»
+- Ведёт к бесплатному пробному уроку в студии «Твой голос»
+
+---
+
 ## Файлы проекта
 
 ### Пак контента Недели 1

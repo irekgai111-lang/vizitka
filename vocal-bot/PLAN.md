@@ -17,6 +17,7 @@
 - [x] Сбор 22 упражнений по 4 зонам — `content/exercises_pool.md`
 - [x] Топ-5 упражнений Серопян по отзывам — `content/exercises_seropyan.md`
 - [x] Интеграция 3 упражнений Серопян (штробас, карандаш, опора в песне) в общий сет
+- [x] Квиз «Почему не получается петь» — создан, опубликован на [GitHub Pages](https://irekgai111-lang.github.io/tvoy-golos-quiz/quiz_tvoy_golos_FINAL%20(1).html)
 
 ---
 
